@@ -18,9 +18,9 @@
                             <tr>
                                 <th class="text-center align-middle">유효 계정</th>
                                 <td class="align-middle">
-                                    <input type="radio" name="is_valid" value="y" id="is_valid"class="form-check-input" @if($view->profile->is_valid == 'y') checked @endif>
+                                    <input type="radio" name="is_valid" value="y" id="is_valid"class="form-check-input" @if($view->member->is_valid == 'y') checked @endif>
                                     <label class="form-check-label me-3" for="is_valid">활성</label>
-                                    <input type="radio" name="is_valid" value="n" id="is_not_valid"class="form-check-input" @if($view->profile->is_valid == 'n') checked @endif>
+                                    <input type="radio" name="is_valid" value="n" id="is_not_valid"class="form-check-input" @if($view->member->is_valid == 'n') checked @endif>
                                     <label class="form-check-label" for="is_not_valid">비활성</label>
                                 </td>
                                 <th class="text-center align-middle">계좌 동결</th>

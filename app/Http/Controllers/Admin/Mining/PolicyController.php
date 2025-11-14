@@ -266,13 +266,13 @@ class PolicyController extends Controller
             $mining_reward = $node_amount / 2;
             $total_mining_amount += $mining_reward;
 
-            $user = $mining->user->profile;
+            $member = $mining->user->member;
 
-            $parents = $user->getParentTree(20);
+            $parents = $member->getParentTree(20);
 
-            foreach ($parents as $level => $parent_profile) {
+            foreach ($parents as $level => $parent) {
 
-                $condition = $parent_profile->checkLevelCondition();
+                $condition = $parent->checkLevelCondition();
 
                 if (!$condition) continue;
 
@@ -280,7 +280,7 @@ class PolicyController extends Controller
 
                 if ($max_depth < $level) continue;
 
-                if ($parent_profile->is_valid === 'n') continue;
+                if ($parent->is_valid === 'n') continue;
 
                 $policy = LevelPolicy::where('depth', $level)->first();
 

@@ -70,14 +70,15 @@ class UserController extends Controller
     {
 
         $user = User::find($request->id);
-        $user_profile = UserProfile::where('user_id', $request->id)->first();
+        $user_profile = $user->profile;
+        $member = $user->member;
 
         if ($user) {
 
             DB::beginTransaction();
 
             try {
-                $request_data = $request->except('name', 'password');
+                $request_data = $request->except('name', 'password', 'is_valid');
 
                 $user->update([
                     'name' => $request->name,
@@ -85,6 +86,10 @@ class UserController extends Controller
                 ]);
 
                 $user_profile->update($request_data);
+
+                $member->update([
+                    'is_valid' => $request->is_valid,
+                ]);
 
                 DB::commit();
 
