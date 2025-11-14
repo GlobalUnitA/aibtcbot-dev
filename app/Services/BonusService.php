@@ -25,7 +25,7 @@ class BonusService
     {
 
         if ($mining->getBenefitRule('referral_bonus') === 'n'){
-            Log::channel('bonus')->warning('This marketing does not allow a referral bonus.', ['mining_id' => $mining->id, 'marketing_id' => $mining->policy->marketing_id]);
+            Log::channel('bonus')->warning('This mining policy does not allow a referral bonus.', ['mining_id' => $mining->id]);
             return;
         }
 
@@ -43,7 +43,7 @@ class BonusService
 
                 if (!$parent->getHasMining($mining->policy_id)) continue;
 
-                $policy = ReferralPolicy::where('marketing_id', $mining->policy->marketing_id)
+                $policy = ReferralPolicy::where('mining_policy_id', $mining->policy_id)
                     ->where('grade_id', $parent->grade->id)
                     ->first();
 
@@ -111,7 +111,7 @@ class BonusService
     public function referralMatching($bonus)
     {
         if ($bonus->mining->getBenefitRule('referral_matching') === 'n'){
-            Log::channel('bonus')->warning('This marketing does not allow a referral matching.', ['bonus_id' => $bonus->id, 'marketing_id' => $bonus->mining->policy->marketing_id]);
+            Log::channel('bonus')->warning('This mining policy does not allow a referral matching.', ['bonus_id' => $bonus->id, 'mining_policy_id' => $bonus->mining->policy_id]);
             return;
         }
 
@@ -122,7 +122,7 @@ class BonusService
 
             if (!$parent->getHasMining($bonus->mining->policy_id)) continue;
 
-            $policy = ReferralMatchingPolicy::where('marketing_id', $bonus->mining->policy->marketing_id)
+            $policy = ReferralMatchingPolicy::where('mining_policy_id', $bonus->mining->policy_id)
                 ->where('grade_id', $parent->grade->id)
                 ->first();
 
@@ -300,7 +300,7 @@ class BonusService
             $member = $profit->user->member;
             $parents = $member->getParentTree(20);
 
-            $marketing_id = $mining->policy->marketing_id;
+            $mining_policy_id = $mining->policy->id;
 
             foreach ($parents as $level => $parent) {
 
@@ -308,7 +308,7 @@ class BonusService
 
                 if (!$parent->getHasMining($mining->policy_id)) continue;
 
-                $condition = $parent->checkLevelCondition($marketing_id);
+                $condition = $parent->checkLevelCondition($mining_policy_id);
 
                 if (!$condition) {
                     Log::channel('bonus')->warning('No Level Condition matched for level bonus', [
@@ -331,7 +331,7 @@ class BonusService
                     continue;
                 }
 
-                $policy = LevelPolicy::where('marketing_id', $marketing_id)
+                $policy = LevelPolicy::where('mining_policy_id', $mining_policy_id)
                     ->where('depth', $level)
                     ->first();
 
@@ -417,15 +417,15 @@ class BonusService
         $member = $bonus->user->member;
         $parents = $member->getParentTree(20);
 
-        $marketing_id = $mining->policy->marketing_id;
+        $mining_policy_id = $mining->policy_id;
 
         foreach ($parents as $level => $parent) {
 
             if ($parent->is_valid === 'n') continue;
 
-            if (!$parent->getHasMining($mining->policy_id)) continue;
+            if (!$parent->getHasMining($mining_policy_id)) continue;
 
-            $condition = $parent->checkLevelCondition($marketing_id);
+            $condition = $parent->checkLevelCondition($mining_policy_id);
 
             if (!$condition) {
                 Log::channel('bonus')->warning('No Level Condition matched for level matching', [
@@ -449,7 +449,7 @@ class BonusService
                 continue;
             }
 
-            $policy = LevelPolicy::where('marketing_id', $marketing_id)
+            $policy = LevelPolicy::where('mining_policy_id', $mining_policy_id)
                 ->where('depth', $level)
                 ->first();
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\User;
 
-use App\Models\Marketing;
+use App\Models\MiningPolicy;
 use App\Models\MemberGrade;
 use App\Models\GradePolicy;
 use App\Http\Controllers\Controller;
@@ -37,20 +37,20 @@ class GradeController extends Controller
         try {
 
             $grade = MemberGrade::create($validated);
-            $marketing_list = Marketing::all();
+            $mining_policies = MiningPolicy::all();
 
             GradePolicy::create([
                 'grade_id' => $grade->id,
             ]);
 
-            foreach ($marketing_list as $marketing) {
+            foreach ($mining_policies as $mining_policy) {
                 ReferralPolicy::create([
-                    'marketing_id' => $marketing->id,
+                    'mining_policy_id' => $mining_policy->id,
                     'grade_id' => $grade->id,
                 ]);
 
                 ReferralMatchingPolicy::create([
-                    'marketing_id' => $marketing->id,
+                    'mining_policy_id' => $mining_policy->id,
                     'grade_id' => $grade->id,
                 ]);
             }

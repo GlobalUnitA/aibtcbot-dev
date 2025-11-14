@@ -18,24 +18,22 @@ use Carbon\Carbon;
 class MiningController extends Controller
 {
 
-    public function index($id)
+    public function index()
     {
         $user = auth()->user();
 
-        $marketing = Marketing::find($id);
         $assets = Asset::where('member_id', $user->member->id)
             ->whereHas('coin', function ($query) {
                 $query->where('is_mining', 'y');
             })
             ->get();
 
-        return view('mining.mining', compact('marketing', 'assets'));
+        return view('mining.mining', compact( 'assets'));
     }
 
     public function data(Request $request)
     {
         $Mining = MiningPolicy::where('coin_id', $request->coin)
-            ->where('marketing_id', $request->marketing)
             ->get();
 
         return response()->json($Mining->toArray());
@@ -54,8 +52,6 @@ class MiningController extends Controller
 
         $mining = MiningPolicy::find($id);
 
-        $marketing = Marketing::find($mining->marketing_id);
-
         $asset = Asset::where('member_id', $user->member->id)
             ->where('coin_id', $mining->coin_id)
             ->first();
@@ -64,7 +60,7 @@ class MiningController extends Controller
 
         $date = $this->getMiningDate($mining);
 
-        return view('mining.confirm', compact('marketing', 'mining', 'date', 'balance'));
+        return view('mining.confirm', compact( 'mining', 'date', 'balance'));
     }
 
     public function store(Request $request)

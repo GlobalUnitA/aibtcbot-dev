@@ -235,9 +235,9 @@ class Member extends Authenticatable
         $this->checkLevelUp($this->grade->level, $this->referral_count, $self_sales, $group_sales);
     }
 
-    public function checkLevelCondition($marketing_id)
+    public function checkLevelCondition($mining_policy_id)
     {
-        $level_conditions = LevelConditionPolicy::where('marketing_id', $marketing_id)
+        $level_conditions = LevelConditionPolicy::where('mining_policy_id', $mining_policy_id)
             ->orderBy('node_amount', 'desc')
             ->get();
 

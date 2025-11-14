@@ -23,16 +23,10 @@ use App\Http\Controllers\Admin\Asset\PolicyController as AssetPolicyController;
 use App\Http\Controllers\Admin\Income\IncomeController;
 use App\Http\Controllers\Admin\Income\DepositController as IncomeDepositController;
 use App\Http\Controllers\Admin\Income\WithdrawalController as IncomeWithdrawalController;
-use App\Http\Controllers\Admin\Income\PolicyController as IncomePolicyController;
-
-use App\Http\Controllers\Admin\Trading\TradingController;
-use App\Http\Controllers\Admin\Trading\PolicyController as TradingPolicyController;
-
-use App\Http\Controllers\Admin\Marketing\MarketingController;
-use App\Http\Controllers\Admin\Marketing\PolicyController as MarketingPolicyController;
 
 use App\Http\Controllers\Admin\Mining\MiningController;
 use App\Http\Controllers\Admin\Mining\PolicyController as MiningPolicyController;
+use App\Http\Controllers\Admin\Mining\ProfitController as MiningProfitController;
 
 use App\Http\Controllers\Admin\Board\BoardController;
 use App\Http\Controllers\Admin\Board\PostController;
@@ -133,35 +127,7 @@ Route::middleware(['admin.auth', 'otp'])->group(function () {
         });
     });
 
-    Route::prefix('marketing')->group(function () {
-        Route::get('list', [MarketingController::class, 'list'])->name('admin.marketing.list');
-        Route::get('view/{id}', [MarketingController::class, 'view'])->name('admin.marketing.view');
-        Route::get('create', [MarketingController::class, 'create'])->name('admin.marketing.create');
-        Route::post('store', [MarketingController::class, 'store'])->name('admin.marketing.store');
-        Route::post('update', [MarketingController::class, 'update'])->name('admin.marketing.update');
-
-        Route::middleware(['check_admin_level:3'])->group(function () {
-            Route::prefix('policy')->group(function () {
-                Route::get('/{id}/{mode}', [MarketingPolicyController::class, 'index'])->name('admin.marketing.policy');
-                Route::post('store', [MarketingPolicyController::class, 'store'])->name('admin.marketing.policy.store');
-                Route::post('update', [MarketingPolicyController::class, 'update'])->name('admin.marketing.policy.update');
-            });
-        });
-    });
-
     Route::middleware(['check_admin_level:2'])->group(function () {
-        Route::prefix('trading')->group(function () {
-            Route::get('list', [TradingController::class, 'list'])->name('admin.trading.list');
-            Route::get('export', [TradingController::class, 'export'])->name('admin.trading.export');
-            Route::middleware(['check_admin_level:3'])->group(function () {
-                Route::prefix('policy')->group(function () {
-                    Route::get('/', [TradingPolicyController::class, 'index'])->name('admin.trading.policy');
-                    Route::post('update', [TradingPolicyController::class, 'update'])->name('admin.trading.policy.update');
-                    Route::get('export', [TradingPolicyController::class, 'export'])->name('admin.trading.policy.export');
-                });
-            });
-        });
-
         Route::prefix('mining')->group(function () {
             Route::get('list', [MiningController::class, 'list'])->name('admin.mining.list');
             Route::get('view/{id}', [MiningController::class, 'view'])->name('admin.mining.view');
@@ -174,6 +140,11 @@ Route::middleware(['admin.auth', 'otp'])->group(function () {
                     Route::get('{mode}/{id?}', [MiningPolicyController::class, 'view'])->name('admin.mining.policy.view');
                     Route::post('store', [MiningPolicyController::class, 'store'])->name('admin.mining.policy.store');
                     Route::post('update', [MiningPolicyController::class, 'update'])->name('admin.mining.policy.update');
+                });
+                Route::prefix('profit')->group(function () {
+                    Route::get('{id}', [MiningProfitController::class, 'index'])->name('admin.mining.profit');
+                    Route::post('store', [MiningProfitController::class, 'store'])->name('admin.mining.profit.store');
+                    Route::post('update', [MiningProfitController::class, 'update'])->name('admin.mining.profit.update');
                 });
             });
         });

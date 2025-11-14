@@ -1,23 +1,25 @@
 $(document).ready(function() {
-    
-    $('.updateBtn').click(function(e) {
+    $('.updateBtn').click(function (e) {
         e.preventDefault();
 
         confirmModal('정책을 변경하시겠습니까?').then((isConfirmed) => {
             if (isConfirmed) {
 
-                const recoad = $(this).closest('.wallet_policy');
-                const formData = new FormData($('#walletPolicyForm')[0]);
-                
-                recoad.find('input').each(function() {
+                const recoad = $(this).closest('.mining_policy');
+                const formData = new FormData($('#updateForm')[0]);
+
+                recoad.find('input, select, textarea').each(function() {
                     const name = $(this).attr('name');
                     const value = $(this).val();
 
-                    formData.append(name, value);
+                    if (name) {
+                        formData.append(name, value);
+                    }
                 });
-            
+
+                console.log(formData);
                 $.ajax({
-                    url: $('#walletPolicyForm').attr('action'),
+                    url: $('#updateForm').attr('action'),
                     type: 'POST',
                     data: formData,
                     processData: false,
@@ -32,7 +34,7 @@ $(document).ready(function() {
                     }
                 });
             } else {
-                return;        
+                return;
             }
         });
     });

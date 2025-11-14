@@ -1,84 +1,88 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Marketing;
+namespace App\Http\Controllers\Admin\Mining;
 
-use App\Models\Marketing;
-use App\Models\ReferralPolicy;
-use App\Models\ReferralMatchingPolicy;
-use App\Models\LevelPolicy;
 use App\Models\LevelConditionPolicy;
+use App\Models\LevelPolicy;
+use App\Models\MiningPolicy;
 use App\Models\PolicyModifyLog;
+use App\Models\ReferralMatchingPolicy;
+use App\Models\ReferralPolicy;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class PolicyController extends Controller
+class ProfitController extends Controller
 {
+    public function __construct()
+    {
+
+    }
 
     public function index(Request $request)
     {
-        $marketing = Marketing::find($request->id);
+        $mining_policy = MiningPolicy::find($request->id);
 
         switch ($request->mode) {
 
             case 'referral_matching' :
 
-                $policies = ReferralMatchingPolicy::where('marketing_id', $request->id)->get();
+                $policies = ReferralMatchingPolicy::where('mining_policy_id', $request->id)->get();
 
                 $modify_logs = PolicyModifyLog::join('referral_matching_policies', 'referral_matching_policies.id', '=', 'policy_modify_logs.policy_id')
                     ->join('member_grades', 'member_grades.id', '=', 'referral_matching_policies.grade_id')
                     ->join('admins', 'admins.id', '=', 'policy_modify_logs.admin_id')
                     ->select('member_grades.name as grade_name', 'admins.name', 'policy_modify_logs.*')
-                    ->where('referral_matching_policies.marketing_id', $marketing->id)
+                    ->where('referral_matching_policies.mining_policy_id', $mining_policy->id)
                     ->where('policy_modify_logs.policy_type', 'referral_matching_policies')
                     ->orderBy('policy_modify_logs.created_at', 'desc')
                     ->get();
 
-                return view('admin.marketing.policy.referral-matching', compact('marketing', 'policies', 'modify_logs'));
+                return view('admin.mining.policy.profit.referral-matching', compact('mining_policy', 'policies', 'modify_logs'));
 
             case 'level_bonus' :
 
-                $policies = LevelPolicy::where('marketing_id', $request->id)->get();
+                $policies = LevelPolicy::where('mining_policy_id', $request->id)->get();
 
                 $modify_logs = PolicyModifyLog::join('level_policies', 'level_policies.id', '=', 'policy_modify_logs.policy_id')
                     ->join('admins', 'admins.id', '=', 'policy_modify_logs.admin_id')
                     ->select('level_policies.depth', 'admins.name', 'policy_modify_logs.*')
-                    ->where('level_policies.marketing_id', $marketing->id)
+                    ->where('level_policies.mining_policy_id', $mining_policy->id)
                     ->where('policy_modify_logs.policy_type', 'level_policies')
                     ->orderBy('policy_modify_logs.created_at', 'desc')
                     ->get();
 
-                return view('admin.marketing.policy.level', compact('marketing', 'policies', 'modify_logs'));
+                return view('admin.mining.policy.profit.level', compact('mining_policy','policies', 'modify_logs'));
 
             case 'level_condition' :
 
-                $policies = LevelConditionPolicy::where('marketing_id', $request->id)->get();
+                $policies = LevelConditionPolicy::where('mining_policy_id', $request->id)->get();
 
                 $modify_logs = PolicyModifyLog::join('level_condition_policies', 'level_condition_policies.id', '=', 'policy_modify_logs.policy_id')
                     ->join('admins', 'admins.id', '=', 'policy_modify_logs.admin_id')
                     ->select('level_condition_policies.node_amount', 'admins.name', 'policy_modify_logs.*')
-                    ->where('level_condition_policies.marketing_id', $marketing->id)
+                    ->where('level_condition_policies.mining_policy_id', $mining_policy->id)
                     ->where('policy_modify_logs.policy_type', 'level_condition_policies')
                     ->orderBy('policy_modify_logs.created_at', 'desc')
                     ->get();
 
-                return view('admin.marketing.policy.level-condition', compact('marketing', 'policies', 'modify_logs'));
+                return view('admin.mining.policy.profit.level-condition', compact('mining_policy','policies', 'modify_logs'));
 
             default :
 
-                $policies = ReferralPolicy::where('marketing_id', $request->id)->get();
+                $policies = ReferralPolicy::where('mining_policy_id', $request->id)->get();
 
                 $modify_logs = PolicyModifyLog::join('referral_policies', 'referral_policies.id', '=', 'policy_modify_logs.policy_id')
                     ->join('member_grades', 'member_grades.id', '=', 'referral_policies.grade_id')
                     ->join('admins', 'admins.id', '=', 'policy_modify_logs.admin_id')
                     ->select('member_grades.name as grade_name', 'admins.name', 'policy_modify_logs.*')
-                    ->where('referral_policies.marketing_id', $marketing->id)
+                    ->where('referral_policies.mining_policy_id', $mining_policy->id)
                     ->where('policy_modify_logs.policy_type', 'referral_policies')
                     ->orderBy('policy_modify_logs.created_at', 'desc')
                     ->get();
 
-                return view('admin.marketing.policy.referral', compact('marketing', 'policies', 'modify_logs'));
+                return view('admin.mining.policy.profit.referral', compact('mining_policy','policies', 'modify_logs'));
 
         }
     }
@@ -89,7 +93,7 @@ class PolicyController extends Controller
             switch ($request->mode) {
 
                 case 'level_bonus' :
-                    if (LevelPolicy::where('marketing_id', $request->marketing_id)->where('depth', $request->depth)->exists()) {
+                    if (LevelPolicy::where('mining_policy_id', $request->mining_policy_id)->where('depth', $request->depth)->exists()) {
                         return response()->json([
                             'status' => 'error',
                             'message' => '이미 해당 뎁스에 대한 정책이 존재합니다.',
@@ -98,7 +102,7 @@ class PolicyController extends Controller
 
                     DB::transaction(function () use ($request) {
                         LevelPolicy::create([
-                            'marketing_id' => $request->marketing_id,
+                            'mining_policy_id' => $request->mining_policy_id,
                             'depth' => $request->depth,
                             'bonus' => $request->bonus ?? 0,
                             'matching' => $request->matching ?? 0,
@@ -108,14 +112,14 @@ class PolicyController extends Controller
                     return response()->json([
                         'status' => 'success',
                         'message' => '정책이 추가되었습니다.',
-                        'url' => route('admin.marketing.policy', ['id' => $request->marketing_id, 'mode' => 'level_bonus']),
+                        'url' => route('admin.mining.profit', ['id' => $request->mining_policy_id, 'mode' => 'level_bonus']),
                     ]);
 
                 case 'level_condition' :
 
                     DB::transaction(function () use ($request) {
                         LevelConditionPolicy::create([
-                            'marketing_id' => $request->marketing_id,
+                            'mining_policy_id' => $request->mining_policy_id,
                             'node_amount' => $request->node_amount,
                             'max_depth' => $request->max_depth,
                             'referral_count' => $request->referral_count,
@@ -126,7 +130,7 @@ class PolicyController extends Controller
                     return response()->json([
                         'status' => 'success',
                         'message' => '정책이 추가되었습니다.',
-                        'url' => route('admin.marketing.policy', ['id' => $request->marketing_id, 'mode' => 'level_condition']),
+                        'url' => route('admin.mining.profit', ['id' => $request->mining_policy_id, 'mode' => 'level_condition']),
                     ]);
 
                 default :
@@ -150,7 +154,7 @@ class PolicyController extends Controller
 
     public function update(Request $request)
     {
-
+        Log::info('error', ['param' => $request->all()]);
         DB::beginTransaction();
 
         try {
@@ -158,11 +162,10 @@ class PolicyController extends Controller
 
                 case 'referral_bonus' :
 
-
                     $referral_policy = ReferralPolicy::findOrFail($request->id);
                     $referral_policy->update($request->all());
 
-                break;
+                    break;
 
                 case 'referral_matching' :
 
@@ -191,7 +194,7 @@ class PolicyController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => '정책이 수정되었습니다.',
-                'url' => route('admin.marketing.policy', ['id' => $request->marketing_id, 'mode' => $request->mode]),
+                'url' => route('admin.mining.profit', ['id' => $request->mining_policy_id, 'mode' => $request->mode]),
             ]);
 
 
@@ -206,4 +209,5 @@ class PolicyController extends Controller
             ]);
         }
     }
+
 }

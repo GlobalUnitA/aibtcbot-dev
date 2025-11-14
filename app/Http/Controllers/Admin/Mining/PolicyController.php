@@ -272,7 +272,7 @@ class PolicyController extends Controller
 
             foreach ($parents as $level => $parent) {
 
-                $condition = $parent->checkLevelCondition();
+                $condition = $parent->checkLevelCondition($mining->policy_id);
 
                 if (!$condition) continue;
 

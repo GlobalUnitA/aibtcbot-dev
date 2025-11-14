@@ -12,7 +12,6 @@ class MiningPolicy extends Model
     use HasFactory, TruncatesDecimals;
 
     protected $fillable = [
-        'marketing_id',
         'coin_id',
         'refund_coin_id',
         'reward_coin_id',
@@ -38,11 +37,6 @@ class MiningPolicy extends Model
         'mining_locale_name',
         'mining_locale_memo',
     ];
-
-    public function marketing()
-    {
-        return $this->belongsTo(Marketing::class, 'marketing_id', 'id');
-    }
 
     public function coin()
     {
@@ -91,7 +85,6 @@ class MiningPolicy extends Model
     }
 
     protected static $columnDescriptions = [
-        'marketing_id' => '마케팅',
         'coin_id' => '입금 코인',
         'refund_coin_id' => '원금 코인',
         'reward_coin_id' => '수익 코인',

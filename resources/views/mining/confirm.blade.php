@@ -2,8 +2,8 @@
 
 @section('content')
 <header class="px-4 py-5 w-100 border-top-title" style="background: url('../../images/tit_bg_01.png') center right no-repeat, #1e1e1f;" >
-    <h2 class="text-white mb-1 px-1">{{ $marketing->translationForLocale('en')['name'] }}</h2>
-    <h6 class="text-white mb-4 px-1">{{ $marketing->marketing_locale_name }}</h6>
+    <h2 class="text-white mb-1 px-1">{{ __('AI BTC BOT') }}</h2>
+    <h6 class="text-white mb-4 px-1">{{ __('AI BTC BOT') }}</h6>
 </header>
 <main class="container-fluid py-5 mb-5">
     <div class="px-3 mb-5">

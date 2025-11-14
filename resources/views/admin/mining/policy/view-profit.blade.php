@@ -122,21 +122,11 @@
                                     @endforeach
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="4">
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{{ route('admin.mining.profit', ['id' => $view->id]) }}">
-                                            <i class="ti ti-settings"></i>
-                                            수익 상세설정
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
-                        <a href="{{ route('admin.mining.policy') }}" class="btn btn-secondary">목록</a>
+                        <a href="{{ route('admin.mining.policy', ['id' => '1']) }}" class="btn btn-secondary">목록</a>
                         <button type="submit" class="btn btn-danger">수정</button>
                     </div>
                 </form>
