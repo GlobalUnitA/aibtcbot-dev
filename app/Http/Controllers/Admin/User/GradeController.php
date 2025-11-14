@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\Models\Marketing;
 use App\Models\MemberGrade;
 use App\Models\GradePolicy;
 use App\Http\Controllers\Controller;
+use App\Models\ReferralMatchingPolicy;
+use App\Models\ReferralPolicy;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
-use Carbon\Carbon;
 
 class GradeController extends Controller
 {
@@ -37,10 +37,24 @@ class GradeController extends Controller
         try {
 
             $grade = MemberGrade::create($validated);
+            $marketing_list = Marketing::all();
 
             GradePolicy::create([
                 'grade_id' => $grade->id,
             ]);
+
+            foreach ($marketing_list as $marketing) {
+                ReferralPolicy::create([
+                    'marketing_id' => $marketing->id,
+                    'grade_id' => $grade->id,
+                ]);
+
+                ReferralMatchingPolicy::create([
+                    'marketing_id' => $marketing->id,
+                    'grade_id' => $grade->id,
+                ]);
+            }
+
 
             DB::commit();
 

@@ -6,6 +6,7 @@ use App\Exports\StakingPolicyExport;
 use App\Models\LanguagePolicy;
 use App\Models\Marketing;
 use App\Models\MarketingTranslation;
+use App\Models\MemberGrade;
 use App\Http\Controllers\Controller;
 use App\Models\ReferralPolicy;
 use App\Models\ReferralMatchingPolicy;
@@ -87,15 +88,17 @@ class MarketingController extends Controller
                     ]);
                 }
 
-                for ($i=1; $i < 14; $i++) {
+                $grades = MemberGrade::all();
+
+                foreach ($grades as $grade) {
                     ReferralPolicy::create([
-                       'marketing_id' => $marketing->id,
-                       'grade_id' => $i,
+                        'marketing_id' => $marketing->id,
+                        'grade_id' => $grade->id,
                     ]);
 
                     ReferralMatchingPolicy::create([
                         'marketing_id' => $marketing->id,
-                        'grade_id' => $i,
+                        'grade_id' => $grade->id,
                     ]);
                 }
 

@@ -181,7 +181,7 @@
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                            @foreach($view->avatars as $avatar)
+                            @foreach($view->avatars->where('is_active', 'y') as $avatar)
                             <tr>
                                 <td class="text-center">{{ $avatar->name }}</td>
                                 @foreach($avatar->member->incomes as $income)
