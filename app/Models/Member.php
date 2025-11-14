@@ -178,13 +178,13 @@ class Member extends Authenticatable
 
 
 
-    public function checkUserValidity()
+    public function checkMemberValidity()
     {
         if ($this->is_valid === 'y') return;
 
         $asset_policy = AssetPolicy::first();
 
-        $max_amount_in_usdt = AssetTransfer::where('user_id', $this->user_id)
+        $max_amount_in_usdt = AssetTransfer::where('member_id', $this->id)
             ->whereIn('type', ['deposit', 'internal', 'manual_deposit'])
             ->where('status', 'completed')
             ->get()
@@ -192,9 +192,9 @@ class Member extends Authenticatable
 
         if ($asset_policy && $asset_policy->min_valid <= $max_amount_in_usdt) {
             $this->update(['is_valid' => 'y']);
-            Log::channel('user')->info('Success to change is_valid', ['user_id' => $this->user_id]);
+            Log::channel('user')->info('Success to change is_valid', ['member_id' => $this->id]);
         } else {
-            Log::channel('user')->info('Failed to change is_valid', ['user_id' => $this->user_id, 'max_amount' => $max_amount_in_usdt]);
+            Log::channel('user')->info('Failed to change is_valid', ['member_id' => $this->id, 'max_amount' => $max_amount_in_usdt]);
         }
     }
 

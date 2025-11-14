@@ -63,7 +63,7 @@ class DepositController extends Controller
 
             $user = User::find($deposit->member->user_id);
 
-            $user->member->checkUserValidity();
+            $user->member->checkMemberValidity();
             $user->member->checkMemberGrade();
 
             return response()->json([
