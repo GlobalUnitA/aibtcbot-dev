@@ -27,9 +27,9 @@
                         <tbody>
                             <tr>
                                 <th class="text-center align-middle">아이디</th>
-                                <td class="align-middle" style="min-width: 150px;">{{ $view->user->account }}</td>
+                                <td class="align-middle" style="min-width: 150px;">{{ $view->member->user->account }}</td>
                                 <th class="text-center align-middle">이름</th>
-                                <td class="align-middle" style="min-width: 150px;">{{ $view->user->name }}</td>
+                                <td class="align-middle" style="min-width: 150px;">{{ $view->member->user->name }}</td>
                             </tr>
                             <tr>
                                 <th class="text-center align-middle">종류</th>
