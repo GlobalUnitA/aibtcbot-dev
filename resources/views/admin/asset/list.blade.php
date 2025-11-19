@@ -138,24 +138,23 @@
                                         <td scope="col" class="text-center">{{ $value->asset->coin->name }}</td>
                                         <td scope="col" class="text-center">{{ $value->amount }}</td>
                                         <td scope="col" class="text-center">{{ $value->actual_amount }}</td>
-                                        <p scope="col" class="text-center">
-                                            @switch($value->status)
-                                                @case('pending')
-                                                    <p class="text-primary">{{ __('신청') }}</p>
+                                        @switch($value->status)
+                                            @case('pending')
+                                                <td scope="col" class="text-center text-primary">{{ __('신청') }}</td>
+                                            @break
+                                            @case('waiting')
+                                                <td scope="col" class="text-center text-warning">{{ __('대기') }}</td>
+                                            @break
+                                            @case('completed')
+                                                <td scope="col" class="text-center text-success">{{ __('완료') }}</td>
                                                 @break
-                                                @case('waiting')
-                                                    <p class="text-warning">{{ __('대기') }}</p>
+                                            @case('canceled')
+                                                <td scope="col" class="text-center text-secondary">{{ __('취소') }}</td>
                                                 @break
-                                                @case('completed')
-                                                    <p class="text-success">{{ __('완료') }}</p>
-                                                    @break
-                                                @case('canceled')
-                                                    <p class="text-secondary">{{ __('취소') }}</p>
-                                                    @break
-                                                @default
-                                                    <p class="text-danger">{{ __('환불') }}</p>
-                                            @endswitch
-                                        </td>
+                                            @default
+                                                <td scope="col" class="text-center text-secondary">{{ __('취소') }}</td>
+                                                {{ __('환불') }}
+                                        @endswitch
                                         <td scope="col" class="text-center">{{ $value->fee }} / {{ $value->tax }}</td>
                                         <td scope="col" class="text-center">{{ $value->created_at }}</td>
                                     </tr>
