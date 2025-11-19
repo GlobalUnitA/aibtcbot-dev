@@ -147,13 +147,12 @@
                                             @break
                                             @case('completed')
                                                 <td scope="col" class="text-center text-success">{{ __('완료') }}</td>
-                                                @break
+                                            @break
                                             @case('canceled')
                                                 <td scope="col" class="text-center text-secondary">{{ __('취소') }}</td>
-                                                @break
+                                            @break
                                             @default
-                                                <td scope="col" class="text-center text-secondary">{{ __('취소') }}</td>
-                                                {{ __('환불') }}
+                                                <td scope="col" class="text-center text-secondary">{{ __('환불') }}</td>
                                         @endswitch
                                         <td scope="col" class="text-center">{{ $value->fee }} / {{ $value->tax }}</td>
                                         <td scope="col" class="text-center">{{ $value->created_at }}</td>
