@@ -138,22 +138,22 @@
                                         <td scope="col" class="text-center">{{ $value->asset->coin->name }}</td>
                                         <td scope="col" class="text-center">{{ $value->amount }}</td>
                                         <td scope="col" class="text-center">{{ $value->actual_amount }}</td>
-                                        <td scope="col" class="text-center">
+                                        <p scope="col" class="text-center">
                                             @switch($value->status)
                                                 @case('pending')
-                                                    {{ __('신청') }}
-                                                    @break
+                                                    <p class="text-primary">{{ __('신청') }}</p>
+                                                @break
                                                 @case('waiting')
-                                                    {{ __('대기') }}
+                                                    <p class="text-warning">{{ __('대기') }}</p>
                                                 @break
                                                 @case('completed')
-                                                    {{ __('완료') }}
+                                                    <p class="text-success">{{ __('완료') }}</p>
                                                     @break
                                                 @case('canceled')
-                                                    {{ __('취소') }}
+                                                    <p class="text-secondary">{{ __('취소') }}</p>
                                                     @break
                                                 @default
-                                                    {{ __('환불') }}
+                                                    <p class="text-danger">{{ __('환불') }}</p>
                                             @endswitch
                                         </td>
                                         <td scope="col" class="text-center">{{ $value->fee }} / {{ $value->tax }}</td>
