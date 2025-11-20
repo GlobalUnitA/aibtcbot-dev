@@ -7,16 +7,6 @@
 </header>
 <main class="container-fluid py-5 mb-5">
     <div class="px-3 mb-5">
-        <div class="mt-4">
-            <label class="form-label">{{ __('mining.max_node_amount') }}</label>
-            <input type="text" value="{{ $mining->node_limit }}" class="form-control mb-3" readonly>
-        </div>
-        {{--
-        <div class="my-4">
-            <label class="form-label">{{ __('system.period') }}</label>
-            <input type="text" value="{{ $mining->split_period }}" class="form-control mb-3" readonly>
-        </div>
-        --}}
         <div class="p-4 rounded bg-light text-black mb-2">
             <div class="row g-3">
                 <div class="col-6">
