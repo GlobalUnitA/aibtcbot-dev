@@ -28,7 +28,6 @@ class Member extends Authenticatable
     protected $appends = [
         'member_id',
         'referral_count',
-        'is_referral',
     ];
 
     public function parent()
@@ -100,24 +99,6 @@ class Member extends Authenticatable
     public function getReferralCountAttribute()
     {
         return $this->referrals()->where('is_valid', 'y')->count();
-    }
-
-    public function getIsReferralAttribute()
-    {
-        $is_valid = 'n';
-        $min_valid = AssetPolicy::first()->min_valid;
-
-        $max_amount_in_usdt = AssetTransfer::where('member_id', $this->id)
-            ->whereIn('type', ['deposit', 'internal', 'manual_deposit'])
-            ->whereIn('status', ['waiting', 'completed'])
-            ->get()
-            ->sum(fn($deposit) => (float) $deposit->getAmountInUsdt());
-
-        if ($max_amount_in_usdt >= $min_valid) {
-            $is_valid = 'y';
-        }
-
-        return $is_valid;
     }
 
     public function getHasMining()
