@@ -34,16 +34,15 @@
             @csrf
             <input type="hidden" name="policy" value="{{ $mining->id }}">
             <input type="hidden" name="exchange_rate" id="exchangeRate" value="{{ $mining->exchange_rate }}">
-            <input type="hidden" name="coin_amount" id="coinAmount" value="">
+            <input type="hidden" name="coin_amount" id="coinAmount" value="{{ $mining->node_limit * 1000 }}">
             <div class="mb-3">
                 <label class="form-label fs-4 text-body">{{ __('mining.participation_node_guide') }}</label>
-                <input type="text" name="node_amount" id="nodeAmount" class="form-control" placeholder=0 min="0" max="{{ $mining->max_quantity }}">
+                <input type="text" name="node_amount" id="nodeAmount" class="form-control" value="{{ $mining->node_limit  }}" readonly>
             </div>
             <div class="mb-3">
                 <label class="form-label fs-4 text-body">{{ $mining->refundCoin->name }} {{ __('system.amount') }}</label>
-                <input type="text" name="refund_coin_amount" id="refundCoinAmount" class="form-control" value="0" readonly>
+                <input type="text" name="refund_coin_amount" id="refundCoinAmount" class="form-control" value="{{ $mining->node_limit * 1000 / $mining->exchange_rate }}" readonly>
             </div>
-            {{--<p class="opacity-50 fw-light fs-4">{{ __('1 NODE') }} = <span class="fw-bold">{{ __('1,000') }} {{ $mining->coin->name }}</span></p>--}}
             <p class="mb-5 opacity-50 fw-light fs-4">{{ __('system.stock_amount') }}: <span class="fw-bold">{{ number_format($balance) }}</span></p>
             <button type="submit" class="btn btn-primary w-100 py-3 mb-4 fs-4" >{{ __('mining.participate') }}</button>
         </form>
