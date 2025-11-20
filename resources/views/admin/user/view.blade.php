@@ -25,7 +25,7 @@
                                 <th class="text-center align-middle">UID</th>
                                 <td class="align-middle">{{ $view->member->member_id }}</td>
                                 <th class="text-center align-middle">추천인</th>
-                                <td class="align-middle">{{ $view->member->referrer->member_id }}</td>
+                                <td class="align-middle">{{ optional($view->member->referrer)->member_id }}</td>
                             </tr>
                             <tr>
                                 <th class="text-center align-middle">유효 계정</th>
