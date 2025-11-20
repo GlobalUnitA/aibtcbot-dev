@@ -85,7 +85,7 @@
                                     @foreach ($list as $key => $value)
                                     <tr style="cursor:pointer;" onclick="window.location='{{ route('admin.mining.view', ['id' => $value->id]) }}';">
                                         <td scope="col" class="text-center">{{ $list->firstItem() + $key }}</td>
-                                        <td scope="col" class="text-center">{{ $value->user_id }}</td>
+                                        <td scope="col" class="text-center">{{ 'U'.$value->user_id }}</td>
                                         <td scope="col" class="text-center">{{ $value->user->name }}</td>
                                         <td scope="col" class="text-center">{{ $value->asset->coin->name }}</td>
                                         <td scope="col" class="text-center">{{ $value->node_amount }}</td>

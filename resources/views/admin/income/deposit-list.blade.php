@@ -89,8 +89,8 @@
                                     @foreach ($list as $key => $value)
                                     <tr style="cursor:pointer;" onclick="window.location='{{ route('admin.income.view', ['id' => $value->id]) }}';">
                                         <td scope="col" class="text-center">{{ $list->firstItem() + $key }}</td>
-                                        <td scope="col" class="text-center">{{ $value->user_id }}</td>
-                                        <td scope="col" class="text-center">{{ $value->user->name }}</td>
+                                        <td scope="col" class="text-center">{{ $value->member->member_id }}</td>
+                                        <td scope="col" class="text-center">{{ $value->member->user->name }}</td>
                                         <td scope="col" class="text-center">{{ $value->income->coin->name }}</td>
                                         <td scope="col" class="text-center">{{ $value->amount }}</td>
                                         <td scope="col" class="text-center">{{ $value->actual_amount }}</td>

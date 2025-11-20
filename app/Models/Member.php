@@ -26,6 +26,7 @@ class Member extends Authenticatable
     ];
 
     protected $appends = [
+        'member_id',
         'referral_count',
         'is_referral',
     ];
@@ -83,6 +84,17 @@ class Member extends Authenticatable
     public function incomeTransfers()
     {
         return $this->hasMany(IncomeTransfer::class, 'member_id', 'id');
+    }
+
+    public function getMemberIdAttribute()
+    {
+        if ($this->user_id) {
+            return 'U' . $this->user_id;
+        }else if ($this->avatar_id) {
+            return 'A' . $this->avatar_id;
+        } else {
+            return null;
+        }
     }
 
     public function getReferralCountAttribute()
