@@ -16,7 +16,7 @@
                         <div class="table-responsive">
                             <table class="table text-nowrap align-middle mb-0 table-striped table-hover">
                                 <thead>
-                                    <tr class="border-2 border-bottom border-primary border-0"> 
+                                    <tr class="border-2 border-bottom border-primary border-0">
                                         <th scope="col" class="ps-0 text-center">번호</th>
                                         <th scope="col" class="text-center">아이디</th>
                                         <th scope="col" class="text-center">UID</th>
@@ -24,6 +24,7 @@
                                         <th scope="col" class="text-center">등급</th>
                                         <th scope="col" class="text-center">연락처</th>
                                         <th scope="col" class="text-center">이메일</th>
+                                        <th scope="col" class="text-center">추천인</th>
                                         <th scope="col" class="text-center" >가입일자</th>
                                     </tr>
                                 </thead>
@@ -38,7 +39,9 @@
                                         <td class="text-center">{{ $value->grade_name }}</td>
                                         <td class="text-center">{{ $value->phone }}</td>
                                         <td class="text-center">{{ $value->email }}</td>
-                                        
+                                        <td class="text-center">
+                                            {{ $value->referrer_user_id ? 'U' . $value->referrer_user_id : ($value->referrer_avatar_id ? 'A' . $value->referrer_avatar_id : '') }}
+                                        </td>
                                         <td class="text-center">{{ $value->created_at }}</td>
                                     </tr>
                                     @endforeach

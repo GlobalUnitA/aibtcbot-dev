@@ -26,7 +26,8 @@ class UserController extends Controller
         ->join('user_profiles', 'users.id', '=', 'user_profiles.user_id')
         ->join('members', 'users.id', '=', 'members.user_id')
         ->join('member_grades', 'members.grade_id', '=', 'member_grades.id')
-        ->select('user_profiles.*', 'users.name', 'users.account', 'member_grades.name as grade_name')
+        ->leftJoin('members as referrer', 'members.referrer_id', '=', 'referrer.id')
+        ->select('user_profiles.*', 'users.name', 'users.account', 'member_grades.name as grade_name', 'referrer.user_id as referrer_user_id', 'referrer.avatar_id as referrer_avatar_id')
         ->when(request('keyword') != '', function ($query) {
             if(request('category') == 'mid'){
                 $query->where('users.id', request('keyword'));
@@ -46,10 +47,8 @@ class UserController extends Controller
             $end_date = Carbon::parse(request('end_date'))->endOfDay();
             $query->where('users.created_at', '<=', $end_date);
         })
-
         ->orderBy('users.created_at', 'desc')
         ->paginate(10);
-
 
         return view('admin.user.list', compact('list'));
     }

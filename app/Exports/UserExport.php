@@ -20,21 +20,19 @@ class UserExport implements FromCollection, WithHeadings
 
         $query = DB::table('users')
             ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
-            ->leftJoin('member_grades', 'member_grades.grade_id', '=', 'member_grades.id')
-            ->leftJoin('user_profiles as parent_profiles', 'user_profiles.parent_id', '=', 'parent_profiles.user_id')
-            ->leftJoin('users as parents', 'parent_profiles.user_id', '=', 'parents.id')
+            ->leftJoin('members', 'users.id', '=', 'members.user_id')
+            ->leftJoin('member_grades', 'members.grade_id', '=', 'member_grades.id')
+            ->leftJoin('members as referrer', 'members.referrer_id', '=', 'referrer.id')
             ->select(
                 'users.account',
                 'users.id',
                 'users.name',
-                'user_profiles.level',
                 'member_grades.name as grade_name',
                 'user_profiles.phone',
                 'user_profiles.email',
-                'user_profiles.meta_uid',
+                'referrer.user_id as ref_user_id',
+                'referrer.avatar_id as ref_avatar_id',
                 'users.created_at',
-                'parent_profiles.user_id',
-                'parents.name as parent_name',
             );
 
 
@@ -55,15 +53,34 @@ class UserExport implements FromCollection, WithHeadings
         $results = $query->get();
 
         return $results->map(function ($item, $index) {
+
+            $uid = 'U' . $item->id;
+
+            if (!empty($item->ref_user_id)) {
+                $referrer = 'U' . $item->ref_user_id;
+            } elseif (!empty($item->ref_avatar_id)) {
+                $referrer = 'A' . $item->ref_avatar_id;
+            } else {
+                $referrer = 'root';
+            }
+
             return collect([
-                '번호' => $index + 1,
-            ])->merge((array) $item);
+                '번호'     => $index + 1,
+                '아이디'   => $item->account,
+                'UID'      => $uid,
+                '회원명'   => $item->name,
+                '등급'     => $item->grade_name,
+                '연락처'   => $item->phone,
+                '이메일'   => $item->email,
+                '추천인'   => $referrer,
+                '가입일자' => $item->created_at,
+            ]);
         });
     }
 
 
     public function headings(): array
     {
-        return ['번호', '아이디', 'MID', '회원명', '노드 레벨', '등급', '연락처', '이메일', 'USDT 주소', '가입일자', '추천인UID', '추천인 이름'];
+        return ['번호', '아이디', 'UID', '회원명', '등급', '연락처', '이메일', '추천인', '가입일자'];
     }
 }
