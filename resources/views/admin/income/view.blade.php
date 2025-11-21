@@ -37,9 +37,9 @@
                         <tbody>
                             <tr>
                                 <th class="text-center align-middle">아이디</th>
-                                <td class="align-middle">{{ $view->user->account }}</td>
+                                <td class="align-middle">{{ $view->member->user->account }}</td>
                                 <th class="text-center align-middle">이름</th>
-                                <td class="align-middle">{{ $view->user->name }}</td>
+                                <td class="align-middle">{{ $view->member->user->name }}</td>
                             </tr>
                             <tr>
                                 <th class="text-center align-middle">종류</th>
@@ -111,9 +111,9 @@
                                     <tbody class="table-group-divider">
                                         @foreach($view->rankBonus->referrals as $referral)
                                         <tr>
-                                            <td scope="col" class="text-center">{{ $referral->user->id }}</td>
-                                            <td scope="col" class="text-center">{{ $referral->user->name }}</td>
-                                            <td scope="col" class="text-center">{{ $referral->user->member->grade->name }}</td>
+                                            <td scope="col" class="text-center">{{ $referral->member->member_id }}</td>
+                                            <td scope="col" class="text-center">{{ $referral->member->member_name }}</td>
+                                            <td scope="col" class="text-center">{{ $referral->member->grade->name }}</td>
                                             <td scope="col" class="text-center">{{ $referral->self_sales }}</td>
                                             <td scope="col" class="text-center">{{ $referral->group_sales }}</td>
                                         </tr>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\BonusService;
 use App\Traits\TruncatesDecimals;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,15 +16,10 @@ class Mining extends Model
     protected $fillable = [
         'user_id',
         'asset_id',
-        'refund_id',
-        'reward_id',
+        'income_id',
         'policy_id',
         'status',
-        'coin_amount',
-        'refund_coin_amount',
-        'node_amount',
-        'exchange_rate',
-        'split_period',
+        'entry_amount',
         'reward_count',
         'reward_limit',
         'started_at',
@@ -31,10 +27,7 @@ class Mining extends Model
     ];
 
     protected $casts = [
-        'coin_amount' => 'decimal:9',
-        'refund_coin_amount' => 'decimal:9',
-        'node_amount' => 'decimal:9',
-        'exchange_rate' => 'decimal:9',
+        'entry_amount' => 'decimal:9',
         'started_at' => 'datetime:Y-m-d',
         'maturity_at' => 'datetime:Y-m-d',
     ];
@@ -50,22 +43,17 @@ class Mining extends Model
 
     public function asset()
     {
-        return $this->belongsTo(Asset::class, 'refund_id', 'id');
+        return $this->belongsTo(Asset::class, 'asset_id', 'id');
     }
 
     public function income()
     {
-        return $this->belongsTo(Income::class, 'reward_id', 'id');
+        return $this->belongsTo(Income::class, 'income_id', 'id');
     }
 
     public function policy()
     {
         return $this->belongsTo(MiningPolicy::class, 'policy_id', 'id');
-    }
-
-    public function refunds()
-    {
-        return $this->hasMany(MiningRefund::class, 'mining_id', 'id');
     }
 
     public function rewards()
@@ -136,12 +124,10 @@ class Mining extends Model
 
             try {
 
-                $reward = ($mining->policy->node_amount * $mining->node_amount);
-
-                MiningReward::create([
+                $reward = MiningReward::create([
                     'user_id'   => $mining->user_id,
                     'mining_id' => $mining->id,
-                    'reward' => $reward,
+                    'reward' => $mining->entry_amount,
                     'reward_date' => $today,
                     'start_date' => $today,
                     'end_date' => $today->copy()->addDays($mining->split_period),
@@ -154,6 +140,9 @@ class Mining extends Model
                 }
 
                 $mining->save();
+
+                $service = new BonusService();
+                $service->levelBonus($reward);
 
                 DB::commit();
 
@@ -188,6 +177,7 @@ class Mining extends Model
 
             try {
 
+                /*
                 $asset = $mining->asset;
 
                 $transfer = AssetTransfer::create([
@@ -203,13 +193,6 @@ class Mining extends Model
 
                 $asset->increment('balance', $mining->refund_coin_amount);
 
-                MiningRefund::create([
-                    'user_id' => $mining->user_id,
-                    'mining_id' => $mining->id,
-                    'transfer_id' => $transfer->id,
-                    'amount' => $mining->refund_coin_amount,
-                ]);
-
                 Log::channel('mining')->info('Mining principal successfully paid out', [
                     'user_id' => $mining->user_id,
                     'mining_id' => $mining->id,
@@ -217,6 +200,8 @@ class Mining extends Model
                     'amount' => $mining->refund_coin_amount,
                     'timestamp' => now(),
                 ]);
+
+                */
 
                 $mining->update(['status' => 'completed']);
 

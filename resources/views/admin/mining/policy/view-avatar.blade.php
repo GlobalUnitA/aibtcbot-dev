@@ -5,22 +5,17 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs mt-3" id="tableTabs" role="tablist" >
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.policy.view', ['mode' => 'mining', 'id' => $view->id]) }}" class="nav-link @if(request('mode') == 'mining') active @endif">
-                    환율 & 채굴값
-                </a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.policy.view', ['mode' => 'policy', 'id' => $view->id]) }}" class="nav-link @if(request('mode') == 'policy') active @endif">
+                <a href="{{ route('admin.mining.policy.view', ['mode' => 'policy', 'id' => $view->id]) }}" class="nav-link">
                     마이닝 정책
                 </a>
             </li>
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.policy.view', ['mode' => 'avatar', 'id' => $view->id]) }}" class="nav-link @if(request('mode') == 'avatar') active @endif">
+                <a href="{{ route('admin.mining.policy.view', ['mode' => 'avatar', 'id' => $view->id]) }}" class="nav-link active">
                     아바타 설정
                 </a>
             </li>
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.policy.view', ['mode' => 'translation', 'id' => $view->id]) }}" class="nav-link @if(request('mode') == 'translation') active @endif">
+                <a href="{{ route('admin.mining.policy.view', ['mode' => 'translation', 'id' => $view->id]) }}" class="nav-link">
                     다국어 설정
                 </a>
             </li>
@@ -47,7 +42,7 @@
                                 <th class="text-center align-middle">아바타 생성 비용</th>
                                 <td class="align-middle d-flex">
                                     <input type="text" name="avatar_cost" value="{{ $view->avatar_cost }}" class="form-control w-25">
-                                    <div class="px-2 d-flex align-items-center">{{  $view->rewardCoin->code }}</div>
+                                    <div class="px-2 d-flex align-items-center">{{  $view->coin->code }}</div>
                                 </td>
                                 <th class="text-center align-middle">아바타 생성 개수</th>
                                 <td class="align-middle d-flex">
@@ -59,7 +54,7 @@
                                 <th class="text-center align-middle">아바타 생성 누적 금액</th>
                                 <td class="align-middle d-flex" colspan="3">
                                     <input type="text" name="avatar_target_amount" value="{{ $view->avatar_target_amount }}" class="form-control w-25">
-                                    <div class="px-2 d-flex align-items-center">{{  $view->rewardCoin->code }}</div>
+                                    <div class="px-2 d-flex align-items-center">{{  $view->coin->code }}</div>
                                 </td>
                             </tr>
                         </tbody>

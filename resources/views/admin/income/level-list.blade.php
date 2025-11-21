@@ -71,7 +71,7 @@
                                         <th scope="col" class="text-center">타입</th>
                                         <th scope="col" class="text-center">상태</th>
                                         <th scope="col" class="text-center">산하ID</th>
-                                        <th scope="col" class="text-center">데일리</th>
+                                        <th scope="col" class="text-center">참여금액</th>
                                         <th scope="col" class="text-center">일자</th>
                                     </tr>
                                 </thead>
@@ -80,9 +80,9 @@
                                     @foreach ($list as $key => $value)
                                     <tr style="cursor:pointer;" onclick="window.location='{{ route('admin.income.view', ['id' => $value->id]) }}';">
                                         <td scope="col" class="text-center">{{ $list->firstItem() + $key }}</td>
-                                        <td scope="col" class="text-center">{{ $value->user_id }}</td>
-                                        <td scope="col" class="text-center">{{ $value->user->name }}</td>
-                                        <td scope="col" class="text-center">{{ $value->user->member->grade->name }}</td>
+                                        <td scope="col" class="text-center">{{ $value->member->member_id }}</td>
+                                        <td scope="col" class="text-center">{{ $value->member->user->name }}</td>
+                                        <td scope="col" class="text-center">{{ $value->member->grade->name }}</td>
                                         <td scope="col" class="text-center">{{ $value->income->coin->name }}</td>
                                         <td scope="col" class="text-center">{{ $value->amount }}</td>
                                         <td scope="col" class="text-center">
@@ -113,7 +113,7 @@
                                             @endswitch
                                         </td>
                                         <td scope="col" class="text-center">{{ $value->levelBonus?->referrer_id }}</td>
-                                        <td scope="col" class="text-center">{{ $value->levelBonus?->profit->profit }}</td>
+                                        <td scope="col" class="text-center">{{ $value->levelBonus?->reward->reward }}</td>
                                         <td scope="col" class="text-center">{{ $value->created_at }}</td>
                                     </tr>
                                     @endforeach

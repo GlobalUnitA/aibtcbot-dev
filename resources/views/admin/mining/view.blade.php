@@ -100,7 +100,6 @@
                         <tr class="border-2 border-bottom border-primary border-0">
                             <th scope="col" class="text-center">채굴날짜</th>
                             <th scope="col" class="text-center">채굴량/수익</th>
-                            <th scope="col" class="text-center">타입</th>
                             <th scope="col" class="text-center">일자</th>
                         </tr>
                         </thead>
@@ -110,25 +109,8 @@
                                 <tr>
                                     <td class="text-center">{{ $reward->reward_date }}</td>
                                     <td class="text-center">{{ $reward->reward }}</td>
-                                    <td class="text-center"></td>
                                     <td class="text-center">{{ $reward->created_at }}</td>
                                 </tr>
-                                @foreach($reward->profits as $profit)
-                                    <tr>
-                                        <td class="text-center"><i class="bi bi-arrow-return-right"></i></td>
-                                        <td class="text-center">{{ $profit->profit }}</td>
-                                        <td class="text-center">
-                                            @if($profit->type == 'instant')
-                                                {{ __('즉시') }}
-                                            @elseif($profit->type == 'daily')
-                                                {{ __('분할') }}
-                                            @else
-                                                {{ __('오류') }}
-                                            @endif
-                                        </td>
-                                        <td class="text-center">{{ $profit->created_at }}</td>
-                                    </tr>
-                                @endforeach
                             @endforeach
                         @else
                             <tr>
@@ -157,7 +139,7 @@
                             <th scope="col" class="text-center">보너스 / 매칭</th>
                             <th scope="col" class="text-center">상태</th>
                             <th scope="col" class="text-center">산하ID</th>
-                            <th scope="col" class="text-center">데일리 / 보너스</th>
+                            <th scope="col" class="text-center">참여금액 / 보너스</th>
                             <th scope="col" class="text-center">일자</th>
                         </tr>
                         </thead>
@@ -166,9 +148,9 @@
                             @foreach($level_bonuses as $bonus)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ $bonus->user_id }}</td>
-                                    <td class="text-center">{{ $bonus->user->name }}</td>
-                                    <td class="text-center">{{ $bonus->user->member->grade->name }}</td>
+                                    <td class="text-center">{{ $bonus->member->member_id }}</td>
+                                    <td class="text-center">{{ $bonus->member->member_name }}</td>
+                                    <td class="text-center">{{ $bonus->member->grade->name }}</td>
                                     <td class="text-center">{{ $bonus->transfer->income->coin->name }}</td>
                                     <td class="text-center">{{ $bonus->bonus }}</td>
                                     <td scope="col" class="text-center">
@@ -189,16 +171,16 @@
                                                 {{ __('환불') }}
                                         @endswitch
                                     </td>
-                                    <td class="text-center">{{ $bonus->referrer_id }}</td>
-                                    <td class="text-center">{{ $bonus->profit->profit }}</td>
+                                    <td class="text-center">{{ $bonus->referrer->member_id }}</td>
+                                    <td class="text-center">{{ $bonus->mining->entry_amount }}</td>
                                     <td class="text-center">{{ $bonus->transfer->created_at }}</td>
                                 </tr>
                                 @foreach($bonus->matchings as $matching)
                                     <tr>
                                         <td class="text-center"><i class="bi bi-arrow-return-right"></i></td>
-                                        <td class="text-center">{{ $matching->user_id }}</td>
-                                        <td class="text-center">{{ $matching->user->name }}</td>
-                                        <td class="text-center">{{ $matching->user->member->grade->name }}</td>
+                                        <td class="text-center">{{ $matching->member->member_id }}</td>
+                                        <td class="text-center">{{ $matching->member->member_name }}</td>
+                                        <td class="text-center">{{ $matching->member->grade->name }}</td>
                                         <td class="text-center">{{ $matching->transfer->income->coin->name }}</td>
                                         <td class="text-center">{{ $matching->matching }}</td>
                                         <td scope="col" class="text-center">
@@ -219,7 +201,7 @@
                                                     {{ __('환불') }}
                                             @endswitch
                                         </td>
-                                        <td class="text-center">{{ $matching->referrer_id }}</td>
+                                        <td class="text-center">{{ $matching->referrer->member_id }}</td>
                                         <td class="text-center">{{ $matching->bonus->bonus }}</td>
                                         <td class="text-center">{{ $matching->transfer->created_at }}</td>
                                     </tr>
@@ -261,9 +243,9 @@
                             @foreach ($referral_bonuses as $bonus)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ $bonus->user_id }}</td>
-                                    <td class="text-center">{{ $bonus->user->name }}</td>
-                                    <td class="text-center">{{ $bonus->user->member->grade->name }}</td>
+                                    <td class="text-center">{{ $bonus->member->member_id }}</td>
+                                    <td class="text-center">{{ $bonus->member->member_name }}</td>
+                                    <td class="text-center">{{ $bonus->member->grade->name }}</td>
                                     <td class="text-center">{{ $bonus->transfer->income->coin->name }}</td>
                                     <td class="text-center">{{ $bonus->bonus }}</td>
                                     <td scope="col" class="text-center">
@@ -284,16 +266,16 @@
                                                 {{ __('환불') }}
                                         @endswitch
                                     </td>
-                                    <td class="text-center">{{ $bonus->referrer_id }}</td>
-                                    <td class="text-center">{{ $view->coin_amount }}</td>
+                                    <td class="text-center">{{ $bonus->referrer->member_id }}</td>
+                                    <td class="text-center">{{ $view->entry_amount }}</td>
                                     <td class="text-center">{{ $bonus->transfer->created_at }}</td>
                                 </tr>
                                 @foreach($bonus->matchings as $matching)
                                     <tr>
                                         <td class="text-center"><i class="bi bi-arrow-return-right"></i></td>
-                                        <td class="text-center">{{ $matching->user_id }}</td>
-                                        <td class="text-center">{{ $matching->user->name }}</td>
-                                        <td class="text-center">{{ $matching->user->member->grade->name }}</td>
+                                        <td class="text-center">{{ $matching->member->member_id }}</td>
+                                        <td class="text-center">{{ $matching->member->member_name }}</td>
+                                        <td class="text-center">{{ $matching->member->grade->name }}</td>
                                         <td class="text-center">{{ $matching->transfer->income->coin->name }}</td>
                                         <td class="text-center">{{ $matching->matching }}</td>
                                         <td scope="col" class="text-center">
@@ -314,7 +296,7 @@
                                                     {{ __('환불') }}
                                             @endswitch
                                         </td>
-                                        <td class="text-center">{{ $matching->referrer_id }}</td>
+                                        <td class="text-center">{{ $matching->referrer->member_id }}</td>
                                         <td class="text-center">{{ $matching->bonus->bonus }}</td>
                                         <td class="text-center">{{ $matching->transfer->created_at }}</td>
                                     </tr>

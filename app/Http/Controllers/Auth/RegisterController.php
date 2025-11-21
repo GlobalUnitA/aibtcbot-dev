@@ -141,15 +141,27 @@ class RegisterController extends Controller
         $service = new MemberService();
         $referrer_info  = $service->memberParseCode($request->referrerId);
 
-        if ($referrer_info['type'] === 'avatar') {
-            $exists = Avatar::where('id', $referrer_info['id'])->exists();
-        } else {
-            $exists = User::where('id', $referrer_info['id'])->exists();
+        $referrer = $referrer_info['type'] === 'avatar'
+            ? Avatar::find($referrer_info['id'])
+            : User::find($referrer_info['id']);
+
+        if (!$referrer) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('auth.recommender_not_found_notice'),
+            ]);
+        }
+
+        if ($referrer->member->is_valid === 'n') {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('auth.recommender_not_found_notice'),
+            ]);
         }
 
         return response()->json([
-            'status' => $exists ? 'success' : 'error',
-            'message' => $exists ? __('auth.recommender_available_notice') : __('auth.recommender_not_found_notice'),
+            'status' => 'success',
+            'message' => __('auth.recommender_available_notice'),
         ]);
     }
 

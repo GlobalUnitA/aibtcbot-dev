@@ -14,7 +14,19 @@
                     <input type="hidden" name="id" value="{{ $view->id }}">
                     <hr>
                     <table class="table table-bordered mt-5 mb-5">
+                        <colgroup>
+                            <col style="width: 15%;">
+                            <col style="width: 35%;">
+                            <col style="width: 15%;">
+                            <col style="width: 35%;">
+                        </colgroup>
                         <tbody>
+                            <tr>
+                                <th class="text-center align-middle">UID</th>
+                                <td class="align-middle">{{ $view->member->member_id }}</td>
+                                <th class="text-center align-middle">추천인</th>
+                                <td class="align-middle">{{ optional($view->member->referrer)->member_id }}</td>
+                            </tr>
                             <tr>
                                 <th class="text-center align-middle">유효 계정</th>
                                 <td class="align-middle">
@@ -71,7 +83,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="text-center align-middle">USDT(BNB Smart Chain)</th>
+                                <th class="text-center align-middle">USDT<br>(BNB Smart Chain)</th>
                                 <td colspan="3">
                                     <div class="d-flex align-items-center justify-content-between me-3">
                                         @if($view->profile->meta_uid)

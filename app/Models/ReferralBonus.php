@@ -39,7 +39,7 @@ class ReferralBonus extends Model
 
     public function referrer()
     {
-        return $this->belongsTo(User::class, 'referrer_id', 'id');
+        return $this->belongsTo(Member::class, 'referrer_id', 'id');
     }
 
     public function matchings()

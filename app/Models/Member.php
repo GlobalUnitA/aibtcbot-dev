@@ -26,8 +26,9 @@ class Member extends Authenticatable
     ];
 
     protected $appends = [
+        'member_id',
+        'member_name',
         'referral_count',
-        'is_referral',
     ];
 
     public function parent()
@@ -85,27 +86,31 @@ class Member extends Authenticatable
         return $this->hasMany(IncomeTransfer::class, 'member_id', 'id');
     }
 
+    public function getMemberIdAttribute()
+    {
+        if ($this->user_id) {
+            return 'U' . $this->user_id;
+        }else if ($this->avatar_id) {
+            return 'A' . $this->avatar_id;
+        } else {
+            return null;
+        }
+    }
+
+    public function getMemberNameAttribute()
+    {
+        if ($this->user_id) {
+            return $this->user->name;
+        }else if ($this->avatar_id) {
+            return $this->avatar->name;
+        } else {
+            return null;
+        }
+    }
+
     public function getReferralCountAttribute()
     {
         return $this->referrals()->where('is_valid', 'y')->count();
-    }
-
-    public function getIsReferralAttribute()
-    {
-        $is_valid = 'n';
-        $min_valid = AssetPolicy::first()->min_valid;
-
-        $max_amount_in_usdt = AssetTransfer::where('member_id', $this->id)
-            ->whereIn('type', ['deposit', 'internal', 'manual_deposit'])
-            ->whereIn('status', ['waiting', 'completed'])
-            ->get()
-            ->sum(fn($deposit) => (float) $deposit->getAmountInUsdt());
-
-        if ($max_amount_in_usdt >= $min_valid) {
-            $is_valid = 'y';
-        }
-
-        return $is_valid;
     }
 
     public function getHasMining()

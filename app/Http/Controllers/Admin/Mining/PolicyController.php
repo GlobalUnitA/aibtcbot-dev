@@ -6,7 +6,6 @@ use App\Exports\StakingPolicyExport;
 use App\Models\Coin;
 use App\Models\MemberGrade;
 use App\Models\Mining;
-use App\Models\MiningDailyStat;
 use App\Models\MiningPolicy;
 use App\Models\MiningPolicyTranslation;
 use App\Models\LevelPolicy;
@@ -52,23 +51,6 @@ class PolicyController extends Controller
 
                 return view('admin.mining.policy.view-translation', compact('policy', 'view'));
 
-            case 'policy' :
-
-                $view = MiningPolicy::find($request->id);
-
-                $selected_days = explode(',', $view->reward_days ?? '');
-
-                $modify_logs = PolicyModifyLog::join('mining_policies', 'mining_policies.id', '=', 'policy_modify_logs.policy_id')
-                    ->join('admins', 'admins.id', '=', 'policy_modify_logs.admin_id')
-                    ->select('admins.name', 'policy_modify_logs.*')
-                    ->where('policy_modify_logs.policy_type', 'mining_policies')
-                    ->where('policy_modify_logs.policy_id', $request->id)
-                    ->whereNotIn('policy_modify_logs.column_name', ['exchange_rate', 'node_amount', 'avatar_cost', 'avatar_count', 'avatar_target_amount'])
-                    ->orderBy('policy_modify_logs.created_at', 'desc')
-                    ->get();
-
-                return view('admin.mining.policy.view-policy', compact('coins', 'view', 'all_days', 'selected_days', 'modify_logs'));
-
             case 'avatar' :
 
                 $view = MiningPolicy::find($request->id);
@@ -90,23 +72,18 @@ class PolicyController extends Controller
 
                 $view = MiningPolicy::find($request->id);
 
-                $mining_daily_stats = MiningDailyStat::where('policy_id', $request->id)->get();
+                $selected_days = explode(',', $view->reward_days ?? '');
 
-                /*
-                foreach ($mining_daily_stats as $mining_daily_stat) {
+                $modify_logs = PolicyModifyLog::join('mining_policies', 'mining_policies.id', '=', 'policy_modify_logs.policy_id')
+                    ->join('admins', 'admins.id', '=', 'policy_modify_logs.admin_id')
+                    ->select('admins.name', 'policy_modify_logs.*')
+                    ->where('policy_modify_logs.policy_type', 'mining_policies')
+                    ->where('policy_modify_logs.policy_id', $request->id)
+                    ->whereNotIn('policy_modify_logs.column_name', ['exchange_rate', 'node_amount', 'avatar_cost', 'avatar_count', 'avatar_target_amount'])
+                    ->orderBy('policy_modify_logs.created_at', 'desc')
+                    ->get();
 
-                    $minings = Mining::where('policy_id', $request->id)->get();
-
-                    $date = $mining_daily_stat->stat_date->format('Y-m-d');
-
-                    $list[$date] = $this->getMiningData($minings, $mining_daily_stat->node_amount);
-                    $list[$date]['exchange_rate'] = $mining_daily_stat->exchange_rate;
-                    $list[$date]['node_amount'] = $mining_daily_stat->node_amount;
-                }
-                */
-
-                $list = [];
-                return view('admin.mining.policy.view-mining', compact('view', 'list'));
+                return view('admin.mining.policy.view-policy', compact('coins', 'view', 'all_days', 'selected_days', 'modify_logs'));
 
         }
     }
@@ -130,14 +107,6 @@ class PolicyController extends Controller
             $data['benefit_rules'] = $request->benefit_rules;
 
             $mining_policy = MiningPolicy::create($data);
-
-
-            MiningDailyStat::updateOrCreate([
-                'policy_id' => $mining_policy->id,
-                'stat_date' => today(),
-                'exchange_rate' => $data['exchange_rate'],
-                'node_amount' => $data['node_amount'],
-            ]);
 
             $locales = $request->translation;
 
@@ -192,34 +161,7 @@ class PolicyController extends Controller
 
                 $mining_policy = MiningPolicy::findOrFail($request->id);
 
-                $mining_daily_stat = MiningDailyStat::where('policy_id', $mining_policy->id)
-                    ->where('stat_date',  today())
-                    ->first();
-
                 switch ($request->mode) {
-                    case 'exchange' :
-
-                        $mining_policy->update(['exchange_rate' => $request->exchange_rate]);
-                        $mining_daily_stat->update(['exchange_rate' => $request->exchange_rate]);
-
-
-                        return response()->json([
-                            'status' => 'success',
-                            'message' => '환율이 변경되었습니다.',
-                            'url' => route('admin.mining.policy.view', ['mode' => 'mining', 'id' => $mining_policy->id]),
-                        ]);
-
-                    case 'node' :
-
-                        $mining_policy->update(['node_amount' => $request->node_amount]);
-                        $mining_daily_stat->update(['node_amount' => $request->node_amount]);
-
-                        return response()->json([
-                            'status' => 'success',
-                            'message' => '채굴값이 변경되었습니다.',
-                            'url' => route('admin.mining.policy.view', ['mode' => 'mining', 'id' => $mining_policy->id]),
-                        ]);
-
                     case 'avatar' :
 
                         $mining_policy->update([
@@ -259,7 +201,7 @@ class PolicyController extends Controller
                     default :
 
                         $days = $request->input('reward_days', []);
-                        $data = $request->except(['exchange_rate', 'node_amount', 'mode', 'reward_days']);
+                        $data = $request->except(['mode', 'reward_days']);
 
                         $data['reward_days'] = implode(',', $days);
 
