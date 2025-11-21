@@ -266,8 +266,8 @@
                                                 {{ __('환불') }}
                                         @endswitch
                                     </td>
-                                    <td class="text-center">{{ $bonus->referrer_id }}</td>
-                                    <td class="text-center">{{ $view->coin_amount }}</td>
+                                    <td class="text-center">{{ $bonus->referrer->member_id }}</td>
+                                    <td class="text-center">{{ $view->entry_amount }}</td>
                                     <td class="text-center">{{ $bonus->transfer->created_at }}</td>
                                 </tr>
                                 @foreach($bonus->matchings as $matching)
@@ -296,7 +296,7 @@
                                                     {{ __('환불') }}
                                             @endswitch
                                         </td>
-                                        <td class="text-center">{{ $matching->referrer_id }}</td>
+                                        <td class="text-center">{{ $matching->referrer->member_id }}</td>
                                         <td class="text-center">{{ $matching->bonus->bonus }}</td>
                                         <td class="text-center">{{ $matching->transfer->created_at }}</td>
                                     </tr>
