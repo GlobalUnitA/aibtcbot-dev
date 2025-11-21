@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{ date_format($mining->created_at, 'Y-m-d h:i:s') }}</td>
                     <td>{{ $mining->node_amount }}</td>
-                    <td>{{ number_format($mining->refund_coin_amount) }}</td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>

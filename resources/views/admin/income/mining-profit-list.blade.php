@@ -83,8 +83,8 @@
                                         <td scope="col" class="text-center">{{ $value->member->member_id }}</td>
                                         <td scope="col" class="text-center">{{ $value->member->user->name }}</td>
                                         <td scope="col" class="text-center">{{ $value->income->coin->name }}</td>
-                                        <td scope="col" class="text-center">{{ $value->miningProfit->reward->mining->policy->mining_locale_name }}</td>
-                                        <td scope="col" class="text-center">{{ $value->miningProfit->reward->mining->coin_amount }}</td>
+                                        <td scope="col" class="text-center">{{ $value->miningReward->mining->policy->mining_locale_name }}</td>
+                                        <td scope="col" class="text-center">{{ $value->miningReward->mining->entry_amount }}</td>
                                         <td scope="col" class="text-center">{{ $value->amount }}</td>
                                         <td scope="col" class="text-center">
                                             @switch($value->miningProfit->type)

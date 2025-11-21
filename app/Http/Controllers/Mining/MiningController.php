@@ -72,7 +72,7 @@ class MiningController extends Controller
         $asset = Asset::where('member_id', $user->member->id)->where('coin_id', $policy->coin_id)->first();
         $income = Income::where('member_id', $user->member->id)->where('coin_id', $policy->coin_id)->first();
 
-        if ($asset->balance < $request->coin_amount) {
+        if ($asset->balance < $request->entry_amount) {
             return response()->json([
                 'status' => 'error',
                 'message' =>  __('asset.lack_balance_notice'),
