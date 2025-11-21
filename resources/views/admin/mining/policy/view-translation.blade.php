@@ -5,22 +5,17 @@
         <div class="container-fluid">
             <ul class="nav nav-tabs mt-3" id="tableTabs" role="tablist" >
                 <li class="nav-item" role="presentation">
-                    <a href="{{ route('admin.mining.policy.view', ['mode' => 'mining', 'id' => $policy->id]) }}" class="nav-link @if(request('mode') == 'mining') active @endif">
-                        환율 & 채굴값
-                    </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a href="{{ route('admin.mining.policy.view', ['mode' => 'policy', 'id' => $policy->id]) }}" class="nav-link @if(request('mode') == 'policy') active @endif">
+                    <a href="{{ route('admin.mining.policy.view', ['mode' => 'policy', 'id' => $policy->id]) }}" class="nav-link">
                         마이닝 정책
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a href="{{ route('admin.mining.policy.view', ['mode' => 'avatar', 'id' => $policy->id]) }}" class="nav-link @if(request('mode') == 'avatar') active @endif">
+                    <a href="{{ route('admin.mining.policy.view', ['mode' => 'avatar', 'id' => $policy->id]) }}" class="nav-link">
                         아바타 설정
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a href="{{ route('admin.mining.policy.view', ['mode' => 'translation', 'id' => $policy->id]) }}" class="nav-link @if(request('mode') == 'translation') active @endif">
+                    <a href="{{ route('admin.mining.policy.view', ['mode' => 'translation', 'id' => $policy->id]) }}" class="nav-link active">
                         다국어 설정
                     </a>
                 </li>

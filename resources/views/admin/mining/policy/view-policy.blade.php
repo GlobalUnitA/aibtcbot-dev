@@ -5,22 +5,17 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs mt-3" id="tableTabs" role="tablist" >
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.policy.view', ['mode' => 'mining', 'id' => $view->id]) }}" class="nav-link @if(request('mode') == 'mining') active @endif">
-                    환율 & 채굴값
-                </a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.policy.view', ['mode' => 'policy', 'id' => $view->id]) }}" class="nav-link @if(request('mode') == 'policy') active @endif">
+                <a href="{{ route('admin.mining.policy.view', ['mode' => 'policy', 'id' => $view->id]) }}" class="nav-link active">
                     마이닝 정책
                 </a>
             </li>
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.policy.view', ['mode' => 'avatar', 'id' => $view->id]) }}" class="nav-link @if(request('mode') == 'avatar') active @endif">
+                <a href="{{ route('admin.mining.policy.view', ['mode' => 'avatar', 'id' => $view->id]) }}" class="nav-link">
                     아바타 설정
                 </a>
             </li>
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.policy.view', ['mode' => 'translation', 'id' => $view->id]) }}" class="nav-link @if(request('mode') == 'translation') active @endif">
+                <a href="{{ route('admin.mining.policy.view', ['mode' => 'translation', 'id' => $view->id]) }}" class="nav-link">
                     다국어 설정
                 </a>
             </li>
@@ -53,42 +48,10 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <th class="text-center align-middle">최대 노드 수량</th>
+                                <th class="text-center align-middle">참여 수량</th>
                                 <td class="align-middle d-flex">
-                                    <input type="text" name="node_limit" value="{{ $view->node_limit }}" class="form-control w-25">
+                                    <input type="text" name="entry_amount" value="{{ $view->entry_amount }}" class="form-control w-25">
                                     <div class="px-2 d-flex align-items-center">개</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="text-center align-middle">원금 코인</th>
-                                <td class="align-middle">
-                                    <select name="refund_coin_id" class="form-select w-50">
-                                        <option value="">코인 선택</option>
-                                        @foreach ($coins as $coin)
-                                        <option value="{{ $coin->id }}" @selected($view->refund_coin_id == $coin->id)>{{ $coin->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <th class="text-center align-middle">수익 코인</th>
-                                <td class="align-middle">
-                                    <select name="reward_coin_id" class="form-select w-50">
-                                        <option value="">코인 선택</option>
-                                        @foreach ($coins as $coin)
-                                        <option value="{{ $coin->id }}" @selected($view->reward_coin_id == $coin->id)>{{ $coin->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="text-center align-middle">즉시 지급</th>
-                                <td class="align-middle d-flex">
-                                    <input type="text" name="instant_rate" value="{{ $view->instant_rate }}" class="form-control w-25">
-                                    <div class="px-2 d-flex align-items-center">%</div>
-                                </td>
-                                <th class="text-center align-middle">분할 지급</th>
-                                <td class="align-middle d-flex">
-                                    <input type="text" name="split_rate" value="{{ $view->split_rate }}" class="form-control w-25">
-                                    <div class="px-2 d-flex align-items-center">%</div>
                                 </td>
                             </tr>
                             <tr>
@@ -97,14 +60,7 @@
                                     <input type="text" name="waiting_period" value="{{ $view->waiting_period }}" class="form-control w-25">
                                     <div class="px-2 d-flex align-items-center">일</div>
                                 </td>
-                                <th class="text-center align-middle">분할 기간</th>
-                                <td class="align-middle d-flex">
-                                    <input type="text" name="split_period" value="{{ $view->split_period }}" class="form-control w-25">
-                                    <div class="px-2 d-flex align-items-center">일</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="text-center align-middle">채굴 제한</th>
+                                <th class="text-center align-middle">수익 횟수</th>
                                 <td class="align-middle d-flex" colspan="3">
                                     <input type="text" name="reward_limit" value="{{ $view->reward_limit }}" class="form-control w-25">
                                     <div class="px-2 d-flex align-items-center">회</div>

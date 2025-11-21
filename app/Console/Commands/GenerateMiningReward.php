@@ -28,7 +28,6 @@ class GenerateMiningReward extends Command
     public function handle()
     {
         Mining::storeMiningReward();
-        MiningReward::distributeProfit();
         Mining::finalizePayout();
     }
 }

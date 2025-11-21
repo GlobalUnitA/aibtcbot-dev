@@ -70,8 +70,7 @@ class MiningController extends Controller
         $policy = MiningPolicy::find($request->policy);
 
         $asset = Asset::where('member_id', $user->member->id)->where('coin_id', $policy->coin_id)->first();
-        $refund = Asset::where('member_id', $user->member->id)->where('coin_id', $policy->refund_coin_id)->first();
-        $reward = Income::where('member_id', $user->member->id)->where('coin_id', $policy->reward_coin_id)->first();
+        $income = Income::where('member_id', $user->member->id)->where('coin_id', $policy->coin_id)->first();
 
         if ($asset->balance < $request->coin_amount) {
             return response()->json([
@@ -79,27 +78,6 @@ class MiningController extends Controller
                 'message' =>  __('asset.lack_balance_notice'),
             ]);
         }
-
-        /*
-        if ($policy->marketing->is_required === 'n') {
-
-            $coin_amount = $user->profile->getMarketingAmount();
-
-            if ($coin_amount['required'] <= 0 ) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' =>  __('mining.required_mining_notice'),
-                ]);
-            }
-
-            if ($request->coin_amount + $coin_amount['other'] > $coin_amount['required'] * 10) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' =>  __('mining.max_mining_amount_notice'),
-                ]);
-            }
-        }
-       */
 
         DB::beginTransaction();
 
@@ -110,14 +88,9 @@ class MiningController extends Controller
             $mining = Mining::create([
                 'user_id' => $user->id,
                 'asset_id' => $asset->id,
-                'refund_id' => $refund->id,
-                'reward_id' => $reward->id,
+                'income_id' => $income->id,
                 'policy_id' => $policy->id,
-                'coin_amount' => $request->coin_amount,
-                'refund_coin_amount' => $request->refund_coin_amount,
-                'node_amount' => $request->node_amount,
-                'exchange_rate' => $request->exchange_rate,
-                'split_period' => $policy->split_period,
+                'entry_amount' => $request->entry_amount,
                 'reward_count' => 0,
                 'reward_limit' => $policy->reward_limit,
                 'started_at' => $date['start'],
@@ -128,14 +101,14 @@ class MiningController extends Controller
                 'asset_id' => $asset->id,
                 'type' => 'mining',
                 'status' => 'completed',
-                'amount' => $request->coin_amount,
-                'actual_amount' => $request->coin_amount,
+                'amount' => $request->entry_amount,
+                'actual_amount' => $request->entry_amount,
                 'before_balance' => $asset->balance,
-                'after_balance' => $asset->balance - $request->coin_amount,
+                'after_balance' => $asset->balance - $request->entry_amount,
             ]);
 
             $asset->update([
-                'balance' => $asset->balance - $request->coin_amount
+                'balance' => $asset->balance - $request->entry_amount
             ]);
 
             $service = new BonusService();

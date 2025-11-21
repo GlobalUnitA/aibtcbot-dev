@@ -14,7 +14,7 @@ class LevelBonus extends Model
         'member_id',
         'referrer_id',
         'transfer_id',
-        'profit_id',
+        'reward_id',
         'bonus',
     ];
 
@@ -27,9 +27,9 @@ class LevelBonus extends Model
         return $this->belongsTo(Member::class, 'member_id', 'id');
     }
 
-    public function profit()
+    public function reward()
     {
-        return $this->belongsTo(MiningProfit::class, 'profit_id', 'id');
+        return $this->belongsTo(MiningReward::class, 'reward_id', 'id');
     }
 
     public function transfer()

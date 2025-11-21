@@ -49,7 +49,7 @@ class BonusService
 
                 $rate_key = "level_{$level}_rate";
 
-                $bonus = $mining->coin_amount * $policy->$rate_key / 100;
+                $bonus = $mining->entry_amount * $policy->$rate_key / 100;
 
                 if ($bonus <= 0) continue;
 
@@ -280,18 +280,18 @@ class BonusService
         }
     }
 
-    public function levelBonus($profit)
+    public function levelBonus($reward)
     {
 
-        $mining = $profit->reward->mining;
+        $mining = $reward->mining;
 
         if (!$mining) {
-            Log::channel('bonus')->warning('Missing mining for profit', ['profit_id' => $profit->id]);
+            Log::channel('bonus')->warning('Missing mining for profit', ['reward_id' => $reward->id]);
             return;
         }
 
         if ($mining->getBenefitRule('level_bonus') === 'n' ){
-            Log::channel('bonus')->warning('This marketing does not allow a level bonus.', ['profit_id' => $profit->id, 'marketing_id' => $mining->policy->marketing_id]);
+            Log::channel('bonus')->warning('This marketing does not allow a level bonus.', ['reward_id' => $reward->id, 'policy_id' => $mining->policy_id]);
             return;
         }
 
@@ -299,7 +299,7 @@ class BonusService
 
             DB::beginTransaction();
 
-            $member = $profit->user->member;
+            $member = $reward->user->member;
             $parents = $member->getParentTree(20);
 
             $mining_policy_id = $mining->policy->id;
@@ -314,7 +314,7 @@ class BonusService
 
                 if (!$condition) {
                     Log::channel('bonus')->warning('No Level Condition matched for level bonus', [
-                        'profit_id' => $profit->id,
+                        'reward_id' => $reward->id,
                         'member_id'   => $parent->id,
                         'level'     => $level,
                     ]);
@@ -325,8 +325,8 @@ class BonusService
 
                 if ($max_depth < $level) {
                     Log::channel('bonus')->warning('Not Condition for level bonus', [
-                        'profit_id' => $profit->id,
-                        'referrer_id' => $profit->user->id,
+                        'reward_id' => $reward->id,
+                        'referrer_id' => $parent->user->id,
                         'parent_level' => $level,
                         'max_depth' => $max_depth,
                     ]);
@@ -337,16 +337,11 @@ class BonusService
                     ->where('depth', $level)
                     ->first();
 
-                $amount = $profit->reward->reward;
+                $amount = $reward->reward;
 
-                $base_bonus = $amount * $policy->bonus / 100;
+                $bonus = $amount * $policy->bonus / 100;
 
-                if ($base_bonus <= 0) continue;
-
-                $payout_rate = $profit->reward_rate;
-                $split_days = $profit->type === 'daily' ? $mining->split_period : 1;
-
-                $bonus = $base_bonus * $payout_rate / 100 / $split_days;
+                if ($bonus <= 0) continue;
 
                 $income = $mining->income;
 
@@ -365,7 +360,7 @@ class BonusService
                     'member_id' => $parent->id,
                     'referrer_id' => $member->id,
                     'transfer_id' => $transfer->id,
-                    'profit_id' => $profit->id,
+                    'reward_id' => $reward->id,
                     'bonus' => $bonus,
                 ]);
 
@@ -377,7 +372,7 @@ class BonusService
                     'referrer_id' => $member->id,
                     'level' => $level,
                     'max_depth' => $max_depth,
-                    'profit_id' => $profit->id,
+                    'reward_id' => $reward->id,
                     'bonus_id' => $level_bonus->id,
                     'transfer_id' => $transfer->id,
                     'bonus' => $bonus,
@@ -395,7 +390,7 @@ class BonusService
             DB::rollBack();
 
             Log::channel('bonus')->error('Level bonus transaction failed', [
-                'profit_id' => $profit->id,
+                'reward_id' => $reward->id,
                 'member_id' => $member->id,
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
@@ -405,7 +400,7 @@ class BonusService
 
     public function levelMatching($bonus)
     {
-        $mining = $bonus->profit->reward->mining;
+        $mining = $bonus->reward->mining;
 
         if ($mining->getBenefitRule('level_matching') === 'n' ){
             Log::channel('bonus')->warning('This marketing does not allow a level matching.', ['bonus_id' => $bonus->id, 'marketing_id' => $mining->policy->marketing_id]);
