@@ -148,9 +148,9 @@
                             @foreach($level_bonuses as $bonus)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ $bonus->user_id }}</td>
-                                    <td class="text-center">{{ $bonus->user->name }}</td>
-                                    <td class="text-center">{{ $bonus->user->member->grade->name }}</td>
+                                    <td class="text-center">{{ $bonus->member->member_id }}</td>
+                                    <td class="text-center">{{ $bonus->member->member_name }}</td>
+                                    <td class="text-center">{{ $bonus->member->grade->name }}</td>
                                     <td class="text-center">{{ $bonus->transfer->income->coin->name }}</td>
                                     <td class="text-center">{{ $bonus->bonus }}</td>
                                     <td scope="col" class="text-center">
@@ -172,15 +172,15 @@
                                         @endswitch
                                     </td>
                                     <td class="text-center">{{ $bonus->referrer_id }}</td>
-                                    <td class="text-center">{{ $bonus->profit->profit }}</td>
+                                    <td class="text-center">{{ $bonus->reward->reward }}</td>
                                     <td class="text-center">{{ $bonus->transfer->created_at }}</td>
                                 </tr>
                                 @foreach($bonus->matchings as $matching)
                                     <tr>
                                         <td class="text-center"><i class="bi bi-arrow-return-right"></i></td>
-                                        <td class="text-center">{{ $matching->user_id }}</td>
-                                        <td class="text-center">{{ $matching->user->name }}</td>
-                                        <td class="text-center">{{ $matching->user->member->grade->name }}</td>
+                                        <td class="text-center">{{ $matching->member->member_id }}</td>
+                                        <td class="text-center">{{ $matching->member->member_name }}</td>
+                                        <td class="text-center">{{ $matching->member->grade->name }}</td>
                                         <td class="text-center">{{ $matching->transfer->income->coin->name }}</td>
                                         <td class="text-center">{{ $matching->matching }}</td>
                                         <td scope="col" class="text-center">
@@ -243,9 +243,9 @@
                             @foreach ($referral_bonuses as $bonus)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ $bonus->user_id }}</td>
-                                    <td class="text-center">{{ $bonus->user->name }}</td>
-                                    <td class="text-center">{{ $bonus->user->member->grade->name }}</td>
+                                    <td class="text-center">{{ $bonus->member->member_id }}</td>
+                                    <td class="text-center">{{ $bonus->member->member_name }}</td>
+                                    <td class="text-center">{{ $bonus->member->grade->name }}</td>
                                     <td class="text-center">{{ $bonus->transfer->income->coin->name }}</td>
                                     <td class="text-center">{{ $bonus->bonus }}</td>
                                     <td scope="col" class="text-center">
@@ -273,9 +273,9 @@
                                 @foreach($bonus->matchings as $matching)
                                     <tr>
                                         <td class="text-center"><i class="bi bi-arrow-return-right"></i></td>
-                                        <td class="text-center">{{ $matching->user_id }}</td>
-                                        <td class="text-center">{{ $matching->user->name }}</td>
-                                        <td class="text-center">{{ $matching->user->member->grade->name }}</td>
+                                        <td class="text-center">{{ $matching->member->member_id }}</td>
+                                        <td class="text-center">{{ $matching->member->member_name }}</td>
+                                        <td class="text-center">{{ $matching->member->grade->name }}</td>
                                         <td class="text-center">{{ $matching->transfer->income->coin->name }}</td>
                                         <td class="text-center">{{ $matching->matching }}</td>
                                         <td scope="col" class="text-center">

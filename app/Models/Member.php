@@ -27,6 +27,7 @@ class Member extends Authenticatable
 
     protected $appends = [
         'member_id',
+        'member_name',
         'referral_count',
     ];
 
@@ -91,6 +92,17 @@ class Member extends Authenticatable
             return 'U' . $this->user_id;
         }else if ($this->avatar_id) {
             return 'A' . $this->avatar_id;
+        } else {
+            return null;
+        }
+    }
+
+    public function getMemberNameAttribute()
+    {
+        if ($this->user_id) {
+            return $this->user->name;
+        }else if ($this->avatar_id) {
+            return $this->avatar->name;
         } else {
             return null;
         }
