@@ -74,10 +74,8 @@ class MiningController extends Controller
 
         $level_bonuses = collect();
         foreach ($rewards as $reward) {
-            foreach ($reward->profits as $profit) {
-                if ($profit->levelBonus) {
-                    $level_bonuses->push($profit->levelBonus);
-                }
+            if ($reward->levelBonus) {
+                $level_bonuses->push($reward->levelBonus);
             }
         }
 

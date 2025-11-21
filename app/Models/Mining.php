@@ -43,22 +43,17 @@ class Mining extends Model
 
     public function asset()
     {
-        return $this->belongsTo(Asset::class, 'refund_id', 'id');
+        return $this->belongsTo(Asset::class, 'asset_id', 'id');
     }
 
     public function income()
     {
-        return $this->belongsTo(Income::class, 'reward_id', 'id');
+        return $this->belongsTo(Income::class, 'income_id', 'id');
     }
 
     public function policy()
     {
         return $this->belongsTo(MiningPolicy::class, 'policy_id', 'id');
-    }
-
-    public function refunds()
-    {
-        return $this->hasMany(MiningRefund::class, 'mining_id', 'id');
     }
 
     public function rewards()

@@ -72,10 +72,8 @@
                                         <th scope="col" class="text-center">UID</th>
                                         <th scope="col" class="text-center">이름</th>
                                         <th scope="col" class="text-center">종류</th>
-                                        <th scope="col" class="text-center">노드수량</th>
-                                        <th scope="col" class="text-center">담보수량</th>
+                                        <th scope="col" class="text-center">참여수량</th>
                                         <th scope="col" class="text-center">상품이름</th>
-                                        <th scope="col" class="text-center">분할기간</th>
                                         <th scope="col" class="text-center">상태</th>
                                         <th scope="col" class="text-center">일자</th>
                                     </tr>
@@ -87,11 +85,9 @@
                                         <td scope="col" class="text-center">{{ $list->firstItem() + $key }}</td>
                                         <td scope="col" class="text-center">{{ 'U'.$value->user_id }}</td>
                                         <td scope="col" class="text-center">{{ $value->user->name }}</td>
-                                        <td scope="col" class="text-center">{{ $value->asset->coin->name }}</td>
-                                        <td scope="col" class="text-center">{{ $value->node_amount }}</td>
-                                        <td scope="col" class="text-center">{{ number_format($value->refund_coin_amount) }}</td>
+                                        <td scope="col" class="text-center">{{ $value->policy->coin->name }}</td>
+                                        <td scope="col" class="text-center">{{ $value->entry_amount }}</td>
                                         <td scope="col" class="text-center">{{ $value->policy->mining_locale_name }}</td>
-                                        <td scope="col" class="text-center">{{ $value->split_period }}</td>
                                         <td scope="col" class="text-center">
                                             @switch($value->status)
                                                 @case('pending')

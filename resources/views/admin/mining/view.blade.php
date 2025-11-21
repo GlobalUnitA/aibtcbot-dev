@@ -100,7 +100,6 @@
                         <tr class="border-2 border-bottom border-primary border-0">
                             <th scope="col" class="text-center">채굴날짜</th>
                             <th scope="col" class="text-center">채굴량/수익</th>
-                            <th scope="col" class="text-center">타입</th>
                             <th scope="col" class="text-center">일자</th>
                         </tr>
                         </thead>
@@ -110,25 +109,8 @@
                                 <tr>
                                     <td class="text-center">{{ $reward->reward_date }}</td>
                                     <td class="text-center">{{ $reward->reward }}</td>
-                                    <td class="text-center"></td>
                                     <td class="text-center">{{ $reward->created_at }}</td>
                                 </tr>
-                                @foreach($reward->profits as $profit)
-                                    <tr>
-                                        <td class="text-center"><i class="bi bi-arrow-return-right"></i></td>
-                                        <td class="text-center">{{ $profit->profit }}</td>
-                                        <td class="text-center">
-                                            @if($profit->type == 'instant')
-                                                {{ __('즉시') }}
-                                            @elseif($profit->type == 'daily')
-                                                {{ __('분할') }}
-                                            @else
-                                                {{ __('오류') }}
-                                            @endif
-                                        </td>
-                                        <td class="text-center">{{ $profit->created_at }}</td>
-                                    </tr>
-                                @endforeach
                             @endforeach
                         @else
                             <tr>
