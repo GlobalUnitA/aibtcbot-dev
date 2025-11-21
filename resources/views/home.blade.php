@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<main class="homeContainer container py-5 position-relative">
+<main class="homeContainer container py-5 position-relative home-active">
     <div class="pb-3 mb-4">
         <div class="d-flex justify-content-start align-items-center">
             <p class="mb-2 pe-3 fs-4">
