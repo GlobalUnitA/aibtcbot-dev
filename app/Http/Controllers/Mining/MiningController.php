@@ -68,14 +68,23 @@ class MiningController extends Controller
 
         $user = auth()->user();
         $policy = MiningPolicy::find($request->policy);
+        $max_amount = 1000;
 
         $asset = Asset::where('member_id', $user->member->id)->where('coin_id', $policy->coin_id)->first();
         $income = Income::where('member_id', $user->member->id)->where('coin_id', $policy->coin_id)->first();
+        $sum_entry_amount = Mining::where('user_id', $user->id)->where('coin_id', $policy->coin_id)->sum('entry_amount');
 
         if ($asset->balance < $request->entry_amount) {
             return response()->json([
                 'status' => 'error',
                 'message' =>  __('asset.lack_balance_notice'),
+            ]);
+        }
+
+        if ($sum_entry_amount + $request->entry_amount >= $max_amount) {
+            return response()->json([
+                'status' => 'error',
+                'message' =>  __('mining.max_mining_amount_notice'),
             ]);
         }
 

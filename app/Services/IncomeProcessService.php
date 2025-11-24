@@ -24,38 +24,46 @@ class IncomeProcessService
             $income->balance += $amount;
             $income->save();
 
-            $progress = IncomeAccumulation::firstOrCreate([
+            IncomeAccumulation::firstOrCreate([
                 'income_id' => $income->id,
                 'mining_policy_id' => $policy->id,
+                ],
+                [
                 'next_target_amount' => $policy->avatar_target_amount,
-            ]);
+                ]
+            );
 
-            $progress->accumulated_amount += $amount;
-            $progress->save();
+            $accumulations = IncomeAccumulation::where('income_id', $income->id)->get();
 
-            $this->processPolicyCondition($progress, $policy, $income);
+            foreach ($accumulations as $accumulation) {
+                $accumulation->accumulated_amount += $amount;
+                $accumulation->save();
+
+                $this->processPolicyCondition($accumulation, $income);
+            }
 
         });
     }
 
     /**
      */
-    protected function processPolicyCondition(IncomeAccumulation $progress, MiningPolicy $policy, Income $income)
+    protected function processPolicyCondition(IncomeAccumulation $accumulation, Income $income)
     {
         $service = new MemberService();
+        $policy = MiningPolicy::find($accumulation->mining_policy_id);
 
-        while ($progress->accumulated_amount >= $progress->next_target_amount) {
+        while ($accumulation->accumulated_amount >= $accumulation->next_target_amount) {
 
             Log::channel('avatar')->info('Start to add avatar', [
-                'user_id' => $progress->income->member->user_id,
-                'accumulated_amount' => $progress->accumulated_amount,
-                'next_target_amount' => $progress->next_target_amount,
+                'user_id' => $accumulation->income->member->user_id,
+                'accumulated_amount' => $accumulation->accumulated_amount,
+                'next_target_amount' => $accumulation->next_target_amount,
                 'avatar_count' => $policy->avatar_count,
             ]);
 
-            $progress->accumulated_amount -= $policy->avatar_cost;
-            $progress->next_target_amount = $progress->accumulated_amount + $policy->avatar_target_amount;
-            $progress->save();
+            $accumulation->accumulated_amount -= $policy->avatar_cost;
+            $accumulation->next_target_amount = $accumulation->accumulated_amount + $policy->avatar_target_amount;
+            $accumulation->save();
 
             $income->balance -= $policy->avatar_cost;
             $income->save();
