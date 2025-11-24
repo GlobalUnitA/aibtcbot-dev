@@ -30,11 +30,11 @@ class DashboardController extends Controller
         $user = auth()->user();
         $grade = $user->member->grade->name;
 
-        $childrens = $user->member->getChildrenTree(20);
+        $children = $user->member->getChildrenTree();
         $avatars = $user->avatars;
 
-        $all_count = collect($childrens)->flatten(1)->count();
-        $direct_count = isset($childrens[1]) ? $childrens[1]->count() : 0;
+        $all_count = collect($children)->flatten(1)->count();
+        $direct_count = isset($children[1]) ? $children[1]->count() : 0;
         $group_sales = $user->member->getGroupSales();
 
         $minings = Mining::where('user_id', auth()->id())->get();

@@ -119,12 +119,13 @@ class Member extends Authenticatable
             ->exists();
     }
 
-    public function getParentTree($max_level = 20)
+    public function getParentTree($max_level = null)
     {
         $levels = [];
         $current = $this;
+        $i = 1;
 
-        for ($i = 1; $i <= $max_level; $i++) {
+        while (true) {
             $parent = $current->parent;
 
             if (!$parent) {
@@ -133,18 +134,23 @@ class Member extends Authenticatable
 
             $levels[$i] = $parent;
             $current = $parent;
+            $i++;
+
+            if ($max_level !== null && $i > $max_level) {
+                break;
+            }
         }
 
         return $levels;
     }
 
-
-    public function getChildrenTree($max_level = 20)
+    public function getChildrenTree($max_level = null)
     {
         $levels = [];
         $current_level_members = collect([$this]);
+        $i = 1;
 
-        for ($i = 1; $i <= $max_level; $i++) {
+        while (true) {
             $next_level = $current_level_members
                 ->flatMap(function ($member) {
                     return $member->children;
@@ -156,6 +162,11 @@ class Member extends Authenticatable
 
             $levels[$i] = $next_level;
             $current_level_members = $next_level;
+            $i++;
+
+            if ($max_level !== null && $i > $max_level) {
+                break;
+            }
         }
 
         return $levels;
@@ -174,10 +185,10 @@ class Member extends Authenticatable
 
     public function getGroupSales()
     {
-        $childrens = $this->getChildrenTree(20);
+        $children = $this->getChildrenTree();
         $group_sales = 0;
 
-        foreach ($childrens as $level => $members) {
+        foreach ($children as $level => $members) {
             foreach ($members as $member) {
                 if(!$member) continue;
 
@@ -218,7 +229,7 @@ class Member extends Authenticatable
     {
         $this->evaluateMemberGrade();
 
-        $parent_tree = $this->getParentTree(20);
+        $parent_tree = $this->getParentTree();
 
         foreach ($parent_tree as $parent) {
             if ($parent) {
@@ -236,7 +247,7 @@ class Member extends Authenticatable
             ->get()
             ->sum(fn($deposit) => (float) $deposit->getAmountInUsdt());
 
-        $children_tree = $this->getChildrenTree(20);
+        $children_tree = $this->getChildrenTree();
         $group_sales = 0;
         foreach ($children_tree as $children) {
             foreach ($children as $child) {

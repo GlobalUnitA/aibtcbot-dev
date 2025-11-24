@@ -99,7 +99,7 @@ class Asset extends Model
         $member = Member::find($this->member->id);
 
         $direct_count = 0;
-        $children_tree = $member->getChildrenTree(21);
+        $children_tree = $member->getChildrenTree();
 
         if ($children_tree) {
             $direct_count = count($children_tree[1]);

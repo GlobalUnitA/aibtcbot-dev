@@ -259,7 +259,7 @@ class PolicyController extends Controller
 
             $member = $mining->user->member;
 
-            $parents = $member->getParentTree(20);
+            $parents = $member->getParentTree();
 
             foreach ($parents as $level => $parent) {
 

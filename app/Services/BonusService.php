@@ -33,7 +33,7 @@ class BonusService
 
             DB::beginTransaction();
 
-            $parents = $member->getParentTree(20);
+            $parents = $member->getParentTree(21);
 
             foreach ($parents as $level => $parent) {
 
@@ -115,7 +115,7 @@ class BonusService
         }
 
         $member = $bonus->member;
-        $parents = $member->getParentTree(20);
+        $parents = $member->getParentTree(21);
 
         foreach ($parents as $level => $parent) {
 
@@ -211,7 +211,7 @@ class BonusService
                 continue;
             }
 
-            $all_children = collect($member->getChildrenTree(20))->flatten(1);
+            $all_children = collect($member->getChildrenTree())->flatten(1);
             $all_count = $all_children->count();
 
             $all_min_level = (int) $policy->conditions['all']['min_level'];
@@ -300,7 +300,7 @@ class BonusService
             DB::beginTransaction();
 
             $member = $reward->user->member;
-            $parents = $member->getParentTree(20);
+            $parents = $member->getParentTree(21);
 
             $mining_policy_id = $mining->policy->id;
 
@@ -413,7 +413,7 @@ class BonusService
         }
 
         $member = $bonus->user->member;
-        $parents = $member->getParentTree(20);
+        $parents = $member->getParentTree(21);
 
         $mining_policy_id = $mining->policy_id;
 

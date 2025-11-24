@@ -106,64 +106,6 @@ class MemberService
 
     /**
      *
-     * @param int $target_id
-     * @param int $max_level
-     * @return array
-     */
-    public function getParentTree(int $target_id, int $max_level = 20)
-    {
-        $target = Member::find($target_id);
-        if (!$target) {
-            throw new \Exception("Target member not found");
-        }
-
-        $root_id = 5000011;
-
-        $tree = $this->buildMemberTree($root_id);
-
-        $parents = [];
-        $this->findParentsInTree($tree, $target_id, $parents);
-
-        return array_slice($parents, 0, $max_level, true);
-    }
-
-    /**
-     *
-     * @param int $root_id
-     * @param int $max_level
-     * @return array
-     */
-    public function getChildrenTree(int $root_id, int $max_level = 20)
-    {
-        $tree = $this->buildMemberTree($root_id);
-
-        $levels = [];
-        $queue = [$tree];
-        $level = 1;
-
-        while (!empty($queue) && $level <= $max_level) {
-            $nextQueue = [];
-            $currentLevelMembers = [];
-
-            foreach ($queue as $node) {
-                foreach ($node['children'] as $child) {
-                    $currentLevelMembers[] = $child['member'];
-                    $nextQueue[] = $child;
-                }
-            }
-
-            if (empty($currentLevelMembers)) break;
-
-            $levels[$level] = collect($currentLevelMembers);
-            $queue = $nextQueue;
-            $level++;
-        }
-
-        return $levels;
-    }
-
-    /**
-     *
      * @param int $root_id
      * @return array
      */
