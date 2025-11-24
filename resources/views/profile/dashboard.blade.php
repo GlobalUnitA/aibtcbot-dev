@@ -31,14 +31,6 @@
                             <h3 class="text-primary fs-6 mb-1">{{ $data['total_node_amount'] }}</h3>
                         </div>
                     </div>
-                    @foreach ($data['total_staking'] as $coin => $staking)
-                        <div class="row g-3 mb-3">
-                            <div class="col-12 col-sm-6">
-                                <p class="text-body fs-4 m-0">{{ __('mining.total_staking').' ('.$coin.')' }}</p>
-                                <h3 class="text-primary fs-6 mb-1">{{ $staking }}</h3>
-                            </div>
-                        </div>
-                    @endforeach
                     @foreach ($data['total_reward'] as $coin => $reward)
                         <div class="row g-3 mb-3">
                             <div class="col-12 col-sm-6">

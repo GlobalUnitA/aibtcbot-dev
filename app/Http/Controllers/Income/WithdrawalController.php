@@ -53,9 +53,7 @@ class WithdrawalController extends Controller
                 throw new \Exception(__('asset.withdrawal_disabled_day_notice'));
             }
 
-            $user = UserProfile::where('user_id', $user->id)->first();
-
-            if($user->is_frozen === 'y') {
+            if($user->profile->is_frozen === 'y') {
                 throw new \Exception(__('asset.withdrawal_frozen_account_notice'));
             }
 

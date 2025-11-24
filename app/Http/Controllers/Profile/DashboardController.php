@@ -50,15 +50,12 @@ class DashboardController extends Controller
         }
 
         foreach ($minings as $mining) {
-            $refund = Asset::find($mining->refund_id);
-            $income = Income::find($mining->reward_id);
+
+            $income = Income::find($mining->income_id);
             foreach ($coins as $coin) {
-                if ($refund->coin_id === $coin->id) {
-                    $total_staking[$coin->code] += $mining->refund_coin_amount;
-                }
                 if ($income->coin_id === $coin->id) {
                     foreach ($mining->rewards as $reward) {
-                        $total_reward[$coin->code] += $reward->profits->sum('profit');
+                        $total_reward[$coin->code] += $reward->sum('reward');
                     }
                 }
             }
@@ -73,7 +70,6 @@ class DashboardController extends Controller
             'direct_count' => $direct_count,
             'group_sales' => $group_sales,
             'total_node_amount' => $total_node_amount,
-            'total_staking' => $total_staking,
             'total_reward' => $total_reward,
             'avatars' => $avatars,
         ];
