@@ -81,7 +81,7 @@ class MiningController extends Controller
             ]);
         }
 
-        if ($sum_entry_amount + $request->entry_amount >= $max_amount) {
+        if ($sum_entry_amount + $request->entry_amount > $max_amount) {
             return response()->json([
                 'status' => 'error',
                 'message' =>  __('mining.max_mining_amount_notice'),
