@@ -185,7 +185,8 @@
                     <table class="table text-nowrap align-middle mb-0 table-striped table-hover">
                         <thead>
                             <tr class="border-2 border-bottom border-primary border-0">
-                                <th scope="col" class="ps-0 text-center">번호</th>
+                                <th scope="col" class="ps-0 text-center">이름</th>
+                                <th scope="col" class="text-center">등급</th>
                                 @foreach($view->member->incomes as $income)
                                 <th scope="col" class="text-center">{{ $income->coin->name }}</th>
                                 @endforeach
@@ -196,6 +197,7 @@
                             @foreach($view->avatars->where('is_active', 'y') as $avatar)
                             <tr>
                                 <td class="text-center">{{ $avatar->name }}</td>
+                                <td class="text-center">{{ $avatar->member->grade->name }}</td>
                                 @foreach($avatar->member->incomes as $income)
                                 <td class="text-center">{{ $income->balance }}</td>
                                 @endforeach
