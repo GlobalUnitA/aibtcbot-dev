@@ -66,6 +66,8 @@ class MemberService
             $this->avatarMining($member->avatar_id);
         }
 
+        $member->checkMemberGrade();
+
     }
 
     /**

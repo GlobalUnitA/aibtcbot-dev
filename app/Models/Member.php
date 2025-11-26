@@ -310,10 +310,10 @@ class Member extends Authenticatable
             ]);
 
             if (!$result) {
-                throw new \Exception("Failed to update grade_id for user_id {$this->user_id}");
+                throw new \Exception("Failed to update grade_id for member id {$this->id}");
             }
 
-            Log::channel('user')->info("User ID {$this->user_id} level up: {$current_level} → {$next_level}, self_sales : {$self_sales}, group_sales : {$group_sales}");
+            Log::channel('user')->info("Member ID {$this->id} level up: {$current_level} → {$next_level}, self_sales : {$self_sales}, group_sales : {$group_sales}");
 
             $this->checkLevelUp($next_level, $referral_count, $self_sales, $group_sales);
         }

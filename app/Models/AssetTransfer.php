@@ -186,7 +186,6 @@ class AssetTransfer extends Model
             $member = Member::where('id', $asset->member_id)->first();
 
             $member->checkMemberValidity();
-            $member->checkMemberGrade();
 
         } catch (\Throwable $e) {
 
