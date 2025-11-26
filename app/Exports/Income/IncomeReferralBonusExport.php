@@ -17,6 +17,7 @@ class IncomeReferralBonusExport extends BaseIncomeExport
             ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
             ->leftJoin('avatars', 'members.avatar_id', '=', 'members.avatar_id')
             ->leftJoin('member_grades', 'members.grade_id', '=', 'member_grades.id')
+            ->leftJoin('members as referrer', 'members.referrer_id', '=', 'referrer.id')
             ->leftJoin('referral_bonuses', 'income_transfers.id', '=', 'referral_bonuses.transfer_id')
             ->leftJoin('minings', 'referral_bonuses.mining_id', '=', 'minings.id')
             ->select(
@@ -26,7 +27,7 @@ class IncomeReferralBonusExport extends BaseIncomeExport
                 'coins.name as coin_name',
                 'income_transfers.amount as bonus',
                 'income_transfers.status as status',
-                'referral_bonuses.referrer_id',
+                'referrer.user_id as referrer_id',
                 'minings.entry_amount',
                 'income_transfers.created_at',
             )
