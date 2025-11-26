@@ -119,6 +119,13 @@ class Member extends Authenticatable
             ->exists();
     }
 
+    public function getHasProductMining($product_id)
+    {
+        return Mining::where('member_id', $this->id)
+            ->where('product_id', $product_id)
+            ->exists();
+    }
+
     public function getParentTree($max_level = null)
     {
         $levels = [];

@@ -66,6 +66,7 @@ class MemberService
             $this->avatarMining($member->avatar_id);
         }
 
+        $member = Member::find($member->id);
         $member->checkMemberGrade();
 
     }

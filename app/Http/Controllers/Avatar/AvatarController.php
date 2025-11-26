@@ -62,7 +62,7 @@ class AvatarController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => __('user.avatar_active_notice'),
-                'route' => route('avatar.view', ['id' => $avatar->id]),
+                'url' => route('avatar.view', ['id' => $avatar->id]),
             ]);
         }
     }

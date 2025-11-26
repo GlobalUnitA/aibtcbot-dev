@@ -26,6 +26,12 @@ class IncomeProcessService
             $income->balance += $amount;
             $income->save();
 
+            $member = $income->member;
+
+            if (!$member->getHasProductMining($product->id)) {
+                return;
+            }
+
             IncomeAccumulation::firstOrCreate([
                 'income_id' => $income->id,
                 'product_id' => $product->id,
