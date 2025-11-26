@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\Income\WithdrawalController as IncomeWithdrawalCo
 
 use App\Http\Controllers\Admin\Mining\MiningController;
 use App\Http\Controllers\Admin\Mining\PolicyController as MiningPolicyController;
+use App\Http\Controllers\Admin\Mining\ProductController as MiningProductController;
 use App\Http\Controllers\Admin\Mining\ProfitController as MiningProfitController;
 
 use App\Http\Controllers\Admin\Board\BoardController;
@@ -132,13 +133,17 @@ Route::middleware(['admin.auth', 'otp'])->group(function () {
             Route::get('list', [MiningController::class, 'list'])->name('admin.mining.list');
             Route::get('view/{id}', [MiningController::class, 'view'])->name('admin.mining.view');
             Route::middleware(['check_admin_level:3'])->group(function () {
+                Route::prefix('product')->group(function () {
+                    Route::get('/', [MiningProductController::class, 'index'])->name('admin.mining.product');
+                    Route::get('export', [MiningProductController::class, 'export'])->name('admin.mining.product.export');
+                    Route::post('check', [MiningProductController::class, 'check'])->name('admin.mining.product.check');
+                    Route::post('marketing-benefit-rules/{id}/get', [MiningProductController::class, 'getMarketingBenefitRules'])->name('admin.mining.product.marketing-benefit-get');
+                    Route::get('{mode}/{id?}', [MiningProductController::class, 'view'])->name('admin.mining.product.view');
+                    Route::post('store', [MiningProductController::class, 'store'])->name('admin.mining.product.store');
+                    Route::post('update', [MiningProductController::class, 'update'])->name('admin.mining.product.update');
+                });
                 Route::prefix('policy')->group(function () {
                     Route::get('/', [MiningPolicyController::class, 'index'])->name('admin.mining.policy');
-                    Route::get('export', [MiningPolicyController::class, 'export'])->name('admin.mining.policy.export');
-                    Route::post('check', [MiningPolicyController::class, 'check'])->name('admin.mining.policy.check');
-                    Route::post('marketing-benefit-rules/{id}/get', [MiningPolicyController::class, 'getMarketingBenefitRules'])->name('admin.mining.policy.marketing-benefit-get');
-                    Route::get('{mode}/{id?}', [MiningPolicyController::class, 'view'])->name('admin.mining.policy.view');
-                    Route::post('store', [MiningPolicyController::class, 'store'])->name('admin.mining.policy.store');
                     Route::post('update', [MiningPolicyController::class, 'update'])->name('admin.mining.policy.update');
                 });
                 Route::prefix('profit')->group(function () {

@@ -5,7 +5,7 @@ $(document).ready(function() {
         confirmModal('정책을 변경하시겠습니까?').then((isConfirmed) => {
             if (isConfirmed) {
 
-                const recoad = $(this).closest('.mining_policy');
+                const recoad = $(this).closest('.mining_product');
                 const formData = new FormData($('#updateForm')[0]);
 
                 recoad.find('input, select, textarea').each(function() {

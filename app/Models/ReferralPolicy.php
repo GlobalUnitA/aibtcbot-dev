@@ -11,7 +11,7 @@ class ReferralPolicy extends Model
     use HasFactory, TruncatesDecimals;
 
     protected $fillable = [
-        'mining_policy_id',
+        'product_id',
         'grade_id',
         'level_1_rate',
         'level_2_rate',

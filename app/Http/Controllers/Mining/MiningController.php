@@ -6,8 +6,8 @@ namespace App\Http\Controllers\Mining;
 use App\Models\Asset;
 use App\Models\AssetTransfer;
 use App\Models\Income;
-use App\Models\Marketing;
 use App\Models\Mining;
+use App\Models\MiningProduct;
 use App\Models\MiningPolicy;
 use App\Http\Controllers\Controller;
 use App\Services\BonusService;
@@ -33,7 +33,7 @@ class MiningController extends Controller
 
     public function data(Request $request)
     {
-        $Mining = MiningPolicy::where('coin_id', $request->coin)
+        $Mining = MiningProduct::where('coin_id', $request->coin)
             ->get();
 
         return response()->json($Mining->toArray());
@@ -41,7 +41,8 @@ class MiningController extends Controller
 
     public function list()
     {
-        $minings = Mining::where('user_id', auth()->id())->get();
+        $user = auth()->user();
+        $minings = Mining::where('member_id', $user->member->id)->get();
 
         return view('mining.list', compact('minings'));
     }
@@ -50,29 +51,29 @@ class MiningController extends Controller
     {
         $user = auth()->user();
 
-        $mining = MiningPolicy::find($id);
+        $product = MiningProduct::find($id);
 
         $asset = Asset::where('member_id', $user->member->id)
-            ->where('coin_id', $mining->coin_id)
+            ->where('coin_id', $product->coin_id)
             ->first();
 
         $balance = $asset->balance;
 
-        $date = $this->getMiningDate($mining);
+        $date = $this->getMiningDate($product);
 
-        return view('mining.confirm', compact( 'mining', 'date', 'balance'));
+        return view('mining.confirm', compact('product', 'date', 'balance'));
     }
 
     public function store(Request $request)
     {
 
         $user = auth()->user();
-        $policy = MiningPolicy::find($request->policy);
-        $max_amount = 100;
+        $product = MiningProduct::find($request->product_id);
+        $max_amount = optional(MiningPolicy::first())->max_entry_amount ?? 0;
 
-        $asset = Asset::where('member_id', $user->member->id)->where('coin_id', $policy->coin_id)->first();
-        $income = Income::where('member_id', $user->member->id)->where('coin_id', $policy->coin_id)->first();
-        $sum_entry_amount = Mining::where('user_id', $user->id)->sum('entry_amount');
+        $asset = Asset::where('member_id', $user->member->id)->where('coin_id', $product->coin_id)->first();
+        $income = Income::where('member_id', $user->member->id)->where('coin_id', $product->coin_id)->first();
+        $sum_entry_amount = Mining::where('member_id', $user->member->id)->sum('entry_amount');
 
         if ($asset->balance < $request->entry_amount) {
             return response()->json([
@@ -92,16 +93,16 @@ class MiningController extends Controller
 
         try {
 
-            $date = $this->getMiningDate($policy);
+            $date = $this->getMiningDate($product);
 
             $mining = Mining::create([
-                'user_id' => $user->id,
+                'member_id' => $user->member->id,
                 'asset_id' => $asset->id,
                 'income_id' => $income->id,
-                'policy_id' => $policy->id,
+                'product_id' => $product->id,
                 'entry_amount' => $request->entry_amount,
                 'reward_count' => 0,
-                'reward_limit' => $policy->reward_limit,
+                'reward_limit' => $product->reward_limit,
                 'started_at' => $date['start'],
             ]);
 
@@ -143,9 +144,9 @@ class MiningController extends Controller
 
     }
 
-    private function getMiningDate($policy)
+    private function getMiningDate($product)
     {
-        $start = Carbon::today()->addDays($policy->waiting_period+1);
+        $start = Carbon::today()->addDays($product->waiting_period+1);
         return [
             'start' => $start,
         ];

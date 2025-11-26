@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Models\Member;
 use App\Models\Income;
 use App\Models\IncomeAccumulation;
-use App\Models\MiningPolicy;
+use App\Models\IncomeTransfer;
+use App\Models\MiningProduct;
 use App\Services\MemberService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -17,19 +19,19 @@ class IncomeProcessService
      * @param MiningPolicy $policy
      * @param float $amount
      */
-    public function addProfitAndProcess(Income $income, MiningPolicy $policy, float $amount)
+    public function addProfitAndProcess(Income $income, MiningProduct $product, float $amount)
     {
-        DB::transaction(function () use ($income, $policy, $amount) {
+        DB::transaction(function () use ($income, $product, $amount) {
 
             $income->balance += $amount;
             $income->save();
 
             IncomeAccumulation::firstOrCreate([
                 'income_id' => $income->id,
-                'mining_policy_id' => $policy->id,
+                'product_id' => $product->id,
                 ],
                 [
-                'next_target_amount' => $policy->avatar_target_amount,
+                'next_target_amount' => $product->avatar_target_amount,
                 ]
             );
 
@@ -50,7 +52,8 @@ class IncomeProcessService
     protected function processPolicyCondition(IncomeAccumulation $accumulation, Income $income)
     {
         $service = new MemberService();
-        $policy = MiningPolicy::find($accumulation->mining_policy_id);
+        $product = MiningProduct::find($accumulation->product_id);
+        $member = Member::find($income->member_id);
 
         while ($accumulation->accumulated_amount >= $accumulation->next_target_amount) {
 
@@ -58,17 +61,28 @@ class IncomeProcessService
                 'user_id' => $accumulation->income->member->user_id,
                 'accumulated_amount' => $accumulation->accumulated_amount,
                 'next_target_amount' => $accumulation->next_target_amount,
-                'avatar_count' => $policy->avatar_count,
+                'avatar_count' => $product->avatar_count,
             ]);
 
-            $accumulation->accumulated_amount -= $policy->avatar_cost;
-            $accumulation->next_target_amount = $accumulation->accumulated_amount + $policy->avatar_target_amount;
+            $accumulation->accumulated_amount -= $product->avatar_cost;
+            $accumulation->next_target_amount = $accumulation->accumulated_amount + $product->avatar_target_amount;
             $accumulation->save();
 
-            $income->balance -= $policy->avatar_cost;
+            $income->balance -= $product->avatar_cost;
             $income->save();
 
-            for ($i = 0; $i < $policy->avatar_count; $i++) {
+            IncomeTransfer::create([
+                'member_id' => $member->id,
+                'income_id' => $income->id,
+                'type' => 'avatar_creation',
+                'status' => 'completed',
+                'amount' => $product->avatar_cost,
+                'actual_amount' => $product->avatar_cost,
+                'before_balance' => $income->balance,
+                'after_balance' => $income->balance - $product->avatar_cost,
+            ]);
+
+            for ($i = 0; $i < $product->avatar_count; $i++) {
                 $user = $income->member->user;
                 $service->addAvatar($user);
                 Log::channel('avatar')->info('Success to add avatar', ['user_id' => $user->id, 'count' => $i+1]);

@@ -22,13 +22,19 @@
                     <tbody>
                         <tr>
                             <th class="text-center align-middle">아이디</th>
-                            <td class="align-middle"><a href="{{ route('admin.user.view', ['id' => $view->user->id])  }}">{{ $view->user->account }}</a></td>
+                            <td class="align-middle">
+                                @if ($view->member->user_id)
+                                    <a href="{{ route('admin.user.view', ['id' => $view->member->user_id])  }}">{{ $view->member->user->account }}</a>
+                                @else
+                                    {{__('Avatar') }}
+                                @endif
+                            </td>
                             <th class="text-center align-middle">이름</th>
-                            <td class="align-middle">{{ $view->user->name }}</td>
+                            <td class="align-middle">{{ $view->member->member_name }}</td>
                         </tr>
                         <tr>
                             <th class="text-center align-middle">상품이름</th>
-                            <td class="align-middle" colspan="3"><a href="{{ route('admin.mining.policy.view', ['id' => $view->policy->id, 'mode' => 'mining'])  }}">{{ $view->policy->mining_locale_name }}</a></td>
+                            <td class="align-middle" colspan="3"><a href="{{ route('admin.mining.product.view', ['id' => $view->product->id, 'mode' => 'mining'])  }}">{{ $view->product->mining_locale_name }}</a></td>
                         </tr>
                         <tr>
                             <th class="text-center align-middle">종류</th>

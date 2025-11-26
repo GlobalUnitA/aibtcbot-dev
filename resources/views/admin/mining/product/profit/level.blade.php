@@ -5,22 +5,22 @@
         <div class="container-fluid">
             <ul class="nav nav-tabs mt-3" id="tableTabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a href="{{ route('admin.mining.profit', ['id' => $mining_policy->id, 'mode' => 'referral_bonus']) }}" class="nav-link">
+                    <a href="{{ route('admin.mining.profit', ['id' => $mining_product->id, 'mode' => 'referral_bonus']) }}" class="nav-link">
                         추천보너스
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a href="{{ route('admin.mining.profit', ['id' => $mining_policy->id, 'mode' => 'referral_matching']) }}" class="nav-link">
+                    <a href="{{ route('admin.mining.profit', ['id' => $mining_product->id, 'mode' => 'referral_matching']) }}" class="nav-link">
                         추천매칭
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a href="{{ route('admin.mining.profit', ['id' => $mining_policy->id, 'mode' => 'level_bonus']) }}" class="nav-link active">
+                    <a href="{{ route('admin.mining.profit', ['id' => $mining_product->id, 'mode' => 'level_bonus']) }}" class="nav-link active">
                         레벨보너스
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a href="{{ route('admin.mining.profit', ['id' => $mining_policy->id, 'mode' => 'level_condition']) }}" class="nav-link">
+                    <a href="{{ route('admin.mining.profit', ['id' => $mining_product->id, 'mode' => 'level_condition']) }}" class="nav-link">
                         레벨조건
                     </a>
                 </li>
@@ -45,7 +45,7 @@
                             <tbody class="table-group-divider">
                             @if($policies->isNotEmpty())
                             @foreach($policies as $key => $val)
-                                <tr class="mining_policy">
+                                <tr class="mining_product">
                                     <input type="hidden" name="id" value="{{ $val->id }}">
                                     <td class="text-center">{{ $val->depth }}</td>
                                     <td class="text-center">
@@ -79,7 +79,7 @@
                             @csrf
                             <hr>
                             <input type="hidden" name="mode" value="level_bonus">
-                            <input type="hidden" name="mining_policy_id" value="{{ $mining_policy->id }}">
+                            <input type="hidden" name="product_id" value="{{ $mining_product->id }}">
                             <table class="table table-bordered mt-5 mb-2">
                                 <tbody>
                                 <tr>
@@ -151,7 +151,7 @@
     </div>
     <form method="POST" id="updateForm" action="{{ route('admin.mining.profit.update') }}" >
         @csrf
-        <input type="hidden" name="mining_policy_id" value="{{ $mining_policy->id }}">
+        <input type="hidden" name="product_id" value="{{ $mining_product->id }}">
         <input type="hidden" name="mode" value="level_bonus">
     </form>
 @endsection

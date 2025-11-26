@@ -48,18 +48,16 @@ class AvatarController extends Controller
         } else {
             $referrer = User::find($referrer_info['id']);
         }
-        Log::info($avatar->owner);
 
         if (!$service->hasMemberInTree($avatar->owner->member->id, $referrer->member->id)) {
             return response()->json([
                 'status' => 'error',
                 'message' => __('user.user_not_found'),
             ]);
+
         } else {
             $avatar->update(['is_active' => 'y']);
             $member = $service->addMember($avatar->id, 'avatar', $referrer->member->id);
-
-
 
             return response()->json([
                 'status' => 'success',

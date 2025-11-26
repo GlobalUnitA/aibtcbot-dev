@@ -5,24 +5,24 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs mt-3" id="tableTabs" role="tablist" >
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.policy.view', ['mode' => 'policy', 'id' => $view->id]) }}" class="nav-link">
-                    마이닝 정책
+                <a href="{{ route('admin.mining.product.view', ['mode' => 'setting', 'id' => $view->id]) }}" class="nav-link">
+                    상품 설정
                 </a>
             </li>
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.policy.view', ['mode' => 'avatar', 'id' => $view->id]) }}" class="nav-link active">
+                <a href="{{ route('admin.mining.product.view', ['mode' => 'avatar', 'id' => $view->id]) }}" class="nav-link active">
                     아바타 설정
                 </a>
             </li>
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.policy.view', ['mode' => 'translation', 'id' => $view->id]) }}" class="nav-link">
+                <a href="{{ route('admin.mining.product.view', ['mode' => 'translation', 'id' => $view->id]) }}" class="nav-link">
                     다국어 설정
                 </a>
             </li>
         </ul>
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('admin.mining.policy.update') }}" id="ajaxForm" data-confirm-message="정책을 변경하시겠습니까?">
+                <form method="POST" action="{{ route('admin.mining.product.update') }}" id="ajaxForm" data-confirm-message="정책을 변경하시겠습니까?">
                     @csrf
                     <input type="hidden" name="mode" value="avatar">
                     <input type="hidden" name="id" value="{{ $view->id }}">
@@ -61,12 +61,13 @@
                     </table>
                     <hr>
                     <div class="d-flex justify-content-between align-items-center">
-                        <a href="{{ route('admin.mining.policy') }}" class="btn btn-secondary">목록</a>
+                        <a href="{{ route('admin.mining.product') }}" class="btn btn-secondary">목록</a>
                         <button type="submit" class="btn btn-danger">수정</button>
                     </div>
                 </form>
             </div>
         </div>
+        {{--
         @if($modify_logs->isNotEmpty())
             <div class="card">
                 <div class="card-body">
@@ -102,10 +103,11 @@
                 </div>
             </div>
         @endif
+        --}}
     </div>
 </div>
 @endsection
 
 @push('script')
-    <script src="{{ asset('js/admin/mining/policy.js') }}"></script>
+    <script src="{{ asset('js/admin/mining/product.js') }}"></script>
 @endpush

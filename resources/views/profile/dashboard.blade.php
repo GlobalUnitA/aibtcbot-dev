@@ -70,7 +70,9 @@
                 @foreach ($data['avatars'] as $avatar)
                 <div class="p-4 rounded bg-light text-body mb-4">
                     <div class="d-flex justify-content-between mb-3">
-                        <p class="text-body fs-4 m-0">{{ __('user.avatar') }} {{ $loop->iteration }}</p>
+                        <a href="{{ route('avatar.view', ['id' => $avatar->id]) }}">
+                            <p class="text-body fs-4 m-0">{{ __('user.avatar') }} {{ $loop->iteration }}</p>
+                        </a>
                         @if ($avatar->is_active === 'n')
                         <p class="text-danger mb-1">비활성</p>
                         @else
@@ -79,8 +81,8 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <p class="text-body fs-4 m-0">{{ $avatar->name }}</p>
-                        <a href="{{ route('avatar.view', ['id' => $avatar->id]) }}">
-                            <p class="text-body fs-4 mb-1">계정확인</p>
+                        <a href="{{ route('register',['mid' => $avatar->member->member_id]) }}">
+                            <p class="text-body fs-4 mb-1">+</p>
                         </a>
                     </div>
                 </div>

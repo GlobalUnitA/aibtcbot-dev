@@ -26,6 +26,8 @@ use App\Http\Controllers\Income\DepositController as IncomeDepositController;
 use App\Http\Controllers\Income\WithdrawalController as IncomeWithdrawalController;
 
 use App\Http\Controllers\Avatar\AvatarController;
+use App\Http\Controllers\Avatar\SwapController;
+
 use App\Http\Controllers\Mining\MiningController;
 
 use App\Http\Controllers\Chart\RefChartController;
@@ -159,6 +161,10 @@ Route::middleware(['auth', 'session.timeout'])->group(function () {
     Route::prefix('avatar')->group(function () {
         Route::get('view/{id}', [AvatarController::class, 'view'])->name('avatar.view');
         Route::post('active', [AvatarController::class, 'active'])->name('avatar.active');
+        Route::prefix('swap')->group(function () {
+            Route::get('/', [SwapController::class, 'index'])->name('avatar.swap');
+            Route::post('/process', [SwapController::class, 'process'])->name('avatar.swap.process');
+        });
     });
 
     Route::prefix('mining')->group(function () {

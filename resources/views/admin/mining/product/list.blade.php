@@ -3,10 +3,22 @@
 @section('content')
 <div class="body-wrapper">
     <div class="container-fluid">
+        <ul class="nav nav-tabs mt-3" id="tableTabs" role="tablist" >
+            <li class="nav-item" role="presentation">
+                <a href="{{ route('admin.mining.policy') }}" class="nav-link">
+                    마이닝 정책
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a href="{{ route('admin.mining.product') }}" class="nav-link active">
+                    마이닝 상품
+                </a>
+            </li>
+        </ul>
         <div class="card">
             <div class="card-body">
                 <div class="mb-3 d-flex justify-content-between">
-                    <h5 class="card-title">마이닝 정책</h5>
+                    <h5 class="card-title">마이닝 상품</h5>
                 </div>
                 <hr>
                 <div>
@@ -20,13 +32,13 @@
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                        @if($policies->isNotEmpty())
-                            @foreach($policies as $key => $val)
-                            <tr class="staking_policy" style ="cursor:pointer;" onclick="window.location='{{ route('admin.mining.policy.view', ['mode' => 'policy', 'id' => $val->id]) }}'">
-                                <td class="text-center">{{ $val->mining_locale_name }}</td>
-                                <td class="text-center">{{ $val->entry_amount }}</td>
-                                <td class="text-center">{{ $val->reward_limit }}</td>
-                                <td class="text-center">{{ $val['updated_at'] }}</td>
+                        @if($products->isNotEmpty())
+                            @foreach($products as $product)
+                            <tr class="staking_policy" style ="cursor:pointer;" onclick="window.location='{{ route('admin.mining.product.view', ['mode' => 'setting', 'id' => $product->id]) }}'">
+                                <td class="text-center">{{ $product->mining_locale_name }}</td>
+                                <td class="text-center">{{ $product->entry_amount }}</td>
+                                <td class="text-center">{{ $product->reward_limit }}</td>
+                                <td class="text-center">{{ $product['updated_at'] }}</td>
                             </tr>
                             @endforeach
                         @else
@@ -38,7 +50,7 @@
                     </table>
                     <hr>
                     <div class="d-flex mt-5">
-                        <a href="{{ route('admin.mining.policy.view', ['mode' => 'create']) }}" class="btn btn-info ms-auto">상품 추가</a>
+                        <a href="{{ route('admin.mining.product.view', ['mode' => 'create']) }}" class="btn btn-info ms-auto">상품 추가</a>
                     </div>
                 </div>
             </div>
@@ -46,7 +58,3 @@
     </div>
 </div>
 @endsection
-
-@push('script')
-<script src="{{ asset('js/admin/staking/policy.js') }}"></script>
-@endpush

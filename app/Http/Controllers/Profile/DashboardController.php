@@ -37,7 +37,7 @@ class DashboardController extends Controller
         $direct_count = isset($children[1]) ? $children[1]->count() : 0;
         $group_sales = $user->member->getGroupSales();
 
-        $minings = Mining::where('user_id', auth()->id())->get();
+        $minings = Mining::where('member_id', $user->member->id)->get();
         $coins = Coin::all();
 
         $total_node_amount = $minings->sum('node_amount');

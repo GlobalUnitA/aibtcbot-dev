@@ -15,7 +15,7 @@ class MiningReward extends Model
     use HasFactory, TruncatesDecimals;
 
     protected $fillable = [
-        'user_id',
+        'member_id',
         'mining_id',
         'reward',
         'reward_date',
@@ -30,9 +30,9 @@ class MiningReward extends Model
         return '지급 완료';
     }
 
-    public function user()
+    public function member()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(Member::class, 'member_id', 'id');
     }
 
     public function mining()

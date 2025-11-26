@@ -9,7 +9,7 @@
         <table class="table table-striped table-bordered break-keep-all">
             <thead class="mb-2">
                 <tr>
-                    <th class="text-center" colspan="3">{{ $mining->policy->mining_locale_name }}</th>
+                    <th class="text-center" colspan="3">{{ $mining->product->mining_locale_name }}</th>
                 </tr>
                 <tr>
                     <th>{{ __('system.date') }}</th>
@@ -20,18 +20,11 @@
             <tbody>
                 <tr>
                     <td>{{ date_format($mining->created_at, 'Y-m-d h:i:s') }}</td>
-                    <td>{{ $mining->node_amount }}</td>
+                    <td>{{ $mining->entry_amount }}</td>
                     <td></td>
                 </tr>
             </tbody>
         </table>
-        {{--
-        <div class="d-flex justify-content-center align-items-center w-100 mb-3">
-            <a href="{{ route('staking.profit', ['id' => $staking->id]) }}">
-                <h5 class="btn btn-outline-primary m-0">스테이킹 수익</h5>
-            </a>
-        </div>
-        --}}
     </div>
     @endforeach
 </div>

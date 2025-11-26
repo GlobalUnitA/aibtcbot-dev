@@ -14,10 +14,10 @@ class Mining extends Model
     use HasFactory, TruncatesDecimals;
 
     protected $fillable = [
-        'user_id',
+        'member_id',
         'asset_id',
         'income_id',
-        'policy_id',
+        'product_id',
         'status',
         'entry_amount',
         'reward_count',
@@ -36,9 +36,9 @@ class Mining extends Model
         'status_text',
     ];
 
-    public function user()
+    public function member()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(Member::class, 'member_id', 'id');
     }
 
     public function asset()
@@ -51,9 +51,9 @@ class Mining extends Model
         return $this->belongsTo(Income::class, 'income_id', 'id');
     }
 
-    public function policy()
+    public function product()
     {
-        return $this->belongsTo(MiningPolicy::class, 'policy_id', 'id');
+        return $this->belongsTo(MiningProduct::class, 'product_id', 'id');
     }
 
     public function rewards()
@@ -101,7 +101,7 @@ class Mining extends Model
 
     public function getBenefitRule($type)
     {
-        $benefit_rules = $this->policy->benefit_rules;
+        $benefit_rules = $this->product->benefit_rules;
 
         return $benefit_rules[$type];
     }
@@ -125,7 +125,7 @@ class Mining extends Model
             try {
 
                 $reward = MiningReward::create([
-                    'user_id'   => $mining->user_id,
+                    'member_id'   => $mining->member_id,
                     'mining_id' => $mining->id,
                     'reward' => $mining->entry_amount,
                     'reward_date' => $today,

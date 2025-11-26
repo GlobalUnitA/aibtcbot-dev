@@ -16,7 +16,7 @@ class MiningController extends Controller
 
     public function list(Request $request)
     {
-        $list = Mining::with(['user'])
+        $list = Mining::with(['member.user', 'member.user.profile'])
 
         ->when($request->filled('category') && $request->filled('keyword'), function ($query) use ($request) {
             switch ($request->category) {

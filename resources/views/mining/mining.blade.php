@@ -26,7 +26,6 @@
                 @endforeach
             </div>
         </fieldset>
-
         <fieldset id="miningData" class="d-none">
             {{-- {{ __('staking.select_staking_category_guide') }} --}}
             <div id="miningDataContainer"></div>

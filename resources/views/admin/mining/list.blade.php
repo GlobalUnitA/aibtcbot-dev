@@ -83,11 +83,11 @@
                                     @foreach ($list as $key => $value)
                                     <tr style="cursor:pointer;" onclick="window.location='{{ route('admin.mining.view', ['id' => $value->id]) }}';">
                                         <td scope="col" class="text-center">{{ $list->firstItem() + $key }}</td>
-                                        <td scope="col" class="text-center">{{ 'U'.$value->user_id }}</td>
-                                        <td scope="col" class="text-center">{{ $value->user->name }}</td>
-                                        <td scope="col" class="text-center">{{ $value->policy->coin->name }}</td>
+                                        <td scope="col" class="text-center">{{ $value->member->member_id }}</td>
+                                        <td scope="col" class="text-center">{{ $value->member->member_name }}</td>
+                                        <td scope="col" class="text-center">{{ $value->product->coin->name }}</td>
                                         <td scope="col" class="text-center">{{ $value->entry_amount }}</td>
-                                        <td scope="col" class="text-center">{{ $value->policy->mining_locale_name }}</td>
+                                        <td scope="col" class="text-center">{{ $value->product->mining_locale_name }}</td>
                                         <td scope="col" class="text-center">
                                             @switch($value->status)
                                                 @case('pending')

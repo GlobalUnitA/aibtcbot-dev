@@ -115,7 +115,7 @@ class Member extends Authenticatable
 
     public function getHasMining()
     {
-        return Mining::where('user_id', $this->user_id)
+        return Mining::where('member_id', $this->id)
             ->exists();
     }
 
@@ -262,9 +262,9 @@ class Member extends Authenticatable
         $this->checkLevelUp($this->grade->level, $this->referral_count, $self_sales, $group_sales);
     }
 
-    public function checkLevelCondition($mining_policy_id)
+    public function checkLevelCondition($product_id)
     {
-        $level_conditions = LevelConditionPolicy::where('mining_policy_id', $mining_policy_id)
+        $level_conditions = LevelConditionPolicy::where('product_id', $product_id)
             ->orderBy('node_amount', 'desc')
             ->get();
 

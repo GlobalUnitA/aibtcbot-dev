@@ -12,7 +12,7 @@ class LevelPolicy extends Model
     use HasFactory, TruncatesDecimals;
 
     protected $fillable = [
-        'mining_policy_id',
+        'product_id',
         'depth',
         'bonus',
         'matching',

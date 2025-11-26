@@ -5,17 +5,17 @@
         <div class="container-fluid">
             <ul class="nav nav-tabs mt-3" id="tableTabs" role="tablist" >
                 <li class="nav-item" role="presentation">
-                    <a href="{{ route('admin.mining.policy.view', ['mode' => 'policy', 'id' => $policy->id]) }}" class="nav-link">
-                        마이닝 정책
+                    <a href="{{ route('admin.mining.product.view', ['mode' => 'setting', 'id' => $product->id]) }}" class="nav-link">
+                        상품 설정
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a href="{{ route('admin.mining.policy.view', ['mode' => 'avatar', 'id' => $policy->id]) }}" class="nav-link">
+                    <a href="{{ route('admin.mining.product.view', ['mode' => 'avatar', 'id' => $product->id]) }}" class="nav-link">
                         아바타 설정
                     </a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a href="{{ route('admin.mining.policy.view', ['mode' => 'translation', 'id' => $policy->id]) }}" class="nav-link active">
+                    <a href="{{ route('admin.mining.product.view', ['mode' => 'translation', 'id' => $product->id]) }}" class="nav-link active">
                         다국어 설정
                     </a>
                 </li>
@@ -25,9 +25,9 @@
                     <div class="mb-3 d-flex justify-content-between">
                         <h5 class="card-title">마이닝 다국어</h5>
                     </div>
-                    <form method="POST" action="{{ route('admin.mining.policy.update') }}" id="ajaxForm" data-confirm-message="다국어 설명을 변경하시겠습니까?">
+                    <form method="POST" action="{{ route('admin.mining.product.update') }}" id="ajaxForm" data-confirm-message="다국어 설명을 변경하시겠습니까?">
                         @csrf
-                        <input type="hidden" name="id" value={{ $policy->id }}>
+                        <input type="hidden" name="id" value={{ $product->id }}>
                         <input type="hidden" name="mode" value="translation">
                         <hr>
                         @foreach($view as $key => $val)
@@ -56,7 +56,7 @@
                         @endforeach
                         <hr>
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="{{ route('admin.mining.policy', ['id' => '1']) }}" class="btn btn-secondary">목록</a>
+                            <a href="{{ route('admin.mining.product') }}" class="btn btn-secondary">목록</a>
                             <button type="submit" class="btn btn-danger">수정</button>
                         </div>
                     </form>

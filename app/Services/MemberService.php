@@ -7,8 +7,16 @@ use App\Models\Asset;
 use App\Models\Coin;
 use App\Models\Income;
 use App\Models\Member;
+use App\Models\Mining;
+use App\Models\MiningPolicy;
+use App\Models\MiningProduct;
 use App\Models\User;
 use App\Models\Avatar;
+use App\Services\BonusService;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class MemberService
 {
@@ -53,6 +61,11 @@ class MemberService
                 'coin_id' => $id,
             ]);
         }
+
+        if ($type == 'avatar') {
+            $this->avatarMining($member->avatar_id);
+        }
+
     }
 
     /**
@@ -207,4 +220,34 @@ class MemberService
 
         return false;
     }
+
+    private function avatarMining(int $avatar_id)
+    {
+
+        $avatar = Avatar::find($avatar_id);
+
+        $policy = miningPolicy::first();
+        $product = MiningProduct::find($policy->avatar_product_id);
+
+        $asset = Asset::where('member_id', $avatar->member->id)->where('coin_id', $product->coin_id)->first();
+        $income = Income::where('member_id', $avatar->member->id)->where('coin_id', $product->coin_id)->first();
+
+        $start = Carbon::today()->addDays($product->waiting_period+1);
+
+        $mining = Mining::create([
+            'member_id' => $avatar->member->id,
+            'asset_id' => $asset->id,
+            'income_id' => $income->id,
+            'product_id' => $product->id,
+            'entry_amount' => $product->entry_amount,
+            'reward_count' => 0,
+            'reward_limit' => $product->reward_limit,
+            'started_at' => $start,
+        ]);
+
+        $service = new BonusService();
+        $service->referralBonus($mining);
+
+    }
+
 }

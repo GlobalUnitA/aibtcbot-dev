@@ -5,22 +5,22 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs mt-3" id="tableTabs" role="tablist" style="margin-left: -300px; margin-right: -300px; width: calc(100% + 600px);">
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.profit', ['id' => $mining_policy->id, 'mode' => 'referral_bonus']) }}" class="nav-link active">
+                <a href="{{ route('admin.mining.profit', ['id' => $mining_product->id, 'mode' => 'referral_bonus']) }}" class="nav-link">
                     추천보너스
                 </a>
             </li>
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.profit', ['id' => $mining_policy->id, 'mode' => 'referral_matching']) }}" class="nav-link">
+                <a href="{{ route('admin.mining.profit', ['id' => $mining_product->id, 'mode' => 'referral_matching']) }}" class="nav-link active">
                     추천매칭
                 </a>
             </li>
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.profit', ['id' => $mining_policy->id, 'mode' => 'level_bonus']) }}" class="nav-link">
+                <a href="{{ route('admin.mining.profit', ['id' => $mining_product->id, 'mode' => 'level_bonus']) }}" class="nav-link">
                     레벨보너스
                 </a>
             </li>
             <li class="nav-item" role="presentation">
-                <a href="{{ route('admin.mining.profit', ['id' => $mining_policy->id, 'mode' => 'level_condition']) }}" class="nav-link">
+                <a href="{{ route('admin.mining.profit', ['id' => $mining_product->id, 'mode' => 'level_condition']) }}" class="nav-link">
                     레벨조건
                 </a>
             </li>
@@ -28,7 +28,7 @@
         <div class="card full-card" style="margin-left: -300px; margin-right: -300px; width: calc(100% + 600px);">
             <div class="card-body">
                 <div class="mb-3 d-flex justify-content-between">
-                    <h5 class="card-title">추천보너스 정책</h5>
+                    <h5 class="card-title">추천매칭 정책</h5>
                     <!--a href="" class="btn btn-primary">Excel</a-->
                 </div>
                 <hr>
@@ -46,7 +46,7 @@
                         </thead>
                         <tbody class="table-group-divider">
                             @foreach($policies as $key => $val)
-                            <tr class="mining_policy">
+                            <tr class="mining_product">
                                 <input type="hidden" name="id" value="{{ $val->id }}" >
                                 <td class="text-center">{{ $val->grade->name }}</td>
                                 @for($i =1; $i <= 21; $i++)
@@ -106,8 +106,8 @@
 
 <form method="POST" id="updateForm" action="{{ route('admin.mining.profit.update') }}" >
     @csrf
-    <input type="hidden" name="mining_policy_id" value="{{ $mining_policy->id }}">
-    <input type="hidden" name="mode" value="referral_bonus">
+    <input type="hidden" name="product_id" value="{{ $mining_product->id }}">
+    <input type="hidden" name="mode" value="referral_matching">
 </form>
 
 @endsection

@@ -8,7 +8,7 @@ class IncomeAccumulation extends Authenticatable
 {
     protected $fillable = [
         'income_id',
-        'mining_policy_id',
+        'product_id',
         'accumulated_amount',
         'next_target_amount',
     ];

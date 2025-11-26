@@ -12,7 +12,7 @@ class LevelConditionPolicy extends Model
     use HasFactory, TruncatesDecimals;
 
     protected $fillable = [
-        'mining_policy_id',
+        'product_id',
         'node_amount',
         'max_depth',
         'referral_count',

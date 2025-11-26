@@ -8,7 +8,7 @@
                 <div class="mb-3 d-flex justify-content-between">
                     <h5 class="card-title">마이닝 정책 추가</h5>
                 </div>
-                <form method="POST" action="{{ route('admin.mining.policy.store') }}" id="ajaxForm">
+                <form method="POST" action="{{ route('admin.mining.product.store') }}" id="ajaxForm">
                     @csrf
                     <hr>
                     <table class="table table-bordered mt-5 mb-5">
@@ -163,5 +163,5 @@
 @endsection
 
 @push('script')
-<script src="{{ asset('js/admin/mining/policy.js') }}"></script>
+<script src="{{ asset('js/admin/mining/product.js') }}"></script>
 @endpush

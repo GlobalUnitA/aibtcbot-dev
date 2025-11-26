@@ -27,7 +27,7 @@ class BonusService
             return;
         }
 
-        $member = $mining->user->member;
+        $member = $mining->member;
 
         try {
 
@@ -41,7 +41,7 @@ class BonusService
 
                 if (!$parent->getHasMining()) continue;
 
-                $policy = ReferralPolicy::where('mining_policy_id', $mining->policy_id)
+                $policy = ReferralPolicy::where('product_id', $mining->product_id)
                     ->where('grade_id', $parent->grade->id)
                     ->first();
 
@@ -53,7 +53,7 @@ class BonusService
 
                 if ($bonus <= 0) continue;
 
-                $income = Income::where('member_id', $parent->id)->where('coin_id', 1)->first();
+                $income = Income::where('member_id', $parent->id)->where('coin_id', $mining->product->coin_id)->first();
 
                 $transfer = IncomeTransfer::create([
                     'member_id'   => $parent->id,
@@ -75,7 +75,7 @@ class BonusService
                 ]);
 
                 $service = new IncomeProcessService();
-                $service->addProfitAndProcess($income, $mining->policy, $bonus);
+                $service->addProfitAndProcess($income, $mining->product, $bonus);
 
                 Log::channel('bonus')->info('Success referral bonus', [
                     'member_id' => $parent->id,
@@ -110,7 +110,7 @@ class BonusService
     public function referralMatching($bonus)
     {
         if ($bonus->mining->getBenefitRule('referral_matching') === 'n'){
-            Log::channel('bonus')->warning('This mining policy does not allow a referral matching.', ['bonus_id' => $bonus->id, 'mining_policy_id' => $bonus->mining->policy_id]);
+            Log::channel('bonus')->warning('This mining policy does not allow a referral matching.', ['bonus_id' => $bonus->id, 'product_id' => $bonus->mining->product_id]);
             return;
         }
 
@@ -123,7 +123,7 @@ class BonusService
 
             if (!$parent->getHasMining()) continue;
 
-            $policy = ReferralMatchingPolicy::where('mining_policy_id', $bonus->mining->policy_id)
+            $policy = ReferralMatchingPolicy::where('product_id', $bonus->mining->product_id)
                 ->where('grade_id', $parent->grade->id)
                 ->first();
 
@@ -135,9 +135,7 @@ class BonusService
 
             if ($matching <= 0) continue;
 
-            $income = Income::where('member_id', $parent->id)
-                ->where('coin_id', 1)
-                ->first();
+            $income = Income::where('member_id', $parent->id)->where('coin_id', $bonus->mining->product->coin_id)->first();
 
             $transfer = IncomeTransfer::create([
                 'member_id'   => $parent->id,
@@ -159,7 +157,7 @@ class BonusService
             ]);
 
             $service = new IncomeProcessService();
-            $service->addProfitAndProcess($income, $bonus->mining->policy, $matching);
+            $service->addProfitAndProcess($income, $bonus->mining->product, $matching);
 
             Log::channel('bonus')->info('Success referral matching', [
                 'member_id' => $parent->id,
@@ -299,10 +297,10 @@ class BonusService
 
             DB::beginTransaction();
 
-            $member = $reward->user->member;
+            $member = $reward->member;
             $parents = $member->getParentTree(21);
 
-            $mining_policy_id = $mining->policy->id;
+            $product_id = $mining->product_id;
 
             foreach ($parents as $level => $parent) {
 
@@ -310,7 +308,7 @@ class BonusService
 
                 if (!$parent->getHasMining()) continue;
 
-                $condition = $parent->checkLevelCondition($mining_policy_id);
+                $condition = $parent->checkLevelCondition($product_id);
 
                 if (!$condition) {
                     Log::channel('bonus')->warning('No Level Condition matched for level bonus', [
@@ -333,7 +331,7 @@ class BonusService
                     continue;
                 }
 
-                $policy = LevelPolicy::where('mining_policy_id', $mining_policy_id)
+                $policy = LevelPolicy::where('product_id', $product_id)
                     ->where('depth', $level)
                     ->first();
 
@@ -365,7 +363,7 @@ class BonusService
                 ]);
 
                 $service = new IncomeProcessService();
-                $service->addProfitAndProcess($income, $mining->policy, $bonus);
+                $service->addProfitAndProcess($income, $mining->product, $bonus);
 
                 Log::channel('bonus')->info('Success level bonus', [
                     'member_id' => $parent->id,
@@ -415,7 +413,7 @@ class BonusService
         $member = $bonus->user->member;
         $parents = $member->getParentTree(21);
 
-        $mining_policy_id = $mining->policy_id;
+        $product_id = $mining->product_id;
 
         foreach ($parents as $level => $parent) {
 
@@ -423,7 +421,7 @@ class BonusService
 
             if (!$parent->getHasMining()) continue;
 
-            $condition = $parent->checkLevelCondition($mining_policy_id);
+            $condition = $parent->checkLevelCondition($product_id);
 
             if (!$condition) {
                 Log::channel('bonus')->warning('No Level Condition matched for level matching', [
@@ -447,7 +445,7 @@ class BonusService
                 continue;
             }
 
-            $policy = LevelPolicy::where('mining_policy_id', $mining_policy_id)
+            $policy = LevelPolicy::where('product_id', $product_id)
                 ->where('depth', $level)
                 ->first();
 
@@ -477,7 +475,7 @@ class BonusService
             ]);
 
             $service = new IncomeProcessService();
-            $service->addProfitAndProcess($income, $mining->policy, $matching);
+            $service->addProfitAndProcess($income, $mining->product, $matching);
 
             Log::channel('bonus')->info('Success level matching', [
                 'member_id' => $parent->id,
