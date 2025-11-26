@@ -34,7 +34,7 @@ class DashboardController extends Controller
         $avatars = $user->avatars;
 
         $all_count = collect($children)->flatten(1)->count();
-        $direct_count = isset($children[1]) ? $children[1]->count() : 0;
+        $referral_count = $user->member->referrals->count();
         $group_sales = $user->member->getGroupSales();
 
         $minings = Mining::where('member_id', $user->member->id)->get();
@@ -67,7 +67,7 @@ class DashboardController extends Controller
         return [
             'grade' => $grade,
             'all_count' => $all_count,
-            'direct_count' => $direct_count,
+            'referral_count' => $referral_count,
             'group_sales' => $group_sales,
             'total_node_amount' => $total_node_amount,
             'total_reward' => $total_reward,

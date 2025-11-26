@@ -46,7 +46,7 @@
                     <div class="row g-3 mb-3">
                         <div class="col-12 col-sm-6">
                             <p class="text-body fs-4 m-0">{{ __('asset.referral_count') }}</p>
-                            <h3 class="text-primary fs-6 mb-1">{{ $data['direct_count'] }}</h3>
+                            <h3 class="text-primary fs-6 mb-1">{{ $data['referral_count'] }}</h3>
                         </div>
                     </div>
                     <div class="row g-3 mb-3">
@@ -81,9 +81,11 @@
                     </div>
                     <div class="d-flex justify-content-between">
                         <p class="text-body fs-4 m-0">{{ $avatar->name }}</p>
+                        @if ($avatar->is_active === 'y')
                         <a href="{{ route('register',['mid' => $avatar->member->member_id]) }}">
                             <p class="text-body fs-4 mb-1">+</p>
                         </a>
+                        @endif
                     </div>
                 </div>
                 @endforeach
