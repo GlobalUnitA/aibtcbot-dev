@@ -63,13 +63,12 @@ class MemberService
             ]);
         }
 
-        if ($type == 'avatar') {
-            $this->avatarMining($member->avatar_id);
-        }
-
         $member = Member::find($member->id);
         $member->checkMemberGrade();
 
+        if ($type == 'avatar') {
+            $this->avatarMining($member->avatar_id);
+        }
     }
 
     /**
