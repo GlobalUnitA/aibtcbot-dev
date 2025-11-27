@@ -6,6 +6,7 @@ namespace App\Services;
 use App\Models\Asset;
 use App\Models\Coin;
 use App\Models\Income;
+use App\Models\IncomeAccumulation;
 use App\Models\Member;
 use App\Models\Mining;
 use App\Models\MiningPolicy;
@@ -76,13 +77,22 @@ class MemberService
      * @param User $root
      * @return Member
      */
-    public function addAvatar(User $root)
+    public function addAvatar(Member $root)
     {
-        $avatar_count = Avatar::where('owner_id', $root->id)->count() + 1;
+
+        if ($root->user_id) {
+            $owner_id = $root->user_id;
+            $avatar_count = Avatar::where('owner_id', $root->member_id)->count() + 1;
+            $name = $root->member_id . '_' .$avatar_count;
+        } else {
+            $owner_id = $root->avatar->owner_id;
+            $avatar_count = Avatar::where('name', 'like', '%' . $root->avatar->owner->member->member_id . '%')->count() + 1;
+            $name = $root->avatar->owner->member->member_id . '_' .$avatar_count;
+        }
 
         $avatar = Avatar::create([
-            'owner_id' => $root->id,
-            'name'     => $root->id . '_' .$avatar_count,
+            'owner_id' => $owner_id,
+            'name'     => $name,
         ]);
 
         return $avatar;
@@ -247,6 +257,16 @@ class MemberService
             'reward_limit' => $product->reward_limit,
             'started_at' => $start,
         ]);
+
+        IncomeAccumulation::firstOrCreate(
+            [
+                'income_id'  => $income->id,
+            ],
+            [
+                'product_id' => $product->id,
+                'next_target_amount' => $product->avatar_target_amount,
+            ]
+        );
 
         $service = new BonusService();
         $service->referralBonus($mining);

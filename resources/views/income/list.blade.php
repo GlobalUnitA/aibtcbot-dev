@@ -34,15 +34,15 @@
                     <td>{{ $value->amount }}</td>
                     <td>
                         @if ($value->type === 'subscription_bonus')
-                            {{ $value->subscriptionBonus ? 'C' . $value->subscriptionBonus->referrer_id : '' }}
+                            {{ $value->subscriptionBonus ? 'C' . $value->subscriptionBonus->referrer->member_id : '' }}
                         @elseif ($value->type === 'referral_bonus')
-                            {{ $value->referralBonus ? 'C' . $value->referralBonus->referrer_id : '' }}
+                            {{ $value->referralBonus ? 'C' . $value->referralBonus->referrer->member_id : '' }}
                         @elseif ($value->type === 'referral_matching')
-                            {{ $value->referralMatching ? 'C' . $value->referralMatching->referrer_id : '' }}
+                            {{ $value->referralMatching ? 'C' . $value->referralMatching->referrer->member_id : '' }}
                         @elseif ($value->type === 'level_bonus')
-                            {{ $value->levelBonus ? 'C' . $value->levelBonus->referrer_id : '' }}
+                            {{ $value->levelBonus ? 'C' . $value->levelBonus->referrer->member_id : '' }}
                         @elseif ($value->type === 'level_matching')
-                            {{ $value->levelMatching ? 'C' . $value->levelMatching->referrer_id : '' }}
+                            {{ $value->levelMatching ? 'C' . $value->levelMatching->referrer->member_id : '' }}
                         @else
                             {{ '' }}
                         @endif

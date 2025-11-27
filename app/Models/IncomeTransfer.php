@@ -104,6 +104,8 @@ class IncomeTransfer extends Model
                 return __('mining.mining_matching_bonus');
             case 'rank_bonus' :
                 return __('asset.rank_bonus');
+            case 'avatar_cost' :
+                return __('mining.avatar_cost');
             default :
                 return __('asset.internal_transfer');
         }

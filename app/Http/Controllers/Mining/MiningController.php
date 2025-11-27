@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Mining;
 use App\Models\Asset;
 use App\Models\AssetTransfer;
 use App\Models\Income;
+use App\Models\IncomeAccumulation;
 use App\Models\Mining;
 use App\Models\MiningProduct;
 use App\Models\MiningPolicy;
@@ -117,9 +118,20 @@ class MiningController extends Controller
                 'after_balance' => $asset->balance - $request->entry_amount,
             ]);
 
+            IncomeAccumulation::firstOrCreate(
+                [
+                    'income_id'  => $income->id,
+                ],
+                [
+                    'product_id' => $product->id,
+                    'next_target_amount' => $product->avatar_target_amount,
+                ]
+            );
+
             $asset->update([
                 'balance' => $asset->balance - $request->entry_amount
             ]);
+
 
             $service = new BonusService();
             $service->referralBonus($mining);

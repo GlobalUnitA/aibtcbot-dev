@@ -19,36 +19,42 @@ class IncomeProcessService
      * @param MiningPolicy $policy
      * @param float $amount
      */
-    public function addProfitAndProcess(Income $income, MiningProduct $product, float $amount)
+    public function addProfitAndProcess(Income $income, float $amount)
     {
-        DB::transaction(function () use ($income, $product, $amount) {
+        DB::transaction(function () use ($income, $amount) {
 
-            $income->balance += $amount;
-            $income->save();
+            $accumulation = IncomeAccumulation::where('income_id', $income->id)->first();
 
-            $member = $income->member;
+            if (!$accumulation) return;
 
-            if (!$member->getHasProductMining($product->id)) {
-                return;
+            $remain = $accumulation->next_target_amount - $accumulation->accumulated_amount;
+
+            $avatar_cost_amount = min($amount, max($remain, 0));
+
+            if ($avatar_cost_amount > 0) {
+
+                $before = $income->balance;
+                $after = $before - $avatar_cost_amount;
+
+                $income->balance -= $avatar_cost_amount;
+                $income->save();
+
+                IncomeTransfer::create([
+                    'member_id'      => $income->member_id,
+                    'income_id'      => $income->id,
+                    'type'           => 'avatar_cost',
+                    'status'         => 'completed',
+                    'amount'         => -$avatar_cost_amount,
+                    'actual_amount'  => -$avatar_cost_amount,
+                    'before_balance' => $before,
+                    'after_balance'  => $after,
+                ]);
             }
 
-            IncomeAccumulation::firstOrCreate([
-                'income_id' => $income->id,
-                'product_id' => $product->id,
-                ],
-                [
-                'next_target_amount' => $product->avatar_target_amount,
-                ]
-            );
+            $accumulation->accumulated_amount += $amount;
+            $accumulation->save();
 
-            $accumulations = IncomeAccumulation::where('income_id', $income->id)->get();
-
-            foreach ($accumulations as $accumulation) {
-                $accumulation->accumulated_amount += $amount;
-                $accumulation->save();
-
-                $this->processPolicyCondition($accumulation, $income);
-            }
+            $this->processPolicyCondition($accumulation, $income);
 
         });
     }
@@ -64,7 +70,7 @@ class IncomeProcessService
         while ($accumulation->accumulated_amount >= $accumulation->next_target_amount) {
 
             Log::channel('avatar')->info('Start to add avatar', [
-                'user_id' => $accumulation->income->member->user_id,
+                'member_id' => $member->id,
                 'accumulated_amount' => $accumulation->accumulated_amount,
                 'next_target_amount' => $accumulation->next_target_amount,
                 'avatar_count' => $product->avatar_count,
@@ -74,24 +80,9 @@ class IncomeProcessService
             $accumulation->next_target_amount = $accumulation->accumulated_amount + $product->avatar_target_amount;
             $accumulation->save();
 
-            $income->balance -= $product->avatar_cost;
-            $income->save();
-
-            IncomeTransfer::create([
-                'member_id' => $member->id,
-                'income_id' => $income->id,
-                'type' => 'avatar_creation',
-                'status' => 'completed',
-                'amount' => $product->avatar_cost,
-                'actual_amount' => $product->avatar_cost,
-                'before_balance' => $income->balance,
-                'after_balance' => $income->balance - $product->avatar_cost,
-            ]);
-
             for ($i = 0; $i < $product->avatar_count; $i++) {
-                $user = $income->member->user;
-                $service->addAvatar($user);
-                Log::channel('avatar')->info('Success to add avatar', ['user_id' => $user->id, 'count' => $i+1]);
+                $service->addAvatar($member);
+                Log::channel('avatar')->info('Success to add avatar', ['member_id' => $member->id, 'count' => $i+1]);
             }
         }
     }

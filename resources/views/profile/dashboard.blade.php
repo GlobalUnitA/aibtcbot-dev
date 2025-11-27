@@ -74,9 +74,9 @@
                             <p class="text-body fs-4 m-0">{{ __('user.avatar') }} {{ $loop->iteration }}</p>
                         </a>
                         @if ($avatar->is_active === 'n')
-                        <p class="text-danger mb-1">비활성</p>
+                        <p class="text-danger mb-1">{{ __('system.inactive') }}</p>
                         @else
-                        <p class="text-primary mb-1">활성</p>
+                        <p class="text-primary mb-1">{{ __('system.active') }}</p>
                         @endif
                     </div>
                     <div class="d-flex justify-content-between">

@@ -160,10 +160,10 @@ class IncomeController extends Controller
                 'created_at' => $item->created_at->format('Y-m-d'),
                 'amount' => $item->amount,
                 'referrer_id' => match ($item->type) {
-                    'referral_bonus' => optional($item->referralBonus)->referrer_id,
-                    'referral_matching' => optional($item->referralMatching)->referrer_id,
-                    'level_bonus' => optional($item->levelBonus)->referrer_id,
-                    'level_matching' => optional($item->levelMatching)->referrer_id,
+                    'referral_bonus' => optional($item->referralBonus)->referrer->member_id,
+                    'referral_matching' => optional($item->referralMatching)->referrer->member_id,
+                    'level_bonus' => optional($item->levelBonus)->referrer->member_id,
+                    'level_matching' => optional($item->levelMatching)->referrer->member_id,
                     default => null,
                 },
                 'type_text' => match ($item->type) {

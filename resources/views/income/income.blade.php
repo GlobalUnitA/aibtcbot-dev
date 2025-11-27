@@ -103,16 +103,18 @@
                 @foreach($list as $key => $val)
                 <tr>
                     <td>{{ date_format($val->created_at, 'Y-m-d') }}</td>
-                    <td>{{ $val->amount }}</td>
+                    <td>
+                        {{ $val->amount }}
+                    </td>
                     <td>
                         @if ($val->type === 'referral_bonus')
-                            {{ $val->referralBonus ? $val->referralBonus->referrer_id : '' }}
+                            {{ $val->referralBonus ? $val->referralBonus->referrer->member_id : '' }}
                         @elseif ($val->type === 'referral_matching')
-                            {{ $val->referralMatching ? $val->referralMatching->referrer_id : '' }}
+                            {{ $val->referralMatching ? $val->referralMatching->referrer->member_id : '' }}
                         @elseif ($val->type === 'level_bonus')
-                            {{ $val->levelBonus ? $val->levelBonus->referrer_id : '' }}
+                            {{ $val->levelBonus ? $val->levelBonus->referrer->member_id : '' }}
                         @elseif ($val->type === 'level_matching')
-                            {{ $val->levelMatching ? $val->levelMatching->referrer_id : '' }}
+                            {{ $val->levelMatching ? $val->levelMatching->referrer->member_id : '' }}
                         @endif
                     </td>
                     <td>

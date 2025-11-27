@@ -37,21 +37,33 @@ class BonusService
 
             foreach ($parents as $level => $parent) {
 
-                if ($parent->is_valid === 'n') continue;
+                if ($parent->is_valid === 'n'){
+                    Log::channel('bonus')->warning('This parent is not valid', ['mining_id' => $mining->id, 'member_id' => $parent->member_id, 'level' => $level]);
+                    continue;
+                }
 
-                if (!$parent->getHasMining()) continue;
+                if (!$parent->getHasMining()) {
+                    Log::channel('bonus')->warning('This parent does not have mining', ['mining_id' => $mining->id, 'member_id' => $parent->member_id, 'level' => $level]);
+                    continue;
+                }
 
                 $policy = ReferralPolicy::where('product_id', $mining->product_id)
                     ->where('grade_id', $parent->grade->id)
                     ->first();
 
-                if (!$policy) continue;
+                if (!$policy){
+                    Log::channel('bonus')->warning('Referral Policy does not exists', ['mining_id' => $mining->id, 'member_id' => $parent->member_id, 'level' => $level]);
+                    continue;
+                }
 
                 $rate_key = "level_{$level}_rate";
 
                 $bonus = $mining->entry_amount * $policy->$rate_key / 100;
 
-                if ($bonus <= 0) continue;
+                if ($bonus <= 0) {
+                    Log::channel('bonus')->warning('Referral bonuses does not exists', ['mining_id' => $mining->id, 'member_id' => $parent->member_id, 'level' => $level]);
+                    continue;
+                }
 
                 $income = Income::where('member_id', $parent->id)->where('coin_id', $mining->product->coin_id)->first();
 
@@ -74,8 +86,11 @@ class BonusService
                     'bonus' => $bonus,
                 ]);
 
+                $income->balance += $bonus;
+                $income->save();
+
                 $service = new IncomeProcessService();
-                $service->addProfitAndProcess($income, $mining->product, $bonus);
+                $service->addProfitAndProcess($income, $bonus);
 
                 Log::channel('bonus')->info('Success referral bonus', [
                     'member_id' => $parent->id,
@@ -110,7 +125,7 @@ class BonusService
     public function referralMatching($bonus)
     {
         if ($bonus->mining->getBenefitRule('referral_matching') === 'n'){
-            Log::channel('bonus')->warning('This mining policy does not allow a referral matching.', ['bonus_id' => $bonus->id, 'product_id' => $bonus->mining->product_id]);
+            Log::channel('bonus')->warning('This mining policy does not allow a referral matching.', ['bonus_id' => $bonus->id, 'mining_id' => $bonus->mining_id, 'product_id' => $bonus->mining->product_id]);
             return;
         }
 
@@ -156,8 +171,11 @@ class BonusService
                 'matching' => $matching,
             ]);
 
+            $income->balance += $matching;
+            $income->save();
+
             $service = new IncomeProcessService();
-            $service->addProfitAndProcess($income, $bonus->mining->product, $matching);
+            $service->addProfitAndProcess($income, $matching);
 
             Log::channel('bonus')->info('Success referral matching', [
                 'member_id' => $parent->id,
@@ -362,8 +380,11 @@ class BonusService
                     'bonus' => $bonus,
                 ]);
 
+                $income->balance += $bonus;
+                $income->save();
+
                 $service = new IncomeProcessService();
-                $service->addProfitAndProcess($income, $mining->product, $bonus);
+                $service->addProfitAndProcess($income, $bonus);
 
                 Log::channel('bonus')->info('Success level bonus', [
                     'member_id' => $parent->id,
@@ -474,8 +495,11 @@ class BonusService
                 'matching' => $matching,
             ]);
 
+            $income->balance += $matching;
+            $income->save();
+
             $service = new IncomeProcessService();
-            $service->addProfitAndProcess($income, $mining->product, $matching);
+            $service->addProfitAndProcess($income, $matching);
 
             Log::channel('bonus')->info('Success level matching', [
                 'member_id' => $parent->id,

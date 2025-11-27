@@ -69,6 +69,7 @@
                                 <thead>
                                     <tr class="border-2 border-bottom border-primary border-0">
                                         <th scope="col" class="text-center">번호</th>
+                                        <th scope="col" class="text-center">마이닝 번호</th>
                                         <th scope="col" class="text-center">UID</th>
                                         <th scope="col" class="text-center">이름</th>
                                         <th scope="col" class="text-center">종류</th>
@@ -83,6 +84,7 @@
                                     @foreach ($list as $key => $value)
                                     <tr style="cursor:pointer;" onclick="window.location='{{ route('admin.mining.view', ['id' => $value->id]) }}';">
                                         <td scope="col" class="text-center">{{ $list->firstItem() + $key }}</td>
+                                        <td scope="col" class="text-center">{{ $value->id }}</td>
                                         <td scope="col" class="text-center">{{ $value->member->member_id }}</td>
                                         <td scope="col" class="text-center">{{ $value->member->member_name }}</td>
                                         <td scope="col" class="text-center">{{ $value->product->coin->name }}</td>
