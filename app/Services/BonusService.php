@@ -61,7 +61,7 @@ class BonusService
                 $bonus = $mining->entry_amount * $policy->$rate_key / 100;
 
                 if ($bonus <= 0) {
-                    Log::channel('bonus')->warning('Referral bonuses does not exists', ['mining_id' => $mining->id, 'member_id' => $parent->member_id, 'level' => $level]);
+                    Log::channel('bonus')->warning('Referral bonuses does not exists', ['mining_id' => $mining->id, 'member_id' => $parent->member_id, 'member_grade' => $parent->grade_id, 'level' => $level]);
                     continue;
                 }
 
