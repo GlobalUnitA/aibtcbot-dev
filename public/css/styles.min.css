@@ -11124,7 +11124,7 @@ textarea.form-control-lg {
   height: 100%;
   width: 100%;
   z-index: 0;
-  opacity: 40%;
+  opacity: 70%;
   /* filter: hue-rotate(205deg); */
 }
 
@@ -17456,7 +17456,7 @@ ul {
 }
 
 
-/*custom-ho*/
+/*custom-ho******************************************************************/
 /*main footer video*/
 .width100_div{/*parent not padding width100*/
     margin-left: calc(-1 * 3rem);
@@ -17506,3 +17506,83 @@ footer.footerContainer a img{
   object-fit: cover;
   border-radius: 12px;
 } */
+
+/*login-box style*/
+.logo-top{margin-bottom: 2rem !important;}
+.box-outline{
+  border: 1px solid #ddd;
+  position: relative;
+  padding: 10px;
+  border-radius: 20px;
+}
+.box-outline label{
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  font-weight: 600;
+  background-color: #fff;
+  padding: 5px 10px;
+
+}
+
+.box-outline option{
+  color:#000;
+}
+
+input.style-no {
+    caret-color: #000 !important; /* 커서 색상 흰색 */
+    color: #000 !important; /* 혹시 모를 기본 텍스트 색상 */
+    -webkit-text-fill-color: #000 !important;
+    border: none;
+}
+
+input.style-no:-webkit-autofill,
+input.style-no:-webkit-autofill:hover,
+input.style-no:-webkit-autofill:focus,
+input.style-no:-webkit-autofill:active {
+    /* 핵심: 배경색 변경을 5000초 동안 천천히 하도록 설정 -> 사실상 변경 안 됨 */
+    transition: background-color 5000s ease-in-out 0s;
+    border: none;
+    /* 텍스트 색상을 흰색으로 강제 고정 */
+    -webkit-text-fill-color: #000 !important;
+}
+
+.box-outline:focus-within{
+  border-color: #ff7e00;
+}
+
+.login-box{
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.login-box.show{
+ opacity: 1;
+ transform: translateY(0);
+}
+
+.bg-video.hide{
+  opacity:0.6;
+}
+.loginlogo{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-70%, -50%);
+  width: 250px;
+  height: auto;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.loginlogo.show{
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+.loginlogo.hide{
+  opacity: 0;
+  transform: translate(-30px, -50%);
+}
