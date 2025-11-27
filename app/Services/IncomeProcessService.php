@@ -16,7 +16,6 @@ class IncomeProcessService
     /**
      *
      * @param Income $income
-     * @param MiningPolicy $policy
      * @param float $amount
      */
     public function addProfitAndProcess(Income $income, float $amount)
@@ -26,30 +25,6 @@ class IncomeProcessService
             $accumulation = IncomeAccumulation::where('income_id', $income->id)->first();
 
             if (!$accumulation) return;
-
-            $remain = $accumulation->next_target_amount - $accumulation->accumulated_amount;
-
-            $avatar_cost_amount = min($amount, max($remain, 0));
-
-            if ($avatar_cost_amount > 0) {
-
-                $before = $income->balance;
-                $after = $before - $avatar_cost_amount;
-
-                $income->balance -= $avatar_cost_amount;
-                $income->save();
-
-                IncomeTransfer::create([
-                    'member_id'      => $income->member_id,
-                    'income_id'      => $income->id,
-                    'type'           => 'avatar_cost',
-                    'status'         => 'completed',
-                    'amount'         => -$avatar_cost_amount,
-                    'actual_amount'  => -$avatar_cost_amount,
-                    'before_balance' => $before,
-                    'after_balance'  => $after,
-                ]);
-            }
 
             $accumulation->accumulated_amount += $amount;
             $accumulation->save();
@@ -79,6 +54,20 @@ class IncomeProcessService
             $accumulation->accumulated_amount -= $product->avatar_cost;
             $accumulation->next_target_amount = $accumulation->accumulated_amount + $product->avatar_target_amount;
             $accumulation->save();
+
+            $income->balance -= $product->avatar_cost;
+            $income->save();
+
+            IncomeTransfer::create([
+                'member_id' => $member->id,
+                'income_id' => $income->id,
+                'type' => 'avatar_cost',
+                'status' => 'completed',
+                'amount' => -$product->avatar_cost,
+                'actual_amount' => -$product->avatar_cost,
+                'before_balance' => $income->balance,
+                'after_balance' => $income->balance - $product->avatar_cost,
+            ]);
 
             for ($i = 0; $i < $product->avatar_count; $i++) {
                 $service->addAvatar($member);
