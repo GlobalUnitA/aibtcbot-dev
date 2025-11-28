@@ -80,7 +80,7 @@
                         <p class="text-primary mb-1">{{ __('system.active') }}</p>
                         @endif
                     </div>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <p class="text-body fs-4 m-0">{{ $avatar->name }}</p>
                         @if ($avatar->is_active === 'y')
                         <a href="{{ route('register',['mid' => $avatar->member->member_id]) }}">
