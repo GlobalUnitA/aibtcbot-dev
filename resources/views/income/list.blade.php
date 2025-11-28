@@ -22,6 +22,7 @@
                             <option value="referral_matching" {{ request('type') == 'referral_matching' ? 'selected' : '' }}>{{ __('asset.referral_bonus_matching') }}</option>
                             <option value="level_bonus" {{ request('type') == 'level_bonus' ? 'selected' : '' }}>{{ __('mining.mining_level_bonus') }}</option>
                             <option value="level_matching" {{ request('type') == 'level_matching' ? 'selected' : '' }}>{{ __('mining.mining_matching_bonus') }}</option>
+                            <option value="avatar_cost" {{ request('type') == 'avatar_cost' ? 'selected' : '' }}>{{ __('mining.avatar_cost') }}</option>
                         </select>
                     </th>
                 </tr>
@@ -34,15 +35,15 @@
                     <td>{{ $value->amount }}</td>
                     <td>
                         @if ($value->type === 'subscription_bonus')
-                            {{ $value->subscriptionBonus ? 'C' . $value->subscriptionBonus->referrer->member_id : '' }}
+                            {{ $value->subscriptionBonus ? $value->subscriptionBonus->referrer->member_id : '' }}
                         @elseif ($value->type === 'referral_bonus')
-                            {{ $value->referralBonus ? 'C' . $value->referralBonus->referrer->member_id : '' }}
+                            {{ $value->referralBonus ? $value->referralBonus->referrer->member_id : '' }}
                         @elseif ($value->type === 'referral_matching')
-                            {{ $value->referralMatching ? 'C' . $value->referralMatching->referrer->member_id : '' }}
+                            {{ $value->referralMatching ? $value->referralMatching->referrer->member_id : '' }}
                         @elseif ($value->type === 'level_bonus')
-                            {{ $value->levelBonus ? 'C' . $value->levelBonus->referrer->member_id : '' }}
+                            {{ $value->levelBonus ? $value->levelBonus->referrer->member_id : '' }}
                         @elseif ($value->type === 'level_matching')
-                            {{ $value->levelMatching ? 'C' . $value->levelMatching->referrer->member_id : '' }}
+                            {{ $value->levelMatching ? $value->levelMatching->referrer->member_id : '' }}
                         @else
                             {{ '' }}
                         @endif
