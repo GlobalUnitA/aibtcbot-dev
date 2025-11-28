@@ -12,7 +12,7 @@ return array (
   'meta_id_guide_1' => 'Chỉ hỗ trợ nạp và rút USDT trên BNB Smart Chain.',
   'meta_id_guide_2' => 'Không hỗ trợ nạp tiền qua mạng Ethereum (ERC-20), mạng Tron (TRC-20) hoặc sử dụng hợp đồng thông minh.
 Vui lòng kiểm tra kỹ với sàn giao dịch và ví mà bạn sẽ rút trước khi thực hiện giao dịch.
-QORA sẽ không chịu bất kỳ trách nhiệm nào đối với các lỗi nạp tiền do người dùng gây ra.',
+AI BTC BOT sẽ không chịu bất kỳ trách nhiệm nào đối với các lỗi nạp tiền do người dùng gây ra.',
   'kyc_verification' => 'Xác minh KYC',
   'child_id' => 'ID tuyến dưới',
   'logout_confirm' => 'Bạn có muốn đăng xuất không?',

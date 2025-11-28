@@ -25,4 +25,5 @@ return array (
   'max_mining_amount_notice' => 'Bạn đã vượt quá số lần tham gia tối đa.',
   'reward_count' => 'Số lần phát sinh lợi nhuận',
   'participation_amount' => 'Số tiền tham gia sản phẩm',
+  'avatar_cost' => 'Khấu trừ avatar',
 );
