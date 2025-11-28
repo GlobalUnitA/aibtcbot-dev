@@ -31,7 +31,6 @@
                             <h3 class="text-primary fs-6 mb-1">{{ $data['total_node_amount'] }}</h3>
                         </div>
                     </div>
-                    {{
                     @foreach ($data['total_reward'] as $coin => $reward)
                         <div class="row g-3 mb-3">
                             <div class="col-12 col-sm-6">
@@ -40,7 +39,6 @@
                             </div>
                         </div>
                     @endforeach
-                    }}
                 </div>
             </div>
             <div class="tab-pane fade show" id="dashboard-myteam" role="tabpanel" aria-labelledby="dashboard-myteam-tab" tabindex="0">
