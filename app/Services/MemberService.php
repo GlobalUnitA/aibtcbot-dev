@@ -4,6 +4,7 @@ namespace App\Services;
 
 
 use App\Models\Asset;
+use App\Models\AssetTransfer;
 use App\Models\Coin;
 use App\Models\Income;
 use App\Models\IncomeAccumulation;
@@ -78,15 +79,14 @@ class MemberService
      */
     public function addAvatar(Member $root)
     {
+        $avatar_count = Avatar::where('owner_id', $root->member_id)->count() + 1;
 
         if ($root->user_id) {
             $owner_id = $root->user_id;
-            $avatar_count = Avatar::where('owner_id', $root->member_id)->count() + 1;
             $name = $root->member_id . '_' .$avatar_count;
         } else {
             $owner_id = $root->avatar->owner_id;
-            $avatar_count = Avatar::where('name', 'like', '%' . $root->avatar->owner->member->member_id . '%')->count() + 1;
-            $name = $root->avatar->owner->member->member_id . '_' .$avatar_count;
+            $name = $root->member_id . '_' .$avatar_count;
         }
 
         $avatar = Avatar::create([
@@ -255,6 +255,29 @@ class MemberService
             'reward_count' => 0,
             'reward_limit' => $product->reward_limit,
             'started_at' => $start,
+        ]);
+
+        AssetTransfer::create([
+            'member_id' => $avatar->member->id,
+            'asset_id' => $asset->id,
+            'type' => 'deposit',
+            'status' => 'completed',
+            'amount' => $product->entry_amount,
+            'actual_amount' => $product->entry_amount,
+            'before_balance' => 0,
+            'after_balance' => $product->entry_amount,
+        ]);
+
+
+        AssetTransfer::create([
+            'member_id' => $avatar->member->id,
+            'asset_id' => $asset->id,
+            'type' => 'mining',
+            'status' => 'completed',
+            'amount' => $product->entry_amount,
+            'actual_amount' => $product->entry_amount,
+            'before_balance' => $product->entry_amount,
+            'after_balance' => 0,
         ]);
 
         IncomeAccumulation::firstOrCreate(
