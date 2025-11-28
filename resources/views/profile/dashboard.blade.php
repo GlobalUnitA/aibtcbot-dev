@@ -71,7 +71,8 @@
                 <div class="p-4 rounded bg-light text-body mb-4">
                     <div class="d-flex justify-content-between mb-3">
                         <a href="{{ route('avatar.view', ['id' => $avatar->id]) }}">
-                            <p class="text-body fs-4 m-0">{{ __('user.avatar') }} {{ $loop->iteration }}</p>
+                            <p class="text-body fs-4 m-0" style="font-weight:bold;color:#6976A2 !important;font-weight: bold;display: inline-block;vertical-align: middle;">{{ __('user.avatar') }} {{ $loop->iteration }}</p>
+                            <img src="{{ asset('images/icon/right_icon_g.svg') }}" style="display: inline-block;width: auto;height: 24px;">
                         </a>
                         @if ($avatar->is_active === 'n')
                         <p class="text-danger mb-1">{{ __('system.inactive') }}</p>
@@ -83,7 +84,8 @@
                         <p class="text-body fs-4 m-0">{{ $avatar->name }}</p>
                         @if ($avatar->is_active === 'y')
                         <a href="{{ route('register',['mid' => $avatar->member->member_id]) }}">
-                            <p class="text-body fs-4 mb-1">+</p>
+                            <!-- <p class="text-body fs-4 mb-1">+</p> -->
+                            <img src="{{ asset('images/icon/plus-solid.svg') }}" style="height:35px;">
                         </a>
                         @endif
                     </div>
