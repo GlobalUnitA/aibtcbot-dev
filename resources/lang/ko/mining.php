@@ -25,4 +25,5 @@ return array (
   'max_mining_amount_notice' => '최대 참여 수량을 초과하였습니다.',
   'reward_count' => '수익 발생 횟수',
   'participation_amount' => '상품 참여금액',
+  'avatar_cost' => '아바타 차감',
 );

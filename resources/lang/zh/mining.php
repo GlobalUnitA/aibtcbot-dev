@@ -25,4 +25,5 @@ return array (
   'max_mining_amount_notice' => '您已超过最多数量。',
   'reward_count' => '收益产生次数',
   'participation_amount' => '参与商品金额',
+  'avatar_cost' => '虚拟账号扣减',
 );

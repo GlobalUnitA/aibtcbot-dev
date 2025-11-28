@@ -25,4 +25,5 @@ return array (
   'max_mining_amount_notice' => '最大参加数量を超えました。',
   'reward_count' => '収益発生回数',
   'participation_amount' => '商品参加金額',
+  'avatar_cost' => 'アバターの差し引き',
 );

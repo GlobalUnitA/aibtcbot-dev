@@ -25,4 +25,5 @@ return array (
   'max_mining_amount_notice' => 'You have exceeded the maximum participation limit.',
   'reward_count' => 'Number of Profit Occurrences',
   'participation_amount' => 'Participation Amount',
+  'avatar_cost' => 'Avatar deduction',
 );
