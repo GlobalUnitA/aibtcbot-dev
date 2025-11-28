@@ -22,7 +22,7 @@
         <div class="tab-content" id="dashboard-tabContent">
             <div class="tab-pane fade show active" id="dashboard-mypage" role="tabpanel" aria-labelledby="dashboard-mypage-tab" tabindex="0">
                 <p class="py-3 fs-4">
-                    {{ __('user.level') }}<span class="text-body fw-semibold ps-2 d-inline-block">{{ $data['grade'] }}</span>
+                    {{ __('user.level') }}<span class="text-body fw-semibold ps-2 d-inline-block">{{data['grade'] }}</span>
                 </p>
                 <div class="p-4 rounded bg-light text-body mb-4">
                     <div class="row g-3 mb-3">
@@ -31,6 +31,7 @@
                             <h3 class="text-primary fs-6 mb-1">{{ $data['total_node_amount'] }}</h3>
                         </div>
                     </div>
+                    {{
                     @foreach ($data['total_reward'] as $coin => $reward)
                         <div class="row g-3 mb-3">
                             <div class="col-12 col-sm-6">
@@ -39,6 +40,7 @@
                             </div>
                         </div>
                     @endforeach
+                    }}
                 </div>
             </div>
             <div class="tab-pane fade show" id="dashboard-myteam" role="tabpanel" aria-labelledby="dashboard-myteam-tab" tabindex="0">
@@ -69,9 +71,10 @@
                 </p>
                 @foreach ($data['avatars'] as $avatar)
                 <div class="p-4 rounded bg-light text-body mb-4">
-                    <div class="d-flex justify-content-between mb-3">
+                    <div class="d-flex justify-content-between mb-2">
                         <a href="{{ route('avatar.view', ['id' => $avatar->id]) }}">
-                            <p class="text-body fs-4 m-0">{{ __('user.avatar') }} {{ $loop->iteration }}</p>
+                            <p class="text-body fs-5 m-0" style="font-weight:bold;color:#6976A2 !important;font-weight: bold;display: inline-block;vertical-align: middle;">{{ __('user.avatar') }} {{ $loop->iteration }}</p>
+                            <img src="{{ asset('images/icon/right_icon_g.svg') }}" style="display: inline-block;width: auto;height: 24px;">
                         </a>
                         @if ($avatar->is_active === 'n')
                         <p class="text-danger mb-1">{{ __('system.inactive') }}</p>
@@ -79,11 +82,12 @@
                         <p class="text-primary mb-1">{{ __('system.active') }}</p>
                         @endif
                     </div>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center">
                         <p class="text-body fs-4 m-0">{{ $avatar->name }}</p>
                         @if ($avatar->is_active === 'y')
                         <a href="{{ route('register',['mid' => $avatar->member->member_id]) }}">
-                            <p class="text-body fs-4 mb-1">+</p>
+                            <!-- <p class="text-body fs-4 mb-1">+</p> -->
+                            <img src="{{ asset('images/icon/plus-solid.svg') }}" style="height:35px;">
                         </a>
                         @endif
                     </div>
