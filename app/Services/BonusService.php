@@ -35,7 +35,9 @@ class BonusService
 
             $parents = $member->getParentTree(21);
 
-            foreach ($parents as $level => $parent) {
+            foreach ($parents as $level => $parent)
+            {
+                $parent = $parent->fresh(['grade']);
 
                 if ($parent->is_valid === 'n'){
                     Log::channel('bonus')->warning('This parent is not valid', ['mining_id' => $mining->id, 'member_id' => $parent->member_id, 'level' => $level]);
@@ -133,6 +135,8 @@ class BonusService
         $parents = $member->getParentTree(21);
 
         foreach ($parents as $level => $parent) {
+
+            $parent = $parent->fresh(['grade']);
 
             if ($parent->is_valid === 'n') continue;
 
@@ -322,6 +326,8 @@ class BonusService
 
             foreach ($parents as $level => $parent) {
 
+                $parent = $parent->fresh(['grade']);
+
                 if ($parent->is_valid === 'n') continue;
 
                 if (!$parent->getHasMining()) continue;
@@ -437,6 +443,8 @@ class BonusService
         $product_id = $mining->product_id;
 
         foreach ($parents as $level => $parent) {
+
+            $parent = $parent->fresh(['grade']);
 
             if ($parent->is_valid === 'n') continue;
 
