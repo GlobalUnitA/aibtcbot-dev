@@ -50,6 +50,7 @@ class RegisterController extends Controller
 
         $validated = $this->validator($request->all())->validate();
 
+        /* 이메일 인증 무효
         if (session('verification_code') != $request->code) {
             return response()->json([
                 'status' => 'error',
@@ -58,7 +59,7 @@ class RegisterController extends Controller
         }
 
         session(['email_verified' => true]);
-
+        */
         try {
 
             $user = $this->create($validated);
@@ -178,7 +179,7 @@ class RegisterController extends Controller
             'account' => ['required', 'string', 'min:4', 'max:20', 'regex:/^[a-zA-Z0-9_-]+$/', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'max:16', 'regex:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).+$/', 'confirmed'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'code' => ['required', 'string'],
+          //  'code' => ['required', 'string'], 이메일 인증 무효
             'phone' => ['required', 'string', 'min:9', 'max:12', 'regex:/^[\d+]+$/'],
             'referrerId' => ['required', 'string'],
             'metaUid' => ['nullable', 'string', 'max:50', 'regex:/^[a-zA-Z0-9]+$/'],

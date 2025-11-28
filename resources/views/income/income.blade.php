@@ -20,6 +20,7 @@
                 </div>
                 <h3 class="text-primary fs-6 mb-1">{{ $data['referral_bonus'] }}</h3>
             </div>
+            {{--
             <div class="mb-4">
                 <div>
                     <p class="text-body fs-4 m-0">{{ __('asset.total_referral_bonus_matching') }}</p>
@@ -32,6 +33,7 @@
                     <h3 class="text-primary fs-6 mb-1">{{ $data['rank_bonus'] }}</h3>
                 </div>
             </div>
+            --}}
             {{--
             <div class="mb-4">
                 <div>
@@ -55,7 +57,7 @@
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-start">
                     <p class="text-body fs-4 m-0">{{ __('asset.total_external_withdrawal') }}</p>
-                    <a href="{{ route('income.withdrawal') }}" class="btn btn-primary fs-4 py-1 px-3">{{ __('asset.withdrawal') }}</a>
+                    {{-- <a href="{{ route('income.withdrawal') }}" class="btn btn-primary fs-4 py-1 px-3">{{ __('asset.withdrawal') }}</a> 외부 출금 제한--}}
                 </div>
                 <h3 class="text-primary fs-6 mb-1">{{ $data['withdrawal_total'] }}</h3>
             </div>
