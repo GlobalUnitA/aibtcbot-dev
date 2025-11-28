@@ -68,6 +68,8 @@ class ChartService
             $info .= "Unknown <br>";
         }
 
+        $info .= "<br>".$member->grade->name;
+
         if ($member->referrer) {
             if ($member->referrer->user) {
                 $info .= "<br> 추천인 : U{$member->referrer->user->id}";
