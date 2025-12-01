@@ -33,10 +33,6 @@
                                         <option value="mid" @if(request()->category == 'mid') selected @endif>MID 조회</option>
                                         <option value="account" @if(request()->category == 'account') selected @endif>아이디 조회</option>
                                         <option value="name" @if(request()->category == 'name') selected @endif>이름 조회</option>
-                                        <option value="phone" @if(request()->category == 'phone') selected @endif>연락처 조회</option>
-                                        <option value="amount" @if(request()->category == 'amount') selected @endif>수량 조회</option>
-                                        <option value="fee" @if(request()->category == 'fee') selected @endif>수수료 조회</option>
-                                        <option value="tax" @if(request()->category == 'tax') selected @endif>세금 조회</option>
                                     </select>
                                 </div>
                                 <div class="col-12 col-md-2 mb-2">

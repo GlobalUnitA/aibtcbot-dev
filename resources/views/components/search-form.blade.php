@@ -15,7 +15,6 @@
                         <option value="mid" @if(request()->category == 'mid') selected @endif>MID 조회</option>
                         <option value="account" @if(request()->category == 'account') selected @endif>아이디 조회</option>
                         <option value="name" @if(request()->category == 'name') selected @endif>이름 조회</option>
-                        <option value="phone" @if(request()->category == 'phone') selected @endif>연락처 조회</option>
                     </select>
                 </div>
                 <!-- 텍스트 검색 -->

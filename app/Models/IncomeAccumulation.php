@@ -15,12 +15,12 @@ class IncomeAccumulation extends Authenticatable
 
     public function income()
     {
-        return $this->belongsTo(Income::class);
+        return $this->belongsTo(Income::class,'income_id', 'id');
     }
 
-    public function miningPolicy()
+    public function product()
     {
-        return $this->belongsTo(MiningPolicy::class);
+        return $this->belongsTo(MiningProduct::class, 'product_id', 'id');
     }
 
 }

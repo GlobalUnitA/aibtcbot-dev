@@ -14,14 +14,11 @@ class IncomeReferralBonusExport extends BaseIncomeExport
             ->leftJoin('coins', 'incomes.coin_id', '=', 'coins.id')
             ->leftJoin('members', 'income_transfers.member_id', '=', 'members.id')
             ->leftJoin('users', 'members.user_id', '=', 'users.id')
-            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
-
 
             ->leftJoin('avatars', 'members.avatar_id', '=', 'avatars.id')
 
             ->leftJoin('member_grades', 'members.grade_id', '=', 'member_grades.id')
             ->leftJoin('referral_bonuses', 'income_transfers.id', '=', 'referral_bonuses.transfer_id')
-
 
             ->leftJoin('members as referrer', 'referral_bonuses.referrer_id', '=', 'referrer.id')
 
@@ -32,10 +29,8 @@ class IncomeReferralBonusExport extends BaseIncomeExport
                 'users.name',
                 'avatars.name as avatar_name',
 
-
                 'members.user_id as member_user_id',
                 'members.avatar_id as member_avatar_id',
-
 
                 'referrer.user_id as referrer_user_id',
                 'referrer.avatar_id as referrer_avatar_id',
@@ -60,20 +55,20 @@ class IncomeReferralBonusExport extends BaseIncomeExport
         return ['번호', 'UID', '이름', '등급', '종류', '보너스', '상태', '산하ID', '참여금액', '일자'];
     }
 
-    private function buildUid($userId, $avatarId)
+    private function buildUid($user_id, $avatar_id)
     {
-        if (!empty($userId)) {
-            return 'U' . $userId;
+        if (!empty($user_id)) {
+            return 'U' . $user_id;
         }
-        if (!empty($avatarId)) {
-            return 'A' . $avatarId;
+        if (!empty($avatar_id)) {
+            return 'A' . $avatar_id;
         }
         return '';
     }
 
-    private function buildName($userName, $avatarName, $userId)
+    private function buildName($user_name, $avatar_name, $user_id)
     {
-        return !empty($userId) ? $userName : $avatarName;
+        return !empty($user_id) ? $user_name : $avatar_name;
     }
 
     protected function formatExportRows($results)
@@ -84,13 +79,8 @@ class IncomeReferralBonusExport extends BaseIncomeExport
 
         foreach ($results as $item) {
 
-            // UID
             $uid = $this->buildUid($item->member_user_id, $item->member_avatar_id);
-
-            // 이름
             $name = $this->buildName($item->name, $item->avatar_name, $item->member_user_id);
-
-            // 추천인 UID
             $referrerUid = $this->buildUid($item->referrer_user_id, $item->referrer_avatar_id);
 
             $rows[] = [
