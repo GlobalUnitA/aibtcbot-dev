@@ -5574,32 +5574,14 @@ textarea.form-control-lg {
   }
 }
 
-/* .card.maincard:has(.nav-asset.active) {
+.card.maincard:has(.nav-asset.active) {
   background: linear-gradient(to right, #ffb081, #FF7E00);
 }
 
 .card.maincard:has(.nav-wallet.active) {
   background: linear-gradient(to right, #FAB4B1, #D2574F);
-} */
-
-
-.card.maincard:has(.nav-asset.active) {
-  /* background: linear-gradient(to top, #94F2FE 0%, #FFAB37 60%); */
-  background-image: url(/images/01holding_assets.png);
-  background-size: cover;
 }
 
-.card.maincard:has(.nav-wallet.active) {
-  /* background: linear-gradient(to top, #83A6FF 0%, #FF8109 60%); */
-  background-image: url(/images/02profitwallet.png);
-  background-size: cover;
-}
-
-.card.maincard:has(.nav-avatar.active) {
-  /* background: linear-gradient(to top, #A798FF 0%, #F45D76 60%); */
-  background-image: url(/images/03avatar.png);
-  background-size: cover;
-}
 
 .accordion {
   --bs-accordion-color: var(--bs-body-color);
