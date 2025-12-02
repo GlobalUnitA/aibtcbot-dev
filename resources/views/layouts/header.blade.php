@@ -54,21 +54,21 @@
                     <div class="collapse" id="language-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-4 ms-4">
                             @foreach ($locales as $locale)
-                                <li><li><a href="{{ route('change.language' ,['locale' => $locale['code']]) }}" class="link-gray d-inline-flex py-2 text-decoration-none fs-4">{{ $locale['name'] }}</a></li></li>
+                                <li><a href="{{ route('change.language' ,['locale' => $locale['code']]) }}" class="link-gray d-inline-flex py-2 text-decoration-none fs-4">{{ $locale['name'] }}</a></li>
                             @endforeach
                         </ul>
                     </div>
                 </li>
+                <a class="nav-link text-inverse fs-5 pb-0" href="{{ route('chart.aff') }}">
+                    <li class="nav-item d-flex justify-content-between align-items-center border-bottom py-3">
+                        <div class="ms-3">{{ __('layout.downline_tree') }}</div>
+                        <i class="ti ti-chevron-right"></i>
+                    </li>
+                </a>
                 {{--
                 <a class="nav-link text-inverse fs-5 pb-0" href="{{ route('chart.ref') }}">
                    <li class="nav-item d-flex justify-content-between align-items-center border-bottom py-3">
                        <div class="ms-3">{{ __('layout.direct_referral_tree') }}</div>
-                       <i class="ti ti-chevron-right"></i>
-                   </li>
-               </a>
-               <a class="nav-link text-inverse fs-5 pb-0" href="{{ route('chart.aff') }}">
-                   <li class="nav-item d-flex justify-content-between align-items-center border-bottom py-3">
-                       <div class="ms-3">{{ __('layout.downline_tree') }}</div>
                        <i class="ti ti-chevron-right"></i>
                    </li>
                </a>
