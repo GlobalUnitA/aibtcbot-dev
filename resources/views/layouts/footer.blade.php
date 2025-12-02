@@ -17,13 +17,13 @@
             @else
             <div class="col px-1 ">
                 <span style="cursor:not-allowed">
-                    <img src="{{ asset('/images/icon/nav_menu_register.svg') }}" class="pb-1 m-register" style="filter: brightness(200%) saturate(40%) opacity(60%);">
+                    <img src="{{ asset('/images/icon/nav_menu_register.svg') }}" class="pb-1 m-register" >
                     <div class="fs-3 text-decoration-none text-dark text-opacity-30">{{ __('auth.join') }}</div>
                 </span>
             </div>
             <div class="col px-1">
                 <span style="cursor:not-allowed">
-                    <img src="{{ asset('/images/icon/nav_menu_link.svg') }}" class="pb-1 m-link" style="filter: brightness(200%) saturate(40%) opacity(60%);">
+                    <img src="{{ asset('/images/icon/nav_menu_link.svg') }}" class="pb-1 m-link" >
                     <div class="fs-3 text-decoration-none text-dark text-opacity-30">{{ __('layout.referral_link') }}</div>
                 </span>
             </div>
