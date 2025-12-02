@@ -17502,6 +17502,7 @@ footer.footerContainer a img{
 }
 footer.footerContainer span img{
   width: 30px;
+  filter: brightness(130%) saturate(10%) opacity(40%);
 }
 
 
