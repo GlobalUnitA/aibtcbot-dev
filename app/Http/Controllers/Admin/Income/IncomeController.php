@@ -33,9 +33,14 @@ class IncomeController extends Controller
         })
         ->when($request->filled('category') && $request->filled('keyword'), function ($query) use ($request) {
             switch ($request->category) {
-                case 'mid':
+                case 'uid':
                     $query->whereHas('member.user', function ($query) use ($request) {
                         $query->where('users.id', 'LIKE', '%' . $request->keyword . '%');
+                    });
+                    break;
+                case 'aid':
+                    $query->whereHas('member.avatar', function ($query) use ($request) {
+                        $query->where('avatars.id', 'LIKE', '%' . $request->keyword . '%');
                     });
                     break;
                 case 'account':

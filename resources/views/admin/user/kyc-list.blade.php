@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                @include('components.search-form', ['route' => route('admin.user.list')])
+                @include('components.search-form', ['route' => route('admin.user.kyc.list')])
                 <div class="card">
                     <div class="card-body">
                         <div class="mb-3 d-flex justify-content-between">
@@ -45,7 +45,7 @@
                                     @endforeach
                                     @else
                                     <tr>
-                                        <td class="text-center" colspan="7">No Data.</td>
+                                        <td class="text-center" colspan="9">No Data.</td>
                                     </tr>
                                     @endif
                                 </tbody>

@@ -16,28 +16,28 @@ class MiningController extends Controller
 
     public function list(Request $request)
     {
-        $list = Mining::with(['member.user', 'member.user.profile'])
+        $list = Mining::with(['member.user', 'member.avatar'])
 
         ->when($request->filled('category') && $request->filled('keyword'), function ($query) use ($request) {
             switch ($request->category) {
-                case 'mid':
-                    $query->whereHas('user', function ($query) use ($request) {
-                        $query->where('users.id', $request->keyword);
+                case 'uid':
+                    $query->whereHas('member.user', function ($query) use ($request) {
+                        $query->where('users.id', 'LIKE', '%' . $request->keyword . '%');
+                    });
+                    break;
+                case 'aid':
+                    $query->whereHas('member.avatar', function ($query) use ($request) {
+                        $query->where('avatars.id', 'LIKE', '%' . $request->keyword . '%');
                     });
                     break;
                 case 'account':
-                    $query->whereHas('user', function ($query) use ($request) {
-                        $query->where('users.account', $request->keyword);
+                    $query->whereHas('member.user', function ($query) use ($request) {
+                        $query->where('users.account', 'LIKE', '%' . $request->keyword . '%');
                     });
                     break;
                 case 'name':
-                    $query->whereHas('user', function ($query) use ($request) {
-                        $query->where('users.name', $request->keyword);
-                    });
-                    break;
-                case 'phone':
-                    $query->whereHas('userProfile', function ($query) use ($request) {
-                        $query->where('user_profiles.phone', $request->keyword);
+                    $query->whereHas('member.user', function ($query) use ($request) {
+                        $query->where('users.name', 'LIKE', '%' . $request->keyword . '%');
                     });
                     break;
             }

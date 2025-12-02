@@ -33,7 +33,6 @@
                                 @endif
                             @endforeach
                             <div class="row align-items-center">
-                                @if(request()->type!='manual_deposit')
                                 @if(request()->type=='deposit')
                                 <div class="col-12 col-md-2 mb-2">
                                     <label for="search" class="sr-only">Status</label>
@@ -56,33 +55,17 @@
                                         <option value="canceled" @if(request()->status == 'canceled') selected @endif>출금취소</option>
                                     </select>
                                 </div>
-                                @else
                                 @endif
                                 <div class="col-12 col-md-2 mb-2">
                                     <label for="search" class="sr-only">Category</label>
                                     <select name="category" id="category" class="form-control" >
                                         <option value="">카테고리 선택</option>
-                                        <option value="mid" @if(request()->category == 'mid') selected @endif>MID 조회</option>
-                                        <option value="account" @if(request()->category == 'account') selected @endif>아이디 조회</option>
-                                        <option value="name" @if(request()->category == 'name') selected @endif>이름 조회</option>
-                                        <option value="phone" @if(request()->category == 'phone') selected @endif>연락처 조회</option>
-                                        <option value="amount" @if(request()->category == 'amount') selected @endif>수량 조회</option>
-                                        <option value="fee" @if(request()->category == 'fee') selected @endif>수수료 조회</option>
-                                        <option value="tax" @if(request()->category == 'tax') selected @endif>세금 조회</option>
+                                        <option value="uid" @if(request()->category == 'uid') selected @endif>사용자 ID 조회</option>
+                                        <option value="aid" @if(request()->category == 'aid') selected @endif>아바타 ID 조회</option>
+                                        <option value="account" @if(request()->category == 'account') selected @endif>사용자 계정 조회</option>
+                                        <option value="name" @if(request()->category == 'name') selected @endif>사용자 이름 조회</option>
                                     </select>
                                 </div>
-                                @else
-                                <div class="col-12 col-md-2 mb-2">
-                                    <label for="search" class="sr-only">Category</label>
-                                    <select name="category" id="category" class="form-control" >
-                                        <option value="">카테고리 선택</option>
-                                        <option value="mid" @if(request()->category == 'mid') selected @endif>MID 조회</option>
-                                        <option value="account" @if(request()->category == 'account') selected @endif>아이디 조회</option>
-                                        <option value="name" @if(request()->category == 'name') selected @endif>이름 조회</option>
-                                        <option value="phone" @if(request()->category == 'phone') selected @endif>연락처 조회</option>
-                                    </select>
-                                </div>
-                                @endif
                                 <div class="col-12 col-md-2 mb-2">
                                     <label for="search" class="sr-only">Keyword</label>
                                     <input type="text" name="keyword" id="keyword" class="form-control" value="{{ request()->get('keyword') }}">

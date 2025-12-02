@@ -26,17 +26,20 @@ class UserController extends Controller
         ->join('user_profiles', 'users.id', '=', 'user_profiles.user_id')
         ->join('members', 'users.id', '=', 'members.user_id')
         ->join('member_grades', 'members.grade_id', '=', 'member_grades.id')
+        ->leftJoin('avatars', 'members.avatar_id', '=', 'avatars.id')
         ->leftJoin('members as referrer', 'members.referrer_id', '=', 'referrer.id')
         ->select('user_profiles.*', 'users.name', 'users.account', 'member_grades.name as grade_name', 'referrer.user_id as referrer_user_id', 'referrer.avatar_id as referrer_avatar_id')
-        ->when(request('keyword') != '', function ($query) {
-            if(request('category') == 'mid'){
-                $query->where('users.id', request('keyword'));
-            } else if (request('category') == 'account') {
-                $query->where('users.account', request('keyword'));
-            } else if (request('category') == 'name') {
-                $query->where('users.name', request('keyword'));
-            } else {
-                $query->where('user_profiles.phone', request('keyword'));
+        ->when($request->filled('category') && $request->filled('keyword'), function ($query) use ($request) {
+            switch ($request->category) {
+                case 'account':
+                    $query->where('users.account', 'LIKE', '%' . $request->keyword . '%');
+                    break;
+                case 'name':
+                    $query->where('users.name', 'LIKE', '%' . $request->keyword . '%');
+                    break;
+                default:
+                    $query->where('users.id', 'LIKE', '%' . $request->keyword . '%');
+                    break;
             }
         })
         ->when(request('start_date'), function ($query) {
