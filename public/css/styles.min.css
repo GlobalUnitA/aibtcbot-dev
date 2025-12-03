@@ -17048,11 +17048,11 @@ textarea.form-control-lg {
   display: block;
 }
 
-#language-collapse ul li:first-child{
+/* #language-collapse ul li:first-child{
   font-weight: 500;
   pointer-events: none;
   cursor: default;
-}
+} */
 
 .app-header {
   position: relative;
