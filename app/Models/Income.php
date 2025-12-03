@@ -17,11 +17,11 @@ class Income extends Model
     protected $fillable = [
         'member_id',
         'coin_id',
-        'amount',
+        'balance',
     ];
 
     protected $casts = [
-        'amount' => 'decimal:9',
+        'balance' => 'decimal:9',
     ];
 
      protected $appends = [
