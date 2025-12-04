@@ -92,4 +92,6 @@ return array (
   'total_rank_bonus' => 'Tổng thưởng cấp bậc',
   'referral_bonus_matching' => 'Thưởng giới thiệu tương ứng',
   'total_referral_bonus_matching' => 'Tổng thưởng matching giới thiệu',
+  'withdrawable_amount' => 'Số tiền có thể thực rút',
+  'max_withdrawable_amount_guide' => 'Bạn đã vượt quá số tiền rút tối đa.',
 );

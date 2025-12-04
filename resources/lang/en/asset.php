@@ -92,4 +92,6 @@ return array (
   'total_rank_bonus' => 'Total Ranking Bonus',
   'referral_bonus_matching' => 'Referral Bonus Matching',
   'total_referral_bonus_matching' => 'Total Referral Bonus Matching',
+  'withdrawable_amount' => 'Actual Withdrawable Amount',
+  'max_withdrawable_amount_guide' => 'You have exceeded the maximum withdrawal amount.',
 );

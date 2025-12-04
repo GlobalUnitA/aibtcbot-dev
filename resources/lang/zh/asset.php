@@ -92,4 +92,6 @@ return array (
   'total_rank_bonus' => '等级奖金合计',
   'referral_bonus_matching' => '推荐间接奖励',
   'total_referral_bonus_matching' => '推荐间接奖励合计',
+  'withdrawable_amount' => '实际可提金额',
+  'max_withdrawable_amount_guide' => '已超出最大可提金额。',
 );

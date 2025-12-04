@@ -92,4 +92,6 @@ return array (
   'total_rank_bonus' => '승급 보너스 합계',
   'referral_bonus_matching' => '추천 보너스 매칭',
   'total_referral_bonus_matching' => '추천 보너스 매칭 합계',
+  'withdrawable_amount' => '실출금가능액',
+  'max_withdrawable_amount_guide' => '최대 출금 가능 금액을 초과하였습니다.',
 );

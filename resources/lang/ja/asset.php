@@ -92,4 +92,6 @@ return array (
   'total_rank_bonus' => 'ランクボーナス合計',
   'referral_bonus_matching' => '推薦ボーナスマッチング',
   'total_referral_bonus_matching' => '推薦ボーナスマッチング合計',
+  'withdrawable_amount' => '実際の出金可能額',
+  'max_withdrawable_amount_guide' => '最大出金可能額を超えました。',
 );
