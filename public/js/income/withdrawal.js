@@ -4,8 +4,12 @@ $(document).ready(function() {
         calculateFinalAmount();
 
         $('#stock').html($(this).data('balance'));
+        $('#withdrawable_amount').html($(this).data('withdrawable'));
         $('#stock-label').removeClass('d-none');
+        $('#withdrawable-label').removeClass('d-none');
         $('#stock-label').addClass('d-block');
+        $('#withdrawable-label').addClass('d-block');
+
     });
 
     $("input[name='amount']").on('input', function () {
@@ -17,6 +21,7 @@ $(document).ready(function() {
 
         const income = $("input[name='income']:checked").val();
         const amount = $("input[name='amount']").val().trim();
+        const withdrawable_amount = parseInt($("#withdrawable_amount").html());
 
         if (!income) {
             alertModal($('#msg_withdrawal_asset').data('label'));
@@ -25,6 +30,11 @@ $(document).ready(function() {
 
         if (!amount) {
             alertModal($('#msg_withdrawal_amount').data('label'));
+            return;
+        }
+
+        if (amount > withdrawable_amount) {
+            alertModal($('#msg_max_withdrawable_amount').data('label'));
             return;
         }
 
