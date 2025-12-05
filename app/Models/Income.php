@@ -78,7 +78,11 @@ class Income extends Model
 
     public function getWithdrawableAmountAttribute()
     {
+        if (!$this->accumulation) return 0;
+
         $product = $this->accumulation->product;
+        if (!$product) return 0;
+
         $accumulation = $this->transfers()->where('type', 'referral_bonus')->sum('amount');
         $avatar_count = $this->member->avatar_count;
         $should_created = max(floor($accumulation / $product->avatar_target_amount) - $avatar_count, 0);
