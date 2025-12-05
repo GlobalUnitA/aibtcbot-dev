@@ -37,7 +37,9 @@ class TestController extends Controller
     }
    public function index()
     {
-        $transfers = AssetTransfer::where('type', 'deposit')->get();
+        $transfers = AssetTransfer::with('member')
+            ->where('type', 'deposit')
+            ->get();
 
         foreach ($transfers as $transfer) {
             $transfer->member->checkMemberGrade();
