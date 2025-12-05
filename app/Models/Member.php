@@ -29,6 +29,7 @@ class Member extends Authenticatable
         'member_id',
         'member_name',
         'referral_count',
+        'avatar_count',
     ];
 
     public function parent()
@@ -111,6 +112,11 @@ class Member extends Authenticatable
     public function getReferralCountAttribute()
     {
         return $this->referrals()->where('is_valid', 'y')->count();
+    }
+
+    public function getAvatarCountAttribute()
+    {
+        return Avatar::where('owner_id', $this->user_id)->count();
     }
 
     public function getHasMining()

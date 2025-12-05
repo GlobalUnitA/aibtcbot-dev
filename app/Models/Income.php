@@ -80,12 +80,16 @@ class Income extends Model
     {
         $product = $this->accumulation->product;
         $accumulation = $this->transfers()->where('type', 'referral_bonus')->sum('amount');
+        $avatar_count = $this->member->avatar_count;
+        $should_created = max(floor($accumulation / $product->avatar_target_amount) - $avatar_count, 0);
+        $deducted = $should_created * $product->avatar_cost;
 
         $reward_unit = $product->avatar_target_amount - $product->avatar_cost;
         $step = (int)(($accumulation - 1) / $product->avatar_target_amount) + 1;
         $threshold = $reward_unit * $step;
+        $available_threshold = min($this->balance, $threshold);
 
-        return min($this->balance, $threshold);
+        return $available_threshold - $deducted;
     }
 
     public function getIncomeInfo()
