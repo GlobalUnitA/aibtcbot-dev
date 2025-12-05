@@ -38,7 +38,7 @@ class TestController extends Controller
     }
    public function index($id)
     {
-         $member = Member::find($id);
+         $member = Member::where('user_id', $id)->first();
          $member->checkMemberGrade();
     }
 }
