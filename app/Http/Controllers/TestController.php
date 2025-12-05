@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coin;
+use App\Models\Member;
 use App\Models\Mining;
 use App\Models\MiningReward;
 use App\Models\MiningPolicy;
@@ -35,14 +36,9 @@ class TestController extends Controller
     {
         $this->kakaoApi = new KakaoApi();
     }
-   public function index()
+   public function index($id)
     {
-        $transfers = AssetTransfer::with('member')
-            ->where('type', 'deposit')
-            ->get();
-
-        foreach ($transfers as $transfer) {
-            $transfer->member->checkMemberGrade();
-        }
+         $member = Member::find($id);
+         $member->checkMemberGrade();
     }
 }
