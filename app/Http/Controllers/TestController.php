@@ -40,5 +40,6 @@ class TestController extends Controller
     {
          $member = Member::where('user_id', $id)->first();
          $member->checkMemberGrade();
+        dd($member);
     }
 }
