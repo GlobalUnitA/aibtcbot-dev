@@ -35,7 +35,7 @@
                 <label class="form-label fs-4 text-body">{{ __('asset.withdrawal_amount_guide') }}</label>
                 <input type="text" name="amount" class="form-control mb-3"  placeholder="0">
                 <p class="mb-2 opacity-50 fw-light fs-4 d-none" id="stock-label">{{ __('system.stock_amount') }}: <span id="stock" class="fw-bold"></span></p>
-                <p class="mb-5 opacity-50 fw-light fs-4 d-none" id="withdrawable-label">{{ __('asset.withdrawable_amount') }}: <span id="withdrawable_amount" class="fw-bold"></span></p>
+                {{--<p class="mb-5 opacity-50 fw-light fs-4 d-none" id="withdrawable-label">{{ __('asset.withdrawable_amount') }}: <span id="withdrawable_amount" class="fw-bold"></span></p> 출금 제한 해제 --}}
                 <input type="hidden" name="tax">
                 <input type="hidden" name="fee">
                 <div>
