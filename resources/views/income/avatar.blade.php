@@ -15,7 +15,7 @@
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-start">
                     <p class="text-body fs-4 m-0">{{ __('asset.total_external_withdrawal') }}</p>
-                    <a href="{{ route('avatar.swap') }}" class="btn btn-primary fs-4 py-1 px-3">swap</a>
+                    {{--<a href="{{ route('avatar.swap') }}" class="btn btn-primary fs-4 py-1 px-3">swap</a> 아바타 스왑 기능 해제--}}
                 </div>
                 <h3 class="text-primary fs-6 mb-1">0</h3>
             </div>
