@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Exports;
 
 use Illuminate\Support\Facades\DB;
@@ -7,7 +6,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Carbon\Carbon;
 
-class AssetExport implements FromCollection, WithHeadings
+class MiningExport implements FromCollection, WithHeadings
 {
     protected $filters;
 
@@ -19,31 +18,29 @@ class AssetExport implements FromCollection, WithHeadings
     public function collection()
     {
 
-        $query = DB::table('asset_transfers')
-            ->leftJoin('assets', 'asset_transfers.asset_id', '=', 'assets.id')
-            ->leftJoin('coins', 'assets.coin_id', '=', 'coins.id')
-            ->leftJoin('members', 'asset_transfers.member_id', '=', 'members.id')
+        $query = DB::table('minings')
+            ->leftJoin('members', 'minings.member_id', '=', 'members.id')
             ->leftJoin('users', 'members.user_id', '=', 'users.id')
+            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
+            ->leftJoin('member_grades', 'members.grade_id', '=', 'member_grades.id')
+            ->leftJoin('mining_products', 'minings.product_id', '=', 'mining_products.id')
+            ->leftJoin('mining_product_translations', 'mining_products.id', '=', 'mining_product_translations.product_id')
+            ->leftJoin('coins', 'mining_products.coin_id', '=', 'coins.id')
+
+
             ->select(
-                'users.id',
-                'users.name as user_name',
+                'minings.id',
+                'users.id as user_id',
+                'users.name',
                 'coins.name as coin_name',
-                'asset_transfers.amount',
-                'asset_transfers.actual_amount',
-                'asset_transfers.status',
-                'asset_transfers.fee',
-                'asset_transfers.tax',
-                'asset_transfers.txid',
-                'asset_transfers.created_at'
-            );
+                'minings.entry_amount',
+                'mining_product_translations.name as product_name',
+                'minings.status',
+                'minings.created_at',
+            )
+            ->where('mining_product_translations.locale', 'ko')
+            ->orderBy('minings.created_at', 'asc');
 
-        if (!empty($this->filters['type'])) {
-            $query->where('asset_transfers.type', $this->filters['type']);
-        }
-
-        if (!empty($this->filters['status'])) {
-            $query->where('asset_transfers.status', $this->filters['status']);
-        }
 
         if (!empty($this->filters['keyword']) && $this->filters['category'] == 'mid') {
             $query->where('users.id', $this->filters['keyword']);
@@ -52,18 +49,16 @@ class AssetExport implements FromCollection, WithHeadings
         if (!empty($this->filters['keyword']) && $this->filters['category'] == 'account') {
             $query->where('users.account', $this->filters['keyword']);
         }
+
         if (!empty($this->filters['start_date']) && !empty($this->filters['end_date'])) {
             $start = Carbon::parse($this->filters['start_date'])->startOfDay();
             $end = Carbon::parse($this->filters['end_date'])->endOfDay();
-            $query->whereBetween('asset_transfers.created_at', [$start, $end]);
+            $query->whereBetween('minings.created_at', [$start, $end]);
         }
 
         $status_map = [
-            'pending' => '신청',
-            'waiting' => '대기',
+            'pending' => '진행중',
             'completed' => '완료',
-            'canceled' => '취소',
-            'refunded' => '반환',
         ];
 
         return $query->get()->map(function ($item) use ($status_map) {
@@ -72,8 +67,9 @@ class AssetExport implements FromCollection, WithHeadings
         });
     }
 
+
     public function headings(): array
     {
-        return ['UID', '이름', '종류', '수량', '실제수량', '상태', '수수료', '세금', 'USDT주소', '거래일자'];
+        return ['마이닝 번호', 'UID', '이름', '자산종류', '참여수량', '상품이름', '상태', '일자'];
     }
 }

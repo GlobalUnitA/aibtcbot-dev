@@ -12,9 +12,10 @@ class IncomeReferralMatchingExport extends BaseIncomeExport
         $query = DB::table('income_transfers')
             ->leftJoin('incomes', 'income_transfers.income_id', '=', 'incomes.id')
             ->leftJoin('coins', 'incomes.coin_id', '=', 'coins.id')
-            ->leftJoin('users', 'income_transfers.user_id', '=', 'users.id')
-            ->leftJoin('user_profiles', 'income_transfers.user_id', '=', 'user_profiles.user_id')
-            ->leftJoin('member_grades', 'user_profiles.grade_id', '=', 'member_grades.id')
+            ->leftJoin('members', 'incomes.member_id', '=', 'members.id')
+            ->leftJoin('users', 'members.user_id', '=', 'users.id')
+            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
+            ->leftJoin('member_grades', 'members.grade_id', '=', 'member_grades.id')
             ->leftJoin('referral_matchings', 'income_transfers.id', '=', 'referral_matchings.transfer_id')
             ->leftJoin('referral_bonuses', 'referral_matchings.bonus_id', '=', 'referral_bonuses.id')
             ->select(

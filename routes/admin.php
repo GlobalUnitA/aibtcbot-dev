@@ -132,6 +132,7 @@ Route::middleware(['admin.auth', 'otp'])->group(function () {
         Route::prefix('mining')->group(function () {
             Route::get('list', [MiningController::class, 'list'])->name('admin.mining.list');
             Route::get('view/{id}', [MiningController::class, 'view'])->name('admin.mining.view');
+            Route::get('export', [MiningController::class, 'export'])->name('admin.mining.export');
             Route::middleware(['check_admin_level:3'])->group(function () {
                 Route::prefix('product')->group(function () {
                     Route::get('/', [MiningProductController::class, 'index'])->name('admin.mining.product');

@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="mb-3 d-flex justify-content-end">
-                        <!--a href="{{ route('admin.asset.export') }}?{{ http_build_query(request()->query()) }}" class="btn btn-primary">Excel</a-->
+                        <a href="{{ route('admin.mining.export') }}?{{ http_build_query(request()->query()) }}" class="btn btn-primary">Excel</a>
                         </div>
                         <div class="table-responsive">
                             <table class="table text-nowrap align-middle mb-0 table-striped table-hover">

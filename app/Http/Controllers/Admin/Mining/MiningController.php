@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin\Mining;
 
 use App\Models\Mining;
+use App\Exports\MiningExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 
 class MiningController extends Controller
@@ -84,6 +86,13 @@ class MiningController extends Controller
             ->get();
 
         return view('admin.mining.view', compact('view', 'rewards', 'level_bonuses', 'referral_bonuses'));
+    }
+
+    public function export(Request $request)
+    {
+        $current = now()->toDateString();
+
+        return Excel::download(new MiningExport($request->all()), '마이닝 목록 '.$current.'.xlsx');
     }
 
 }

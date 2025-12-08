@@ -12,13 +12,14 @@ class IncomeDepositExport extends BaseIncomeExport
         $query = DB::table('income_transfers')
             ->leftJoin('incomes', 'income_transfers.income_id', '=', 'incomes.id')
             ->leftJoin('coins', 'incomes.coin_id', '=', 'coins.id')
-            ->leftJoin('users', 'income_transfers.user_id', '=', 'users.id')
+            ->leftJoin('members', 'incomes.member_id', '=', 'members.id')
+            ->leftJoin('users', 'members.user_id', '=', 'users.id')
             ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
             ->select(
-                'users.id', 
-                'users.name', 
-                'coins.name as coin_name', 
-                'income_transfers.amount', 
+                'users.id',
+                'users.name',
+                'coins.name as coin_name',
+                'income_transfers.amount',
                 'income_transfers.actual_amount',
                 'income_transfers.status',
                 'income_transfers.fee',
@@ -33,7 +34,7 @@ class IncomeDepositExport extends BaseIncomeExport
 
         return $this->formatExportRows($results);
     }
-    
+
 
     public function headings(): array
     {

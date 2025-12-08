@@ -12,9 +12,10 @@ class IncomeLevelMatchingExport extends BaseIncomeExport
         $query = DB::table('income_transfers')
             ->leftJoin('incomes', 'income_transfers.income_id', '=', 'incomes.id')
             ->leftJoin('coins', 'incomes.coin_id', '=', 'coins.id')
-            ->leftJoin('users', 'income_transfers.user_id', '=', 'users.id')
-            ->leftJoin('user_profiles', 'income_transfers.user_id', '=', 'user_profiles.user_id')
-            ->leftJoin('member_grades', 'user_profiles.grade_id', '=', 'member_grades.id')
+            ->leftJoin('members', 'income_transfers.member_id', '=', 'members.id')
+            ->leftJoin('users', 'members.user_id', '=', 'users.id')
+            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
+            ->leftJoin('member_grades', 'members.grade_id', '=', 'member_grades.id')
             ->leftJoin('level_matchings', 'income_transfers.id', '=', 'level_matchings.transfer_id')
             ->leftJoin('level_bonuses', 'level_matchings.id', '=', 'level_bonuses.transfer_id')
             ->select(

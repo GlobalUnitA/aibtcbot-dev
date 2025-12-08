@@ -12,7 +12,9 @@ class AssetManualDepositExport extends BaseAssetExport
         $query = DB::table('asset_transfers')
             ->leftJoin('assets', 'asset_transfers.asset_id', '=', 'assets.id')
             ->leftJoin('coins', 'assets.coin_id', '=', 'coins.id')
-            ->leftJoin('users', 'asset_transfers.user_id', '=', 'users.id')
+            ->leftJoin('members', 'assets.member_id', '=', 'members.id')
+            ->leftJoin('users', 'members.user_id', '=', 'users.id')
+            ->leftJoin('user_profiles', 'users.id', '=', 'user_profiles.user_id')
             ->select(
                 'users.id',
                 'users.name',

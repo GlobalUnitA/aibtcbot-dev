@@ -14,25 +14,26 @@ class KycExport implements FromCollection, WithHeadings
     {
         $this->filters = $filters;
     }
-  
+
     public function collection()
     {
-        
+
         $query = DB::table('kyc_verifications')
             ->leftJoin('users', 'users.id', '=', 'kyc_verifications.user_id')
             ->leftJoin('user_profiles', 'user_profiles.user_id', '=', 'kyc_verifications.user_id')
+            ->leftJoin('members', 'kyc_verifications.user_id', '=', 'members.user_id')
             ->select(
                 'users.account',
                 'users.id',
                 'users.name',
-                'user_profiles.level',
+                'members.level',
                 'user_profiles.phone',
                 'user_profiles.email',
                 'kyc_verifications.status',
                 'users.created_at',
             );
 
-      
+
         if (!empty($this->filters['keyword']) && $this->filters['category'] == 'mid') {
             $query->where('users.id', $this->filters['keyword']);
         }
@@ -65,7 +66,7 @@ class KycExport implements FromCollection, WithHeadings
         return $query->get();
     }
 
-  
+
     public function headings(): array
     {
         return ['아이디', 'MID', '회원명', '레벨', '연락처', '이메일', '가입일자'];
