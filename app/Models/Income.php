@@ -83,23 +83,21 @@ class Income extends Model
         $product = $this->accumulation->product;
         if (!$product) return 0;
 
-        $accumulation = $this->transfers()->where('type', 'referral_bonus')->sum('amount');
-        $avatar_count = $this->member->avatar_count;
-        $should_created = max(floor($accumulation / $product->avatar_target_amount) - $avatar_count, 0);
-        $deducted = $should_created * $product->avatar_cost;
+        $base = $product->avatar_target_amount - $product->avatar_cost;
+        $accumulated_profit = $this->transfers()->where('type', 'referral_bonus')->sum('amount');
+        $accumulated_withdrawn = $this->transfers()->where('type', 'withdrawal')->sum('amount');
 
-        $reward_unit = $product->avatar_target_amount - $product->avatar_cost;
-        $step = (int)(($accumulation - 1) / $product->avatar_target_amount) + 1;
-        $threshold = $reward_unit * $step;
-        $available_threshold = min($this->balance, $threshold);
+        $int_part = intdiv($accumulated_profit, $product->avatar_target_amount);
+        $mod_part = $accumulated_profit % $product->avatar_target_amount;
 
-        return $available_threshold - $deducted;
+        $min_part = min($base, $mod_part);
+
+        return max(0, ($base * $int_part) + $min_part - $accumulated_withdrawn);
     }
+
 
     public function getIncomeInfo()
     {
-        $user_profile = UserProfile::where('user_id', $this->user_id)->first();
-
         $incomeTransfers = IncomeTransfer::where('income_id', $this->id)->get();
 
         $deposits =  $incomeTransfers->where('type', 'deposit')->where('status', 'completed');
