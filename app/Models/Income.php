@@ -84,8 +84,14 @@ class Income extends Model
         if (!$product) return 0;
 
         $base = $product->avatar_target_amount - $product->avatar_cost;
-        $accumulated_profit = $this->transfers()->where('type', 'referral_bonus')->sum('amount');
-        $accumulated_withdrawn = $this->transfers()->where('type', 'withdrawal')->sum('amount');
+        $accumulated_profit = $this->transfers()
+            ->where('type', 'referral_bonus')
+            ->where('status', 'completed')
+            ->sum('amount');
+        $accumulated_withdrawn = $this->transfers()
+            ->where('type', 'withdrawal')
+            ->where('status', 'completed')
+            ->sum('amount');
 
         $int_part = intdiv($accumulated_profit, $product->avatar_target_amount);
         $mod_part = $accumulated_profit % $product->avatar_target_amount;
