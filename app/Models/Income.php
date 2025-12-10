@@ -124,6 +124,9 @@ class Income extends Model
         $rank_bonus = $incomeTransfers->where('type', 'rank_bonus')->where('status', 'completed');
         $rank_bonus_total = $rank_bonus->sum('amount');
 
+        $avatar_cost = $incomeTransfers->where('type', 'avatar_cost')->where('status', 'completed');
+        $avatar_cost_total = abs($avatar_cost->sum('amount'));
+
         return [
             'encrypted_id' => $this->encrypted_id,
             'coin_name' => $this->coin->name,
@@ -134,6 +137,7 @@ class Income extends Model
             'rank_bonus' => $rank_bonus_total,
             'deposit_total' => $deposit_total,
             'withdrawal_total' => $withdrawal_total,
+            'avatar_cost_total' => $avatar_cost_total,
         ];
     }
 

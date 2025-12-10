@@ -72,19 +72,16 @@ class AssetTransfer extends Model
         switch ($this->type) {
             case 'deposit' :
                 return __('asset.deposit');
-            break;
             case 'withdrawal' :
                 return __('asset.withdrawal');
-            break;
             case 'internal' :
                 return __('asset.internal_transfer');
-            break;
             case 'manual_deposit' :
                 return __('asset.manual_deposit');
-            break;
+            case 'mining' :
+                return __('mining.mining');
             case 'staking_refund' :
                 return __('asset.staking_refund');
-            break;
         }
     }
 

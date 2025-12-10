@@ -70,10 +70,20 @@
                 <h3 class="text-primary fs-6 mb-1">{{ $data['deposit_total'] }}</h3>
             </div>
             --}}
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <p class="text-body fs-4 m-0">{{ __('asset.current_balance') }}</p>
-                    <h3 class="text-primary fs-6 mb-1">{{ $data['balance'] }}</h3>
+            <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-body fs-4 m-0">{{ __('asset.current_balance') }}</p>
+                        <h3 class="text-primary fs-6 mb-1">{{ $data['balance'] }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-body fs-4 m-0">{{ __('asset.total_avatar_cost') }}</p>
+                        <h3 class="text-primary fs-6 mb-1">{{ $data['avatar_cost_total'] }}</h3>
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,19 +95,7 @@
                     <th>{{ __('system.date') }}</th>
                     <th>{{ __('system.amount') }}</th>
                     <th>{{ __('user.child_id') }}</th>
-                    <th>
-                        <select id="incomeTypeSelect" name="type" class="form-select form-select-sm">
-                            <option value="">{{ __('system.category') }}</option>
-                            {{--<option value="deposit" {{ request('type') == 'deposit' ? 'selected' : '' }}>{{ __('asset.internal_transfer') }}</option>--}}
-                            <option value="withdrawal" {{ request('type') == 'withdrawal' ? 'selected' : '' }}>{{ __('asset.external_withdrawal') }}</option>
-                            <option value="mining_profit" {{ request('type') == 'mining_profit' ? 'selected' : '' }}>{{ __('mining.mining_profit') }}</option>
-                            <option value="rank_bonus" {{ request('type') == 'rank_bonus' ? 'selected' : '' }}>{{ __('asset.rank_bonus') }}</option>
-                            <option value="referral_bonus" {{ request('type') == 'referral_bonus' ? 'selected' : '' }}>{{ __('asset.referral_bonus') }}</option>
-                            <option value="referral_matching" {{ request('type') == 'referral_matching' ? 'selected' : '' }}>{{ __('asset.referral_bonus_matching') }}</option>
-                            <option value="level_bonus" {{ request('type') == 'level_bonus' ? 'selected' : '' }}>{{ __('mining.mining_level_bonus') }}</option>
-                            <option value="level_matching" {{ request('type') == 'level_matching' ? 'selected' : '' }}>{{ __('mining.mining_matching_bonus') }}</option>
-                        </select>
-                    </th>
+                    <th>{{ __('system.category') }}</th>
                 </tr>
             </thead>
             <tbody id="loadMoreContainer">
