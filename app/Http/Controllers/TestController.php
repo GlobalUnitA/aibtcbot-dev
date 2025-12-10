@@ -73,6 +73,9 @@ class TestController extends Controller
         $withdrawable_amount = max(0, ($base * $int_part) + $min_part - $accumulated_withdrawn);
         dump('withdrawable_amount : ', $withdrawable_amount);
 
-        dd(min($withdrawable_amount, $income->balance));
+        dump('result : ',min($withdrawable_amount, $income->balance));
+
+
+        dump('income->withdrawable_amount', $income->withdrawable_amount);
     }
 }
