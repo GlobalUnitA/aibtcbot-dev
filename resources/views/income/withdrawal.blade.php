@@ -20,7 +20,7 @@
                 <div class="d-grid d-grid-col-2 mb-3">
                 @foreach ($incomes as $income)
                     <div class="selectedAsset">
-                        <input type="radio" class="btn-check" name="income" value="{{ $income->encrypted_id }}" id="{{ $income->coin->code }}" autocomplete="off" data-balance="{{ $income->balance }}" data-withdrawable="{{ $income->withdrawable_amount }}">
+                        <input type="radio" class="btn-check" name="income" value="{{ $income->encrypted_id }}" id="{{ $income->coin->code }}" autocomplete="off" data-balance="{{ $income->balance }}" data-withdrawable="{{  $income->calculateWithdrawableAmount() }}">
                         <label class="btn btn-light w-100 p-4 rounded text-center fs-5 d-flex flex-column align-items-center" for="{{ $income->coin->code }}">
                             <img src="{{ $income->coin->image_urls[0] }}" width="40" alt="{{ $income->coin->code }}" class="img-fluid mb-2">
                             {{ $income->coin->name }}

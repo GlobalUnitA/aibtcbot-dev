@@ -22,14 +22,12 @@ class Income extends Model
 
     protected $casts = [
         'balance' => 'decimal:9',
-        'withdrawable_amount' => 'decimal:9',
     ];
 
      protected $appends = [
         'encrypted_id',
         'fee_rate',
         'tax_rate',
-        'withdrawable_amount',
     ];
 
     public function member()
@@ -77,14 +75,14 @@ class Income extends Model
         return $policy->tax_rate;
     }
 
-    public function getWithdrawableAmountAttribute()
+    public function calculateWithdrawableAmount()
     {
         if (!$this->accumulation) return 0;
 
         $product = $this->accumulation->product;
         if (!$product) return 0;
 
-        $base = $product->avatar_target_amount - $product->avatar_cost;
+        $base = floatval($product->avatar_target_amount - $product->avatar_cost);
         $accumulated_profit = $this->transfers()
             ->where('type', 'referral_bonus')
             ->where('status', 'completed')
