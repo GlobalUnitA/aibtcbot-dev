@@ -98,8 +98,9 @@ class Income extends Model
         $mod_part = $accumulated_profit % $product->avatar_target_amount;
 
         $min_part = min($base, $mod_part);
+        $withdrawable_amount = max(0, ($base * $int_part) + $min_part - $accumulated_withdrawn);
 
-        return max(0, ($base * $int_part) + $min_part - $accumulated_withdrawn);
+        return min($withdrawable_amount, $this->balance);
     }
 
 
