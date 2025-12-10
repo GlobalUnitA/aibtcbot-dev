@@ -22,6 +22,7 @@ class Income extends Model
 
     protected $casts = [
         'balance' => 'decimal:9',
+        'withdrawable_amount' => 'decimal:9',
     ];
 
      protected $appends = [
