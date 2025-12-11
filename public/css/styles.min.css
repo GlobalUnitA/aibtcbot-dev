@@ -17613,46 +17613,46 @@ input.style-no:-webkit-autofill:active {
 .card .maincard{
   border-radius: 0 12px 12px 12px;
 }
-.card-body nav{
+.card-body.maincard nav{
   position: absolute;
   top: -35px;
   left: 0;
 }
-.card-body nav .nav{
+.card-body.maincard nav .nav{
   text-align: left !important;
   gap: 0 4px;
 }
 
-.card-body nav .nav button{
+.card-body.maincard nav .nav button{
   border-radius: 10px 10px 0 0;
 }
 
-.card-body nav .nav button > h5{
+.card-body.maincard nav .nav button > h5{
   margin: 0 !important;
 }
 
-.card-body nav .nav button.nav-asset{
+.card-body.maincard nav .nav button.nav-asset{
   background-color: #ffab37;
 }
-.card-body nav .nav button.nav-wallet{
+.card-body.maincard nav .nav button.nav-wallet{
   background-color: #ff8109;
 }
-.card-body nav .nav button.nav-avatar{
+.card-body.maincard nav .nav button.nav-avatar{
   background-color: #f45076;
 }
-.card-body .tab-content > div > div > div{
+.card-body.maincard .tab-content > div > div > div{
   flex-direction: column;
   padding-top: 0 !important;
   align-items: end !important;
 }
 
-.card-body .tab-content > div > div > div > h6{
+.card-body.maincard .tab-content > div > div > div > h6{
   width: 100%; text-align: left;
 }
-.card-body .tab-content > div > div > div > h4{
+.card-body.maincard .tab-content > div > div > div > h4{
   width: 100%; padding-bottom: 15px;
 }
-.card-body .tab-content > div > div > div > a span.btn{
+.card-body.maincard .tab-content > div > div > div > a span.btn{
   background-color: #fff;
   color: #000;
 }
@@ -17685,14 +17685,14 @@ footer.footerContainer{
   background-color: rgb(247, 147, 26, 0.2);
   position: absolute;
   left: 50%;
-  top: 0.4rem;
+  top: 0.3rem;
   transform: translate(-50%, 0);
   z-index: 1;
   border-radius: 50%;
 }
 .icon-bg img{
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   z-index: 2;
   position: relative;
 }
