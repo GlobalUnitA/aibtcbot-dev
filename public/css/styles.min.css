@@ -770,7 +770,7 @@ progress {
 .container-lg,
 .container-md,
 .container-sm {
-  --bs-gutter-x: 30px;
+  --bs-gutter-x: 0;
   --bs-gutter-y: 0;
   width: 100%;
   padding-right: calc(var(--bs-gutter-x) * 0.5);
@@ -795,7 +795,7 @@ progress {
 
 @media (min-width: 480px) {
   .homeContainer {
-    padding: 2rem !important;
+    padding: 0 !important;
   }
   .container-fluid{
     padding-left: 2rem;
@@ -3663,7 +3663,7 @@ textarea.form-control-lg {
   content: "";
 }
 
-.divider-w:before {
+/* .divider-w:before {
   position: absolute;
   top: 50%;
   left: 0;
@@ -3672,7 +3672,7 @@ textarea.form-control-lg {
   background: rgba(var(--bs-white-rgb), 0.3);
   transform: translateY(-50%);
   content: "";
-}
+} */
 
 .btn {
   --bs-btn-padding-x: 20px;
@@ -5574,14 +5574,26 @@ textarea.form-control-lg {
   }
 }
 
-.card.maincard:has(.nav-asset.active) {
-  background: linear-gradient(to right, #ffb081, #FF7E00);
+.card > .maincard:has(.nav-asset.active) {
+  /* background: linear-gradient(to right, #ffb081, #FF7E00); */
+  background-image: url(/images/01.holdingassets.png);
+  background-size: cover;
+  background-position: center;
 }
 
-.card.maincard:has(.nav-wallet.active) {
-  background: linear-gradient(to right, #FAB4B1, #D2574F);
+.card > .maincard:has(.nav-wallet.active) {
+  /* background: linear-gradient(to right, #FAB4B1, #D2574F); */
+  background-image: url(/images/02.profitwallet.png);
+  background-size: cover;
+  background-position: center;
 }
 
+.card > .maincard:has(.nav-avatar.active) {
+  /* background: linear-gradient(to right, #FAB4B1, #D2574F); */
+  background-image: url(/images/03.avatar.png);
+  background-size: cover;
+  background-position: center;
+}
 
 .accordion {
   --bs-accordion-color: var(--bs-body-color);
@@ -7353,13 +7365,13 @@ textarea.form-control-lg {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack:end;
+      -ms-flex-pack:end;
+          justify-content:end;
   padding: 0;
-  margin-right: 15%;
-  margin-bottom: 0.5rem;
-  margin-left: 15%;
+  margin-right: 5%;
+  margin-bottom: 1rem;
+  margin-left: 5%;
 }
 .carousel-indicators [data-bs-target] {
   -webkit-box-sizing: content-box;
@@ -7367,8 +7379,9 @@ textarea.form-control-lg {
   -webkit-box-flex: 0;
       -ms-flex: 0 1 auto;
           flex: 0 1 auto;
-  width: 30px;
-  height: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 15px;
   padding: 0;
   margin-right: 3px;
   margin-left: 3px;
@@ -7377,8 +7390,8 @@ textarea.form-control-lg {
   background-color: #fff;
   background-clip: padding-box;
   border: 0;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
+  /* border-top: 10px solid transparent; */
+  /* border-bottom: 10px solid transparent; */
   opacity: 0.5;
   -webkit-transition: opacity 0.6s ease;
   transition: opacity 0.6s ease;
@@ -9206,6 +9219,18 @@ textarea.form-control-lg {
 
 .min-vw-100 {
   min-width: 100vw !important;
+}
+
+.h-50px {
+  height: 50px !important;
+}
+
+.h-100px {
+  height: 100px !important;
+}
+
+.h-150px {
+  height: 150px !important;
 }
 
 .h-25 {
@@ -17480,7 +17505,8 @@ ul {
 
 /*nav menu*/
 footer.footerContainer a img{
-  width: 30px;
+  height: 50px;
+  width: auto;
 }
 footer.footerContainer span img{
   width: 30px;
@@ -17569,3 +17595,145 @@ input.style-no:-webkit-autofill:active {
 }
 
 
+
+/*margin 추가*/
+.mb-50{
+  margin-bottom: 5rem;
+}
+
+.myinfobox{
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 0px 18px rgba(0,0,0,0.2); 
+  background-color:#fff;
+}
+
+
+/*card new design*/
+.card .maincard{
+  border-radius: 0 12px 12px 12px;
+}
+.card-body nav{
+  position: absolute;
+  top: -35px;
+  left: 0;
+}
+.card-body nav .nav{
+  text-align: left !important;
+  gap: 0 4px;
+}
+
+.card-body nav .nav button{
+  border-radius: 10px 10px 0 0;
+}
+
+.card-body nav .nav button > h5{
+  margin: 0 !important;
+}
+
+.card-body nav .nav button.nav-asset{
+  background-color: #ffab37;
+}
+.card-body nav .nav button.nav-wallet{
+  background-color: #ff8109;
+}
+.card-body nav .nav button.nav-avatar{
+  background-color: #f45076;
+}
+.card-body .tab-content > div > div > div{
+  flex-direction: column;
+  padding-top: 0 !important;
+  align-items: end !important;
+}
+
+.card-body .tab-content > div > div > div > h6{
+  width: 100%; text-align: left;
+}
+.card-body .tab-content > div > div > div > h4{
+  width: 100%; padding-bottom: 15px;
+}
+.card-body .tab-content > div > div > div > a span.btn{
+  background-color: #fff;
+  color: #000;
+}
+
+.mid-icon a div p{
+  color: #6579C9;
+}
+
+footer.footerContainer{
+  background-color: #fff;
+}
+
+/*hammenu design 변경*/
+.offcanvas#sidebar{
+  width: 90%;
+}
+.offcanvas#sidebar .offcanvas-body .container-fluid {
+  background-color: #fff;
+  border-bottom:5px solid #eee;
+}
+.icon-bg{
+  position: relative;
+  padding-top: 1rem;
+}
+.icon-bg::after{
+  content: "";
+  display: block;
+  width: 55px;
+  height: 55px;
+  background-color: rgb(247, 147, 26, 0.2);
+  position: absolute;
+  left: 50%;
+  top: 0.4rem;
+  transform: translate(-50%, 0);
+  z-index: 1;
+  border-radius: 50%;
+}
+.icon-bg img{
+  width: 35px;
+  height: 35px;
+  z-index: 2;
+  position: relative;
+}
+.icon-bg div{
+  color:#000;
+}
+
+
+[data-bs-theme=dark] .mid-icon a div img{
+ filter:  brightness(0) invert(1);
+}
+
+[data-bs-theme=dark] .mid-icon a div p{
+  color: #fff !important;
+}
+
+[data-bs-theme=dark] .myinfobox{
+  background-color: #000;
+}
+[data-bs-theme=dark] .myinfobox div p{
+ color: #fff !important;
+}
+
+[data-bs-theme=dark] .myinfobox div div h4{
+  color:#eee !important;
+}
+
+[data-bs-theme=dark] footer.footerContainer{
+  background-color: #000;
+}
+[data-bs-theme=dark] footer.footerContainer a div {
+  color: #fff;
+}
+
+[data-bs-theme=dark] .offcanvas#sidebar .offcanvas-body .container-fluid {
+  background-color: #000;
+}
+[data-bs-theme=dark] .icon-bg div{
+  color:#fff;
+}
+
+[data-bs-theme=dark] .offcanvas#sidebar .offcanvas-body .container-fluid {
+    border-bottom:5px solid #444444;
+}

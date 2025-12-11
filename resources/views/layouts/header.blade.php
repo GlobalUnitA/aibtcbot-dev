@@ -1,49 +1,41 @@
 
 <div class="headerContainer container fixed-top" style="height: 1px; z-index: 1040;">
     <div class="offcanvas offcanvas-start vh-100 position-absolute" id="sidebar" tabindex="-1">
-        <div class="offcanvas-header py-3 bg-dark">
+        <div class="offcanvas-header py-3" style="background-color:rgb(255 126 0);">
             <h1 class="offcanvas-title text-white flex-grow-1 text-center fs-7 my-1"><img src="{{ asset('/images/logos/logo_bit_w.svg') }}" height="26" alt="" class="me-2"></h1>
             <button type="button" class="btn-close flex-grow-0" data-bs-dismiss="offcanvas" style="filter: invert(1);"></button>
         </div>
         <div class="offcanvas-body p-0">
-            <div class="container-fluid px-1 bg-dark">
-                <div class="row text-center py-5 mx-1 text-decoration-none text-light">
+            <div class="container-fluid px-1" style="">
+                <div class="row text-center py-4 mx-1 text-decoration-none text-light">
                     <form method="POST" id="logoutForm" class="col px-1 cursor-pointer" action="{{ route('logout') }}" >
                         @csrf
-                        <div onclick="logout();">
-                            <img src="{{ asset('/images/icon/icon_nav_menu_logout.svg') }}" class="mb-2">
-                            <div class="text-white fs-4">{{ __('auth.logout') }}</div>
+                        <div onclick="logout();" class="icon-bg">
+                            <img src="{{ asset('/images/icon/logout.svg') }}" class="mb-3">
+                            <div class="fs-3">{{ __('auth.logout') }}</div>
                         </div>
                     </form>
-                    <div class="col px-1">
+                    <div class="col px-1 icon-bg">
                         <a class="nav-link text-inverse" href="{{ route('board.list', ['code' =>'notice'])}}">
-                            <img src="{{ asset('/images/icon/icon_nav_menu_notice.svg') }}" class="mb-2">
-                            <div class="text-white fs-4">{{ __('layout.notice') }}</div>
+                            <img src="{{ asset('/images/icon/notice.svg') }}" class="mb-3">
+                            <div class="fs-3">{{ __('layout.notice') }}</div>
                         </a>
                     </div>
-                    <div class="col px-1">
+                    <div class="col px-1 icon-bg">
                         <a class="nav-link text-inverse" href="{{ route('board.list', ['code' =>'qna'])}}">
-                            <img src="{{ asset('/images/icon/icon_nav_menu_cs.svg') }}" class="mb-2">
-                            <div class="text-white fs-4">{{ __('layout.qna') }}</div>
+                            <img src="{{ asset('/images/icon/qna.svg') }}" class="mb-3">
+                            <div class="fs-3">{{ __('layout.qna') }}</div>
                         </a>
                     </div>
-                    <div class="col px-1">
+                    <div class="col px-1 icon-bg">
                         <a class="nav-link text-inverse" href="{{ route('profile') }}">
-                            <img src="{{ asset('/images/icon/icon_nav_menu_user_info.svg') }}" class="mb-2">
-                            <div class="text-white fs-4">{{ __('user.user_info') }}</div>
+                            <img src="{{ asset('/images/icon/myinfo.svg') }}" class="mb-3">
+                            <div class="fs-3">{{ __('user.user_info') }}</div>
                         </a>
                     </div>
                 </div>
             </div>
             <ul class="navbar-nav px-3" style="margin-bottom: 40px;">
-                <li class="border-bottom">
-                    <div class="nav-item d-flex justify-content-between align-items-center fs-5 py-3">
-                        <div class="ms-3 nav-link text-inverse">{{ __('layout.dark_mode') }}</div>
-                        <div class="form-check form-switch">
-                            <button class="btn btn-dark" id="themeBtn">On</button>
-                        </div>
-                    </div>
-                </li>
                 <li class="border-bottom">
                     <a href="#" class="nav-link text-inverse fs-5 pb-0 cursor-pointer" data-bs-toggle="collapse" data-bs-target="#language-collapse" aria-expanded="false">
                         <div class="nav-item d-flex justify-content-between align-items-center py-3">
@@ -103,6 +95,14 @@
                         <i class="ti ti-chevron-right"></i>
                     </li>
                 </a>
+                <li class="border-bottom">
+                    <div class="nav-item d-flex justify-content-between align-items-center fs-5 py-3">
+                        <div class="ms-3 nav-link text-inverse">{{ __('layout.dark_mode') }}</div>
+                        <div class="form-check form-switch">
+                            <button class="btn btn-dark" id="themeBtn">On</button>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

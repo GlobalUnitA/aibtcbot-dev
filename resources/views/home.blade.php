@@ -1,33 +1,35 @@
 @extends('layouts.master')
 
 @section('content')
-<main class="homeContainer container py-5 position-relative home-active">
-    <div class="pb-3 mb-4">
-        <div class="d-flex justify-content-start align-items-center">
-            <p class="mb-2 pe-3 fs-4">
-                {{ __('user.level') }}<span class="fw-semibold d-inline-block ps-2">{{ Auth::user()->member->grade->name }}</span>
-            </p>
-            <p class="mb-2 divider ps-3 position-relative fs-4">
-                UID<span class="fw-semibold d-inline-block ps-2">U{{ Auth::user()->id }}</span>
-            </p>
-            <a href="#">
-                <p type="button" class="mb-2 fs-4 ps-2 copyBtn" data-copy="U{{ Auth::user()->id }}">{{ __('system.copy') }}</p>
-            </a>
-        </div>
-        <div class="d-flex justify-content-between align-items-center w-100">
-            <div>
-                <!-- <h4 class="m-0 fs-6 lh-md pe-1">{{ Auth::user()->name }} <span class="fw-normal lh-base">{{ __('messages.member.member_welcome') }}</span></h4> -->
-                <h4 class="m-0 fs-6 pe-1"><span class="fw-normal lh-base">Hello, </span>{{ Auth::user()->name }}</h4>
-                <p class="m-0 pe-1 text-body opacity-50">Make crypto work smarter for you</p>
-            </div>
-            <div>
-                <a href="{{ route('profile') }}" class="btn btn-dark w-100 text-decoration-none d-flex p-0">
-                    <p class="small mb-0 px-3 py-2">MY</p>
+<main class="homeContainer container position-relative home-active">
+    <div class="bg-dark position-relative mb-5 h-150px px-4 py-4">
+        <div class="p-4 mb-4 myinfobox mx-auto my-2" style="">
+            <div class="d-flex justify-content-start align-items-center mb-2">
+                <p class="mb-0 pe-3 fs-4">
+                    {{ __('user.level') }}<span class="fw-semibold d-inline-block ps-2">{{ Auth::user()->member->grade->name }}</span>
+                </p>
+                <p class="mb-0 divider ps-3 position-relative fs-4">
+                    UID<span class="fw-semibold d-inline-block ps-2">U{{ Auth::user()->id }}</span>
+                </p>
+                <a href="#" class="btn-outline-primary ms-3" style="border:1px solid;border-radius:5px;">
+                    <p type="button" class="mb-0 fs-2 px-2 copyBtn" data-copy="U{{ Auth::user()->id }}">{{ __('system.copy') }}</p>
                 </a>
+            </div>
+            <div class="d-flex justify-content-center align-items-end w-100 flex-column">
+                <div class="w-100">
+                    <!-- <h4 class="m-0 fs-6 lh-md pe-1">{{ Auth::user()->name }} <span class="fw-normal lh-base">{{ __('messages.member.member_welcome') }}</span></h4> -->
+                    <h4 class="m-0 fs-6 pe-1"><span class="fw-normal lh-base">Hello, </span>{{ Auth::user()->name }}</h4>
+                    <p class="m-0 pe-1 text-body opacity-50">Make crypto work smarter for you</p>
+                </div>
+                <div>
+                    <a href="{{ route('profile') }}" class="btn btn-primary w-100 text-decoration-none d-flex p-0">
+                        <p class="small mb-0 px-3 py-2">MY</p>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="mb-2">
+    <div class="mb-2 p-4">
         @isset($notice)
         <a href="{{ route('board.view', ['code' => $notice->board->board_code, 'mode' => 'view', 'id' => $notice->id]) }}" >
             <div class="alert alert-light d-flex" role="alert">
@@ -37,60 +39,19 @@
         </a>
         @endif
     </div>
-    <div id="carouselExampleCaptions" data-bs-ride="carousel" data-bs-interval="2400" class="carousel slide mb-5">
-        <div class="carousel-indicators opacity-25" style="filter: invert(1);">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{{ asset('images/bit_ban1.jpg') }}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <!-- <h5>First slide label</h5>
-                    <p>Some representative placeholder content for the first slide.</p> -->
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="{{ asset('images/bit_ban2.jpg') }}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <!-- <h5>Second slide label</h5>
-                    <p>Some representative placeholder content for the second slide.</p> -->
-                </div>
-            </div>
-            <div class="carousel-item">
-                <!--a href="{{ route('board.list', ['code' =>'product'])}}"-->
-                <a href="#" onclick="alertModal('{{ __('system.coming_soon_notice') }}')">
-                    <img src="{{ asset('images/bit_ban3.jpg') }}" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <!-- <h5>Third slide label</h5>
-                        <p>Some representative placeholder content for the third slide.</p> -->
-                    </div>
-                </a>
-            </div>
-        </div>
-        <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon opacity-25" style="filter: invert(1);" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon opacity-25" style="filter: invert(1);" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button> -->
-    </div>
-    <div class="card maincard mb-5 text-center">
-        <div class="card-body py-4 px-0">
+    <div class="card mb-4 text-center p-4">
+        <div class="maincard card-body py-4 px-0 position-relative">
             <nav>
                 <div class="nav justify-content-center" id="nav-tab" role="tablist">
                     <button class="nav-link nav-asset active ps-3 pe-3" id="nav-asset-tab" data-bs-toggle="tab" data-bs-target="#nav-asset" type="button" role="tab" aria-controls="nav-asset" aria-selected="true">
-                        <h5 class="link-card-tab fs-5 my-3">{{ __('asset.assets_held') }}</h5>
+                        <h5 class="link-card-tab fs-4 my-3">{{ __('asset.assets_held') }}</h5>
                     </button>
                     <button class="nav-link nav-wallet ps-3 pe-3 position-relative divider-w" id="nav-wallet-tab" data-bs-toggle="tab" data-bs-target="#nav-wallet" type="button" role="tab" aria-controls="nav-wallet" aria-selected="false">
-                        <h5 class="link-card-tab fs-5 my-3">{{ __('asset.income_wallet') }}</h5>
+                        <h5 class="link-card-tab fs-4 my-3">{{ __('asset.income_wallet') }}</h5>
                     </button>
                     @if($avatar_data->isNotEmpty())
-                    <button class="nav-link nav-wallet ps-3 pe-3 position-relative divider-w" id="nav-avatar-tab" data-bs-toggle="tab" data-bs-target="#nav-avatar" type="button" role="tab" aria-controls="nav-avatar" aria-selected="false">
-                        <h5 class="link-card-tab fs-5 my-3">{{ __('user.avatar') }}</h5>
+                    <button class="nav-link nav-avatar ps-3 pe-3 position-relative divider-w" id="nav-avatar-tab" data-bs-toggle="tab" data-bs-target="#nav-avatar" type="button" role="tab" aria-controls="nav-avatar" aria-selected="false">
+                        <h5 class="link-card-tab fs-4 my-3">{{ __('user.avatar') }}</h5>
                     </button>
                     @endif
                 </div>
@@ -205,36 +166,77 @@
             @endif
         </div>
     </div>
-    <div class="mb-5">
+     <div class="mb-5 px-4">
         <h5 class="mb-3"></h5>
-        <div class="d-flex justify-content-start align-items-start mb-3">
+        <div class="mid-icon d-flex justify-content-start align-items-start mb-3">
             <a href="{{ route('asset.deposit') }}" class="link-body-emphasis w-100" style="max-width: 25%">
                 <div class="d-flex align-items-center flex-column">
-                    <img src="{{ asset('/images/icon/icon_main_deposit.png') }}" width="44" class="mb-1">
-                    <p class="m-0 fw-medium fs-3 text-center">{{ __('asset.deposit') }}</p>
+                    <img src="{{ asset('/images/icon/01deposit.svg') }}" width="65" class="mb-1">
+                    <p class="m-0 fw-medium fs-2 text-center" >{{ __('asset.deposit') }}</p>
                 </div>
             </a>
             {{--
             <a href="{{ route('asset.withdrawal') }}" class="link-body-emphasis w-100" style="max-width: 25%">
                 <div class="d-flex align-items-center flex-column">
-                    <img src="{{ asset('/images/icon/icon_main_withdrawal.png') }}" width="44" class="mb-1">
-                    <p class="m-0 fw-medium fs-3 text-center">{{ __('asset.withdrawal') }}</p>
+                    <img src="{{ asset('/images/icon/02withdrawal.svg') }}" width="65" class="mb-1">
+                    <p class="m-0 fw-medium fs-2 text-center" >{{ __('asset.withdrawal') }}</p>
                 </div>
             </a>
             <a href="{{ route('trading') }}" class="link-body-emphasis w-100" style="max-width: 25%">
                 <div class="d-flex align-items-center flex-column">
-                <img src="{{ asset('/images/icon/icon_main_trading.png') }}" width="44" class="mb-1">
-                    <p class="m-0 fw-medium fs-3 text-center">{{ __('asset.trading') }}</p>
+                <img src="{{ asset('/images/icon/03trading.svg') }}" width="65" class="mb-1">
+                    <p class="m-0 fw-medium fs-2 text-center">{{ __('asset.trading') }}</p>
                 </div>
             </a>
             --}}
             <a href="{{ route('mining') }}" class="link-body-emphasis w-100" style="max-width: 25%">
                 <div class="d-flex align-items-center flex-column">
-                <img src="{{ asset('/images/icon/icon_main_investment.png') }}" width="44" class="mb-1">
-                    <p class="m-0 fw-medium fs-3 text-center">{{ __('AI BTC BOT') }}</p>
+                <img src="{{ asset('/images/icon/04mining.svg') }}" width="65" class="mb-1">
+                    <p class="m-0 fw-medium fs-2 text-center" >{{ __('AI BTC BOT') }}</p>
                 </div>
             </a>
         </div>
+    </div>
+    <div id="carouselExampleCaptions" data-bs-ride="carousel" data-bs-interval="2400" class="carousel slide mb-5">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{{ asset('images/ban/ban01.jpg') }}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <!-- <h5>First slide label</h5>
+                    <p>Some representative placeholder content for the first slide.</p> -->
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{{ asset('images/ban/ban02.jpg') }}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <!-- <h5>Second slide label</h5>
+                    <p>Some representative placeholder content for the second slide.</p> -->
+                </div>
+            </div>
+            <div class="carousel-item">
+                <!--a href="{{ route('board.list', ['code' =>'product'])}}"-->
+                <a href="#" onclick="alertModal('{{ __('system.coming_soon_notice') }}')">
+                    <img src="{{ asset('images/ban/ban03.jpg') }}" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <!-- <h5>Third slide label</h5>
+                        <p>Some representative placeholder content for the third slide.</p> -->
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon opacity-25" style="filter: invert(1);" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon opacity-25" style="filter: invert(1);" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button> -->
     </div>
     {{--
     <div class="pb-5">
@@ -270,7 +272,7 @@
             --}}
         </div>
     </div> -->
-    <div class="position-relative width100_div" style="height: auto; margin-bottom: 100px;">
+    <div class="position-relative width100_div" style="height: auto; margin-bottom: 100px; display:none;">
         <div class="position-absolute w-100 text-center video_text">
             <!-- <h5 class="text-white pt-5 opacity-50">Building Decentralized</h5> -->
             <h5 class="text-white pb-4">Bitcoin is an innovative payment <br> network and  a new kind of money.</h5>
