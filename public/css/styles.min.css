@@ -5578,21 +5578,21 @@ textarea.form-control-lg {
   /* background: linear-gradient(to right, #ffb081, #FF7E00); */
   background-image: url(/images/01.holdingassets.png);
   background-size: cover;
-  background-position: center;
+  background-position: center left;
 }
 
 .card > .maincard:has(.nav-wallet.active) {
   /* background: linear-gradient(to right, #FAB4B1, #D2574F); */
   background-image: url(/images/02.profitwallet.png);
   background-size: cover;
-  background-position: center;
+  background-position: center left;
 }
 
 .card > .maincard:has(.nav-avatar.active) {
   /* background: linear-gradient(to right, #FAB4B1, #D2574F); */
   background-image: url(/images/03.avatar.png);
   background-size: cover;
-  background-position: center;
+  background-position: center left;
 }
 
 .accordion {
@@ -17615,7 +17615,7 @@ input.style-no:-webkit-autofill:active {
 }
 .card-body.maincard nav{
   position: absolute;
-  top: -35px;
+  top: -33px;
   left: 0;
 }
 .card-body.maincard nav .nav{
