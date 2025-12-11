@@ -10,7 +10,7 @@ return array (
   'total_node' => '加入商品数量',
   'total_staking' => 'ステーキング合計',
   'total_mining' => 'デイリー収益合計',
-  'mining' => 'ノードマイニング',
+  'mining' => '商品参加',
   'max_node_amount' => '最大数量',
   'node_amount' => '数量',
   'select_mining_asset_guide' => '参加する資産を選択してください。',

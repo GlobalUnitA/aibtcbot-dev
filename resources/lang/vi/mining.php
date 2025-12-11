@@ -10,7 +10,7 @@ return array (
   'total_node' => 'Số lượng sản phẩm đăng ký',
   'total_staking' => 'Tổng Staking',
   'total_mining' => 'Tổng thu nhập hàng ngày',
-  'mining' => 'Node Mining',
+  'mining' => 'Tham gia sản phẩm',
   'max_node_amount' => 'Số lượng tối đa',
   'node_amount' => 'Quantity',
   'select_mining_asset_guide' => 'Vui lòng chọn tài sản sẽ tham gia.',

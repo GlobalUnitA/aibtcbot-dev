@@ -10,7 +10,7 @@ return array (
   'total_node' => '参与产品数量',
   'total_staking' => '锁仓合计',
   'total_mining' => '静态收益合计',
-  'mining' => '节点挖矿',
+  'mining' => '参与产品',
   'max_node_amount' => '总数量',
   'node_amount' => '数量',
   'select_mining_asset_guide' => '请选择想参与的虚拟资产。',

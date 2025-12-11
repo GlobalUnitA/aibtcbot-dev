@@ -10,7 +10,7 @@ return array (
   'total_node' => 'Number Of Subscribed Products',
   'total_staking' => 'Total Staking',
   'total_mining' => 'Daily Earnings Total',
-  'mining' => 'Node Mining',
+  'mining' => 'Product Participation',
   'max_node_amount' => 'Maximum Quantity',
   'node_amount' => 'Quantity',
   'select_mining_asset_guide' => 'Please select the asset to participate.',

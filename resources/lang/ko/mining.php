@@ -10,7 +10,7 @@ return array (
   'total_node' => '가입 상품 수량',
   'total_staking' => '스테이킹 합계',
   'total_mining' => '데일리수익 합계',
-  'mining' => '노드 마이닝',
+  'mining' => '상품참여',
   'max_node_amount' => '최대 수량',
   'node_amount' => '수량',
   'select_mining_asset_guide' => '참여할 자산을 선택해주세요.',
