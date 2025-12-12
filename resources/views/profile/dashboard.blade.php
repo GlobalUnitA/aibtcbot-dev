@@ -25,16 +25,16 @@
                 </p>
                 <div class="text-body mt-3">
                     <div class="g-3">
-                        <div class="col-12 col-sm-6 d-flex gap-4">
+                        <div class="col-12 col-sm-6 d-flex gap-4 align-items-center">
                             <p class="text-body fs-4 m-0">{{ __('mining.total_node') }}</p>
-                            <h3 class="text-primary fs-5 mb-0">{{ $data['total_node_amount'] }}</h3>
+                            <h3 class="fs-5 mb-0" style="color:#ff7e00;">{{ $data['total_node_amount'] }}</h3>
                         </div>
                     </div>
                     @foreach ($data['total_reward'] as $coin => $reward)
                         <div class="g-3 mb-3">
-                            <div class="col-12 col-sm-6 d-flex gap-4">
+                            <div class="col-12 col-sm-6 d-flex gap-4 align-items-center">
                                 <p class="text-body fs-4 m-0">{{ __('mining.total_mining').' ('.$coin.')' }}</p>
-                                <h3 class="text-primary fs-5 mb-0">{{ $reward }}</h3>
+                                <h3 class="fs-5 mb-0" style="color:#ff7e00;">{{ $reward }}</h3>
                             </div>
                         </div>
                     @endforeach
@@ -45,33 +45,33 @@
                     <div class="g-3">
                         <div class="col-12 col-sm-6 d-flex gap-4">
                             <p class="text-body fs-4 m-0">{{ __('asset.referral_count') }}</p>
-                            <h3 class="text-primary fs-5 mb-0">{{ $data['referral_count'] }}</h3>
+                            <h3 class="fs-5 mb-0" style="color:#ff7e00;">{{ $data['referral_count'] }}</h3>
                         </div>
                     </div>
                     <div class="g-3 mt-3">
                         <div class="col-12 col-sm-6 d-flex gap-4">
                             <p class="text-body fs-4 m-0">{{ __('asset.child_count') }}</p>
-                            <h3 class="text-primary fs-5 mb-0">{{ $data['all_count'] }}</h3>
+                            <h3 class="fs-5 mb-0" style="color:#ff7e00;">{{ $data['all_count'] }}</h3>
                         </div>
                     </div>
                     <div class="g-3 mt-3">
                         <div class="col-12 col-sm-6 d-flex gap-4">
                             <p class="text-body fs-4 m-0">{{ __('asset.total_group_sales') }}</p>
-                            <h3 class="text-primary fs-5 mb-0">{{ $data['group_sales'] }}</h3>
+                            <h3 class="fs-5 mb-0" style="color:#ff7e00;">{{ $data['group_sales'] }}</h3>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade show" id="dashboard-avatar" role="tabpanel" aria-labelledby="dashboard-avatar-tab" tabindex="0">
                 <p class="fs-4 mb-2 tabbox_bg">
-                    {{ __('user.avatar') }} {{ __('system.amount') }}<span class="text-body fw-semibold ps-2 d-inline-block">{{ $data['avatars']->count() }}</span>
+                    {{ __('user.avatar') }} {{ __('system.amount') }}<span class="text-body fw-semibold ps-4 d-inline-block">{{ $data['avatars']->count() }}</span>
                 </p>
                 <div class="pt-2 avatar_list">
                 @foreach ($data['avatars'] as $avatar)
                     <div class="text-body mb-2 tabbox">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <a href="{{ route('avatar.view', ['id' => $avatar->id]) }}">
-                                <p class="text-body fs-5 m-0" style="font-weight:bold;color:#6976A2 !important;font-weight: bold;display: inline-block;vertical-align: middle;">{{ __('user.avatar') }} {{ $loop->iteration }}</p>
+                                <p class="text-body fs-5 m-0 idtext">{{ __('user.avatar') }} {{ $loop->iteration }}</p>
                                 <img src="{{ asset('images/icon/right_icon_g.svg') }}" style="display: inline-block;width: auto;height: 24px;">
                             </a>
                             @if ($avatar->is_active === 'n')
@@ -80,7 +80,7 @@
                             <p class="mb-0 sign_active">{{ __('system.active') }}</p>
                             @endif
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center gap-4">
                             <p class="text-body fs-4 m-0">{{ $avatar->name }}</p>
                             @if ($avatar->is_active === 'y')
                             <a href="{{ route('register',['mid' => $avatar->member->member_id]) }}">

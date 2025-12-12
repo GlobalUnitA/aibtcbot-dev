@@ -17843,7 +17843,7 @@ width:100%;
 
 .content-d .tabbox_bg{
   border-radius: 10px;
-  padding: 1.5rem;
+  padding: 1rem;
   background-color: #fff5e7;
 }
 
@@ -17868,6 +17868,14 @@ width:100%;
   background-color: #043C97;
   border:1px solid #043c97;
   padding: 2px 12px;
+}
+
+
+.content-d .tabbox p.idtext{
+  font-weight:bold;
+  color:#6976A2 !important;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /*dark theme 작업*/
@@ -17913,4 +17921,40 @@ width:100%;
 }
 [data-bs-theme=dark] .offcanvas#sidebar{
   background-color: #000;
+}
+
+[data-bs-theme=dark] .register_n .form_line .form-label{
+  background-color: rgb(47, 47, 48);
+}
+
+[data-bs-theme=dark] .tab-button .nav-item .nav-link{
+   background-color: #646464;
+}
+
+[data-bs-theme=dark] .tab-button .nav-item .nav-link.active{
+   color: #000;
+}
+
+[data-bs-theme=dark] .content-d .tabbox{
+  border-color: #fff;
+
+}
+
+[data-bs-theme=dark] .content-d .tabbox_bg{
+  background-color: #000;
+  color: #fff;
+}
+
+[data-bs-theme=dark] .content-d .avatar_list p.sign_inactive{
+  border-color: #0062ff;
+  background-color: #0062ff;
+}
+
+[data-bs-theme=dark] .content-d .avatar_list p.sign_active{
+  border-color: #dc3444;
+  background-color: #dc3444;
+}
+
+[data-bs-theme=dark] .content-d .tabbox p.idtext{
+  color: #a0b4f8 !important;
 }
