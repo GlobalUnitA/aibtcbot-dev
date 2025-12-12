@@ -47,6 +47,14 @@ class RegisterController extends Controller
     */
     public function register(Request $request)
     {
+        try {
+            $this->referrerCheck($request, true);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ]);
+        }
 
         $validated = $this->validator($request->all())->validate();
 
@@ -137,7 +145,8 @@ class RegisterController extends Controller
 
     }
 
-    public function referrerCheck(Request $request)
+
+    public function referrerCheck(Request $request, $internal = false)
     {
         $service = new MemberService();
         $referrer_info  = $service->memberParseCode($request->referrerId);
@@ -146,18 +155,21 @@ class RegisterController extends Controller
             ? Avatar::find($referrer_info['id'])
             : User::find($referrer_info['id']);
 
-        if (!$referrer) {
+
+        if (!$referrer || $referrer->member->is_valid === 'n') {
+
+            if ($internal) {
+                throw new \Exception(__('auth.recommender_not_found_notice'));
+            }
+
             return response()->json([
                 'status' => 'error',
                 'message' => __('auth.recommender_not_found_notice'),
             ]);
         }
 
-        if ($referrer->member->is_valid === 'n') {
-            return response()->json([
-                'status' => 'error',
-                'message' => __('auth.recommender_not_found_notice'),
-            ]);
+        if ($internal) {
+            return true;
         }
 
         return response()->json([
