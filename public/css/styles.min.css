@@ -17827,6 +17827,8 @@ border-bottom: 0;
 font-size: 1rem;
 border-radius: 8px;
 border-bottom: none;
+color: #fff;
+width:100%;
 
 }
 .tab-button .nav-item .nav-link.active{
@@ -17836,7 +17838,7 @@ border-bottom: none;
 .content-d .tabbox{
   border: 1px solid #d5d5d5;
   border-radius: 10px;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 .content-d .tabbox_bg{
