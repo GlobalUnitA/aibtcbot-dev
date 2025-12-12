@@ -37,9 +37,9 @@
                         <tbody>
                             <tr>
                                 <th class="text-center align-middle">아이디</th>
-                                <td class="align-middle">{{ $view->member->user->account }}</td>
+                                <td class="align-middle">{{ $view->member->member_id }}</td>
                                 <th class="text-center align-middle">이름</th>
-                                <td class="align-middle">{{ $view->member->user->name }}</td>
+                                <td class="align-middle">{{ $view->member->member_name }}</td>
                             </tr>
                             <tr>
                                 <th class="text-center align-middle">종류</th>
