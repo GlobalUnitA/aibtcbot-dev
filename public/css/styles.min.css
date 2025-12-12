@@ -17821,18 +17821,18 @@ footer.footerContainer{
 }
 .tab-button .nav-item{flex: 1;}
 .tab-button .nav-item .nav-link{
-border-radius: 12px;
-background-color: #ffd5ad;
-border-bottom: 0;
-font-size: 1rem;
-border-radius: 8px;
-border-bottom: none;
-color: #fff;
-width:100%;
+  border-radius: 12px;
+  background-color: #ffd5ad;
+  border-bottom: 0;
+  font-size: 1rem;
+  border-radius: 8px;
+  border-bottom: none;
+  color: #fff;
+  width:100%;
 
 }
 .tab-button .nav-item .nav-link.active{
- background-color: #ff7f00;
+  background-color: #ff7f00;
 }
 
 .content-d .tabbox{
@@ -17880,7 +17880,7 @@ width:100%;
 
 /*dark theme 작업*/
 [data-bs-theme=dark] .mid-icon a div img{
- filter:  brightness(0) invert(1);
+  filter:  brightness(0) invert(1);
 }
 
 [data-bs-theme=dark] .mid-icon a div p{
@@ -17891,7 +17891,7 @@ width:100%;
   background-color: #000;
 }
 [data-bs-theme=dark] .myinfobox div p{
- color: #fff !important;
+  color: #fff !important;
 }
 
 [data-bs-theme=dark] .myinfobox div div h4{
@@ -17928,11 +17928,12 @@ width:100%;
 }
 
 [data-bs-theme=dark] .tab-button .nav-item .nav-link{
-   background-color: #646464;
+  background-color: #646464;
 }
 
 [data-bs-theme=dark] .tab-button .nav-item .nav-link.active{
-   color: #000;
+  color: #000;
+  background-color: #ff7f00;
 }
 
 [data-bs-theme=dark] .content-d .tabbox{
@@ -17946,13 +17947,13 @@ width:100%;
 }
 
 [data-bs-theme=dark] .content-d .avatar_list p.sign_inactive{
-  border-color: #0062ff;
-  background-color: #0062ff;
+  border-color: #dc3444;
+  background-color: #dc3444;
 }
 
 [data-bs-theme=dark] .content-d .avatar_list p.sign_active{
-  border-color: #dc3444;
-  background-color: #dc3444;
+  border-color: #0062ff;
+  background-color: #0062ff;
 }
 
 [data-bs-theme=dark] .content-d .tabbox p.idtext{
