@@ -60,19 +60,10 @@ class MiningController extends Controller
 
     public function view(Request $request)
     {
-        $start_date = $request->start_date
-            ? Carbon::parse($request->start_date)->startOfDay()
-            : today()->startOfDay();
-
-        $end_date = $request->end_date
-            ? Carbon::parse($request->end_date)->endOfDay()
-            : today()->endOfDay();
 
         $view = Mining::find($request->id);
 
-        $rewards = $view->rewards()
-            ->whereBetween('created_at', [$start_date, $end_date])
-            ->get();
+        $rewards = $view->rewards()->get();
 
         $level_bonuses = collect();
         foreach ($rewards as $reward) {
@@ -81,9 +72,7 @@ class MiningController extends Controller
             }
         }
 
-        $referral_bonuses = $view->referralBonus()
-            ->whereBetween('created_at', [$start_date, $end_date])
-            ->get();
+        $referral_bonuses = $view->referralBonus()->get();
 
         return view('admin.mining.view', compact('view', 'rewards', 'level_bonuses', 'referral_bonuses'));
     }

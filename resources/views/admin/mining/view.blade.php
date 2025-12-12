@@ -70,31 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <form action="{{ route('admin.mining.view', ['id' => $view->id]) }}" method="GET">
-                    <div class="row align-items-center">
-                        <div class="col-12 col-md-3 mb-2">
-                            <label for="start_date" class="sr-only">Start Date</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-                                <input type="date" name="start_date" id="start_date" class="form-control" value="{{ request()->get('start_date') ?? today()->toDateString() }}">
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3 mb-2">
-                            <label for="end_date" class="sr-only">End Date</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-                                <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request()->get('end_date') ?? today()->toDateString() }}">
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-2 text-center mt-2">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+        @if($rewards->isNotEmpty())
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
@@ -110,7 +86,7 @@
                         </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                        @if($rewards->isNotEmpty())
+
                             @foreach($rewards as $reward)
                                 <tr>
                                     <td class="text-center">{{ $reward->reward_date }}</td>
@@ -118,16 +94,13 @@
                                     <td class="text-center">{{ $reward->created_at }}</td>
                                 </tr>
                             @endforeach
-                        @else
-                            <tr>
-                                <td class="text-center" colspan="4">No Data.</td>
-                            </tr>
-                        @endif
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        @endif
+        @if($level_bonuses->isNotEmpty())
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
@@ -150,7 +123,6 @@
                         </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                        @if($level_bonuses->isNotEmpty())
                             @foreach($level_bonuses as $bonus)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
@@ -213,16 +185,13 @@
                                     </tr>
                                 @endforeach
                             @endforeach
-                        @else
-                            <tr>
-                                <td class="text-center" colspan="10">No Data.</td>
-                            </tr>
-                        @endif
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        @endif
+        @if ($referral_bonuses->isNotEmpty())
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
@@ -245,7 +214,6 @@
                         </tr>
                         </thead>
                         <tbody class="table-group-divider">
-                        @if ($referral_bonuses->isNotEmpty())
                             @foreach ($referral_bonuses as $bonus)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
@@ -308,16 +276,12 @@
                                     </tr>
                                 @endforeach
                             @endforeach
-                        @else
-                            <tr>
-                                <td class="text-center" colspan="10">No Data.</td>
-                            </tr>
-                        @endif
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        @endif
     </div>
 </div>
 @endsection
