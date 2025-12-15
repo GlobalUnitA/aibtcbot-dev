@@ -30,6 +30,7 @@ class Member extends Authenticatable
         'member_name',
         'referral_count',
         'avatar_count',
+        'total_entry_amount',
     ];
 
     public function parent()
@@ -117,6 +118,11 @@ class Member extends Authenticatable
     public function getAvatarCountAttribute()
     {
         return Avatar::where('owner_id', $this->user_id)->count();
+    }
+
+    public function getTotalEntryAmountAttribute()
+    {
+        return Mining::where('member_id', $this->id)->sum('entry_amount');
     }
 
     public function getHasMining()

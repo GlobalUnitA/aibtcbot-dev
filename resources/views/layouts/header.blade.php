@@ -56,6 +56,11 @@
                         <div class="ms-3"><img src="{{ asset('/images/icon/list_icon_downline.svg') }}" class="list-icon me-2"><span>{{ __('layout.downline_tree') }}</span></div>
                     </li>
                 </a>
+                <a class="nav-link text-inverse fs-5 pb-0 px-3 border-bottom border-gray border-opacity-25" href="{{ route('profile.referral', ['id' => auth()->user()->member->id]) }}">
+                    <li class="nav-item d-flex justify-content-between align-items-center py-3 ">
+                        <div class="ms-3"><img src="{{ asset('/images/icon/list_icon_downline.svg') }}" class="list-icon me-2"><span>{{ __('asset.referrer_info') }}</span></div>
+                    </li>
+                </a>
                 {{--
                 <a class="nav-link text-inverse fs-5 pb-0 border-bottom border-gray border-opacity-25" href="{{ route('chart.ref') }}">
                    <li class="nav-item d-flex justify-content-between align-items-center py-3">

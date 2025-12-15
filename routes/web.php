@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\OtpController;
 
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Profile\DashboardController;
+use App\Http\Controllers\Profile\ReferralController;
 use App\Http\Controllers\Profile\KycVerificationController;
 
 use App\Http\Controllers\Asset\AssetController;
@@ -93,6 +94,7 @@ Route::middleware(['auth', 'session.timeout'])->group(function () {
         Route::post('/password/update', [ProfileController::class, 'passwordUpdate'])->name('profile.password.update');
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('profile.dashboard');
+        Route::get('/referral/{id}', [ReferralController::class, 'index'])->name('profile.referral');
 
         Route::prefix('kyc')->group(function () {
             Route::get('/', [KycVerificationController::class, 'index'])->name('kyc');
