@@ -17929,10 +17929,10 @@ footer.footerContainer{
   padding-bottom: 0;
   border-bottom: 0;
 }
-.avatar_list .referral_box .referral_1{
+.avatar_list .referral_1{
   background-color: #ff7f00;
 }
-.avatar_list .referral_box [class*="referral_"]:not(.referral_1) {
+.avatar_list [class*="referral_"]:not(.referral_1) {
   border: 1px solid #ff7e00;
 }
 
