@@ -19,6 +19,7 @@
                                     <tr class="border-2 border-bottom border-primary border-0">
                                         <th scope="col" class="ps-0 text-center">번호</th>
                                         <th scope="col" class="text-center">아이디</th>
+                                        <th scope="col" class="text-center">MID</th>
                                         <th scope="col" class="text-center">UID</th>
                                         <th scope="col" class="text-center">회원명</th>
                                         <th scope="col" class="text-center">등급</th>
@@ -34,6 +35,7 @@
                                     <tr style="cursor:pointer;" onclick="window.location='{{ route('admin.user.view', ['id' => $value->user_id]) }}';">
                                         <th scope="row" class="ps-0 fw-medium text-center">{{ $list->firstItem() + $key }}</th>
                                         <td class="text-center">{{ $value->account }}</td>
+                                        <td class="text-center">{{ $value->id }}</td>
                                         <td class="text-center">{{ 'U'.$value->user_id }}</td>
                                         <td class="text-center">{{ $value->name }}</td>
                                         <td class="text-center">{{ $value->grade_name }}</td>
