@@ -17930,7 +17930,7 @@ footer.footerContainer{
   border-bottom: 0;
 }
 .avatar_list .referral_1{
-  background-color: #ff7f00;
+  background-color: #fff5e7;
 }
 .avatar_list [class*="referral_"]:not(.referral_1) {
   border: 1px solid #ff7e00;
@@ -17939,6 +17939,10 @@ footer.footerContainer{
 .referral_box{
   border-radius: 10px;
   padding: 1rem;
+}
+
+.referral_box .level_t{
+  border-bottom: 1px solid #ff7e00;
 }
 
 /*dark theme 작업*/
