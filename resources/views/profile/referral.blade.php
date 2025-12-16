@@ -9,7 +9,7 @@
             <div class="pt-2 avatar_list">
                 @foreach ($referrals as $referral)
                     <div class="text-body mb-2 referral_box referral_{{ $level }}">
-                        <a href="{{ route('profile.referral', ['id' => $referral->id]) }}">
+                        <a href="{{ $referral->referral_count > 0 ? route('profile.referral', ['id' => $referral->id]): '#'}}">
                             <div class="d-flex align-items-center mb-3 pb-2 justify-content-end level_t">
                                 <p class="text-body fs-5 m-0 me-2 key_color fw-bold">{{ __('Level') }}</p>
                                 <p class="text-body fs-5 m-0 key_color fw-bold">{{ $level }}</p>
