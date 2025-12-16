@@ -12,7 +12,7 @@
                         <a href="{{ route('profile.referral', ['id' => $referral->id]) }}">
                             <div class="d-flex align-items-center mb-2">
                                 <p class="text-body fs-5 m-0 me-2">{{ __('Level') }}</p>
-                                <p class="text-body fs-5 m-0">{{ $level }}</p>
+                                <p class="text-body fs-5 m-0 referral_{{ $level }}">{{ $level }}</p>
                             </div>
                             <div class="mb-2">
                                 <div class="d-flex">
