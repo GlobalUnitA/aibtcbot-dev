@@ -1,44 +1,43 @@
 @extends('layouts.master')
 
 @section('content')
-<main class="container-fluid py-5 mb-5">
-    <div class="d-flex justify-content-between align-items-center">
-        <h3>{{ __('user.user_info') }}</h3>    
+<main class="container-fluid py-5 mb-5 px-4">
+    <div class="mb-4">
+        <h3 class="text-center">{{ __('user.user_info') }}</h3>    
     </div>
     <form method="POST" action="{{ route('profile.update') }}" id="ajaxForm" class="mb-5">
         @csrf
         <input type="hidden" name="id" value="{{ $view->user_id }}">
-        <hr>
         <div class="table-responsive overflow-x-auto">
-            <table class="table table-bordered my-5">
+            <table class="table mb-3 table-nstyle">
                 <tbody>
                     <tr>
-                        <th width="30%" class="text-center text-body align-middle">{{ __('user.name') }}</th>
-                        <td width="70%" class="align-middle text-body">{{ $view->name }}</td>
+                        <th width="30%" class="text-body align-middle">{{ __('user.name') }}</th>
+                        <td width="70%" class="align-middle text-body"><div class="input_like">{{ $view->name }}</div></td>
                     </tr>
                     <tr>
-                        <th class="text-center text-body align-middle">{{ __('UID') }}</th>
-                        <td class="align-middle text-body">{{ $view->user_id }}</td>
+                        <th class="text-body align-middle">{{ __('UID') }}</th>
+                        <td class="align-middle text-body"><div class="input_like">{{ $view->user_id }}</div></td>
                     </tr>
                     <tr>
-                        <th class="text-center text-body align-middle">{{ __('auth.password') }}</th>
-                        <td class="align-middle text-body"><a href="{{ route('profile.password') }}" class="btn btn-info btn-sm">{{ __('auth.reset_password') }}</a></td>
+                        <th class="text-body align-middle">{{ __('auth.password') }}</th>
+                        <td class="align-middle text-body"><a href="{{ route('profile.password') }}" class="btn btn-info btn-sm input_like_btn">{{ __('auth.reset_password') }}</a></td>
                     </tr>
                     <tr>
-                        <th class="text-center text-body align-middle">{{ __('user.email') }}</th>
-                        <td class="align-middle text-body">{{ $view->email }}</td>
+                        <th class="text-body align-middle">{{ __('user.email') }}</th>
+                        <td class="align-middle text-body"><div class="input_like">{{ $view->email }}</div></td>
                     </tr>
                     <tr>
-                        <th class="text-center text-body align-middle">{{ __('user.phone') }}</th>
+                        <th class="text-body align-middle">{{ __('user.phone') }}</th>
                         <td class="align-middle text-body">
                             <input type="text" name="phone" value="{{ $view->phone }}" class="form-control">
                         </td>
                     </tr>
                     <tr>
-                        <th class="text-center text-body align-middle">{{ __('user.kyc_verification') }}</th>
+                        <th class="text-body align-middle">{{ __('user.kyc_verification') }}</th>
                         <td class="align-middle text-body">
                             @if (!$view->user->kyc)
-                            <a class="btn btn-info btn-sm px-4" href="{{ route('kyc') }}">{{ __('auth.verify') }}</a>
+                            <a class="btn btn-info btn-sm px-4 input_like_btn" href="{{ route('kyc') }}">{{ __('auth.verify') }}</a>
                             @elseif ($view->user->kyc->status === 'pending')
                             {{ __('auth.verified_pending') }}
                             @elseif ($view->user->kyc->status === 'rejected')
@@ -50,7 +49,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="text-center text-body align-middle">{{ __('user.otp_connect') }}</th>
+                        <th class="text-body align-middle">{{ __('user.otp_connect') }}</th>
                         <td class="align-middle text-body">
                             @if (!$view->user->otp || !$view->user->otp->secret_key)
                             {{ __('user.connect_unlinked') }}
@@ -60,8 +59,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="text-center text-body align-middle">{{ __('user.meta_id') }}</th>
-                        <td class="align-middle text-body">
+                        <th class="text-body">{{ __('user.meta_id') }}</th>
+                        <td class="align-m text-body">
                             <input type="text" name="meta_uid" value="{{ $view->meta_uid }}" class="form-control"  {{ $view->meta_uid ? 'readonly' : '' }}>
                             <div class="alert alert-danger mt-4 mb-2" role="alert">
                                 <h6 class="text-danger text-center fw-bold fs-4 m-0 lh-base">{{ __('user.meta_id_guide_1') }}</h6>

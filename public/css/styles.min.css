@@ -17815,6 +17815,7 @@ footer.footerContainer{
 .register_n .form-control.required:invalid:not(:placeholder-shown) ~ .invalid-feedback {
   display: block;
 }
+.key_color{color:#ff7e00;}
 .tab-button{
   justify-content: center;
   gap:0 5px;
@@ -17836,7 +17837,7 @@ footer.footerContainer{
 }
 
 .content-d .tabbox{
-  border: 1px solid #d5d5d5;
+  border: 1px solid #ff7e00;
   border-radius: 10px;
   padding: 1rem;
 }
@@ -17852,7 +17853,8 @@ footer.footerContainer{
 }
 
 .content-d .avatar_list{
-  border-top:1px solid #727272;
+  /* border-top:1px solid #727272; */
+  margin-top: 1rem;
 }
 .content-d .avatar_list p.sign_inactive{
   border-radius: 25px;
@@ -17870,12 +17872,73 @@ footer.footerContainer{
   padding: 2px 12px;
 }
 
-
 .content-d .tabbox p.idtext{
   font-weight:bold;
   color:#6976A2 !important;
   display: inline-block;
   vertical-align: middle;
+}
+
+.table-nstyle{
+  border-top:2px solid #ff7e00;
+}
+.table-nstyle table{
+  border:0 !important;
+}
+.table-nstyle table thead tr{
+  border-bottom:1px solid #bbb;
+    background-color:#f9f9fa;
+}
+.table-nstyle table tbody tr{
+  border-bottom: 1px solid #ededed;
+}
+/* .table-nstyle table tbody tr:nth-child(odd){
+  background-color:#f9f9fa;
+} */
+.table-nstyle table thead tr th, .table-nstyle table tbody tr td {
+  border: 0 !important;
+  background-color: transparent;
+}
+.input_like{
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: 0.5rem;
+  background-color: #f8f8f8;
+  color: #777;
+}
+.input_like_btn{
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  width: 100%;
+}
+
+.box_b_line > div.box_b_line{
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(255, 126, 0, 0.2);
+}
+.box_b_line > div.box_b_line:first-child{
+  margin-top: 0;
+}
+.box_b_line > div.box_b_line:last-child{
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.avatar_list .referral_box .referral_1{
+  background-color: #ff7f00;
+}
+.avatar_list .referral_box [class*="referral_"]:not(.referral_1) {
+  border: 1px solid #ff7e00;
+}
+
+.referral_box{
+  border-radius: 10px;
+  padding: 1rem;
 }
 
 /*dark theme 작업*/
@@ -17958,4 +18021,36 @@ footer.footerContainer{
 
 [data-bs-theme=dark] .content-d .tabbox p.idtext{
   color: #a0b4f8 !important;
+}
+/* [data-bs-theme=dark] .table-nstyle table tbody tr:nth-child(odd){
+  background-color:#000;
+} */
+[data-bs-theme=dark] .table-nstyle table thead tr{
+  border-bottom:1px solid #aaa;
+  background-color:#1d1d1d;
+}
+[data-bs-theme=dark] .table-nstyle table tbody tr{
+  border-bottom: 1px solid #777;
+}
+[data-bs-theme=dark] .box_b_line > div.box_b_line{
+  border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+}
+
+@media (max-width: 479px) {
+  .container-fluid{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .fs-3{font-size: 0.75rem !important;}
+  .fs-4{font-size: 0.9rem !important;}
+  .fs-5{font-size: 0.95rem !important;}
+  .fs-6{font-size: 1.05rem !important;}
+  .table-nstyle{font-size: 0.75rem;}
+  .px-4{padding-left: 1rem !important;padding-right: 1rem !important;}
+  .p-4{padding:1rem !important;}
+  .navbar-brand img{height: 20px;}
+  .icon-bg img{width:25px;height: 25px;}
+  .icon-bg::after{width: 47px; height: 47px;}
+  .list-icon{height: 20px;}
+  .card-body.maincard nav {top: -30px;}
 }

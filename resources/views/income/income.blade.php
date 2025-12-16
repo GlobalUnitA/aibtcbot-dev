@@ -2,94 +2,77 @@
 
 @section('content')
 <main class="container-fluid py-5 mb-5">
-    <h2 class="mb-3 text-center">{{ __('asset.profit_detail') }}</h2>
-    <hr>
-    <div class="g-3 py-5">
-        <div class="px-4 py-5 rounded bg-light text-body">
+    <div class="mb-4">
+        <h3 class="text-center">{{ __('asset.profit_detail') }}</h3>
+    </div>
+    <div class="g-3 mb-5 content-d mt-0">
+        <div class="p-4 mb-4 tabbox_bg text-body box_b_line">
             {{--
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div>
-                    <p class="text-body fs-4 m-0">{{ __('asset.total_subscription_bonus') }}</p>
-                    <h3 class="text-primary fs-6 mb-1">{{ $data['subscription_bonus'] }}</h3>
-                </div>
+            <div class="d-flex justify-content-between align-items-center box_b_line">
+                <p class="text-body fs-4 m-0">{{ __('asset.total_subscription_bonus') }}</p>
+                <h3 class="key_color fs-6 mb-1">{{ $data['subscription_bonus'] }}</h3>
             </div>
             --}}
-            <div class="mb-4">
-                <div class="d-flex justify-content-between align-items-start">
-                    <p class="text-body fs-4 m-0">{{ __('asset.total_referral_bonus') }}</p>
-                </div>
-                <h3 class="text-primary fs-6 mb-1">{{ $data['referral_bonus'] }}</h3>
+            <div class="d-flex justify-content-between align-items-center box_b_line">
+                <p class="text-body fs-4 m-0">{{ __('asset.total_referral_bonus') }}</p>
+                <h3 class="key_color fs-6 mb-1">{{ $data['referral_bonus'] }}</h3>
             </div>
             {{--
-            <div class="mb-4">
-                <div>
-                    <p class="text-body fs-4 m-0">{{ __('asset.total_referral_bonus_matching') }}</p>
-                    <h3 class="text-primary fs-6 mb-1">{{ $data['referral_matching'] }}</h3>
-                </div>
+            <div class="d-flex justify-content-between align-items-center box_b_line">
+                <p class="text-body fs-4 m-0">{{ __('asset.total_referral_bonus_matching') }}</p>
+                <h3 class="key_color fs-6 mb-1">{{ $data['referral_matching'] }}</h3>
             </div>
-            <div class="mb-4">
-                <div>
-                    <p class="text-body fs-4 m-0">{{ __('asset.total_rank_bonus') }}</p>
-                    <h3 class="text-primary fs-6 mb-1">{{ $data['rank_bonus'] }}</h3>
-                </div>
+            <div class="d-flex justify-content-between align-items-center box_b_line">
+                <p class="text-body fs-4 m-0">{{ __('asset.total_rank_bonus') }}</p>
+                <h3 class="key_color fs-6 mb-1">{{ $data['rank_bonus'] }}</h3>
             </div>
             --}}
             {{--
-            <div class="mb-4">
-                <div>
-                    <p class="text-body fs-4 m-0">{{ __('mining.total_mining_profit') }}</p>
-                    <h3 class="text-primary fs-6 mb-1">{{ __('???') }}</h3>
-                </div>
+            <div class="d-flex justify-content-between align-items-center box_b_line">
+                <p class="text-body fs-4 m-0">{{ __('mining.total_mining_profit') }}</p>
+                <h3 class="key_color fs-6 mb-1">{{ __('???') }}</h3>
             </div>
-            <div class="mb-4">
-                <div>
-                    <p class="text-body fs-4 m-0">{{ __('mining.total_mining_level_bonus') }}</p>
-                    <h3 class="text-primary fs-6 mb-1">{{ __('???') }}</h3>
-                </div>
+            <div class="d-flex justify-content-between align-items-center box_b_line">
+                <p class="text-body fs-4 m-0">{{ __('mining.total_mining_level_bonus') }}</p>
+                <h3 class="key_color fs-6 mb-1">{{ __('???') }}</h3>
             </div>
-            <div class="mb-4">
-                <div>
-                    <p class="text-body fs-4 m-0">{{ __('mining.total_mining_matching_bonus') }}</p>
-                    <h3 class="text-primary fs-6 mb-1">{{ __('???') }}</h3>
-                </div>
+            <div class="d-flex justify-content-between align-items-center box_b_line">
+                <p class="text-body fs-4 m-0">{{ __('mining.total_mining_matching_bonus') }}</p>
+                <h3 class="key_color fs-6 mb-1">{{ __('???') }}</h3>
             </div>
             --}}
-            <div class="mb-4">
-                <div class="d-flex justify-content-between align-items-start">
+            <div class="box_b_line">
+                <div class="d-flex gap-4 align-items-center justify-content-between mb-1">
                     <p class="text-body fs-4 m-0">{{ __('asset.total_external_withdrawal') }}</p>
+                    <h3 class="key_color fs-6 mb-1">{{ $data['withdrawal_total'] }}</h3>
+                </div>
+                <div class="text-end">
                     <a href="{{ route('income.withdrawal') }}" class="btn btn-primary fs-4 py-1 px-3">{{ __('asset.withdrawal') }}</a>
                 </div>
-                <h3 class="text-primary fs-6 mb-1">{{ $data['withdrawal_total'] }}</h3>
             </div>
             {{--
-            <div class="mb-4">
-                <div class="d-flex justify-content-between align-items-start">
+            <div class="box_b_line">
+                <div class=" d-flex gap-4 align-items-center justify-content-between mb-1">
                     <p class="text-body fs-4 m-0">{{ __('asset.total_internal_transfer') }}</p>
                     <a href="{{ route('income.deposit') }}" class="btn btn-primary fs-4 py-1 px-3">{{ __('asset.internal_transfer') }}</a>
                 </div>
-                <h3 class="text-primary fs-6 mb-1">{{ $data['deposit_total'] }}</h3>
+                <div class="text-end">
+                    <h3 class="key_color fs-6 mb-0">{{ $data['deposit_total'] }}</h3>
+                </div>
             </div>
             --}}
-            <div class="mb-4">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <p class="text-body fs-4 m-0">{{ __('asset.current_balance') }}</p>
-                        <h3 class="text-primary fs-6 mb-1">{{ $data['balance'] }}</h3>
-                    </div>
-                </div>
+            <div class="d-flex gap-4 align-items-center justify-content-between box_b_line">
+                <p class="text-body fs-4 m-0">{{ __('asset.current_balance') }}</p>
+                <h3 class="key_color fs-6 mb-1">{{ $data['balance'] }}</h3>
             </div>
-            <div class="mb-4">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <p class="text-body fs-4 m-0">{{ __('asset.total_avatar_cost') }}</p>
-                        <h3 class="text-primary fs-6 mb-1">{{ $data['avatar_cost_total'] }}</h3>
-                    </div>
-                </div>
+            <div class="mb-0 d-flex gap-4 align-items-center justify-content-between box_b_line">
+                <p class="text-body fs-4 m-0">{{ __('asset.total_avatar_cost') }}</p>
+                <h3 class="key_color fs-6 mb-1">{{ $data['avatar_cost_total'] }}</h3>
             </div>
         </div>
     </div>
-    <div class="table-responsive pb-5">
-        <table class="table table-striped table-bordered">
+    <div class="table-responsive pb-5 table-nstyle">
+        <table class="table">
             <thead class="mb-2">
                 <tr>
                     <th>{{ __('system.date') }}</th>

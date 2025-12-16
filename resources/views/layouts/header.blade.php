@@ -37,9 +37,9 @@
             </div>
             <ul class="navbar-nav" style="margin-bottom: 40px;">
                 <li class="">
-                    <a href="#" class="nav-link text-inverse fs-5 pb-0 cursor-pointer px-3 border-bottom border-gray border-opacity-25" data-bs-toggle="collapse" data-bs-target="#language-collapse" aria-expanded="false">
-                        <div class="nav-item d-flex justify-content-between align-items-center py-3">
-                            <div class="ms-3"><img src="{{ asset('/images/icon/list_icon_language.svg') }}" class="list-icon me-2"><span>{{ __('Language') }}</span></div>
+                    <a href="#" class="nav-link text-inverse fs-5 p-0 cursor-pointer px-3 border-bottom border-gray border-opacity-25" data-bs-toggle="collapse" data-bs-target="#language-collapse" aria-expanded="false">
+                        <div class="nav-item d-flex justify-content-between align-items-center py-4 px-3">
+                            <div class="align-items-cente d-flex"><img src="{{ asset('/images/icon/list_icon_language.svg') }}" class="list-icon me-2"><span>{{ __('Language') }}</span></div>
                             <i class="ti ti-chevron-up collapse-i"></i>
                         </div>
                     </a>
@@ -51,46 +51,46 @@
                         </ul>
                     </div>
                 </li>
-                <a class="nav-link text-inverse fs-5 pb-0 px-3 border-bottom border-gray border-opacity-25" href="{{ route('chart.aff') }}">
-                    <li class="nav-item d-flex justify-content-between align-items-center py-3 ">
-                        <div class="ms-3"><img src="{{ asset('/images/icon/list_icon_downline.svg') }}" class="list-icon me-2"><span>{{ __('layout.downline_tree') }}</span></div>
+                <a class="nav-link text-inverse fs-5 p-0 px-3 border-bottom border-gray border-opacity-25" href="{{ route('chart.aff') }}">
+                    <li class="nav-item d-flex align-items-center py-4 px-3">
+                        <img src="{{ asset('/images/icon/list_icon_down.svg') }}" class="list-icon me-2"><span>{{ __('layout.downline_tree') }}</span>
                     </li>
                 </a>
-                <a class="nav-link text-inverse fs-5 pb-0 px-3 border-bottom border-gray border-opacity-25" href="{{ route('profile.referral', ['id' => auth()->user()->member->id]) }}">
-                    <li class="nav-item d-flex justify-content-between align-items-center py-3 ">
-                        <div class="ms-3"><img src="{{ asset('/images/icon/list_icon_downline.svg') }}" class="list-icon me-2"><span>{{ __('asset.referrer_info') }}</span></div>
+                <a class="nav-link text-inverse fs-5 p-0 px-3 border-bottom border-gray border-opacity-25" href="{{ route('profile.referral', ['id' => auth()->user()->member->id]) }}">
+                    <li class="nav-item d-flex align-items-center py-4 px-3">
+                        <img src="{{ asset('/images/icon/list_icon_referral.svg') }}" class="list-icon me-2"><span>{{ __('asset.referrer_info') }}</span>
                     </li>
                 </a>
                 {{--
-                <a class="nav-link text-inverse fs-5 pb-0 border-bottom border-gray border-opacity-25" href="{{ route('chart.ref') }}">
-                   <li class="nav-item d-flex justify-content-between align-items-center py-3">
+                <a class="nav-link text-inverse fs-5 p-0 border-bottom border-gray border-opacity-25" href="{{ route('chart.ref') }}">
+                   <li class="nav-item d-flex align-items-center py-4 px-3">
                        <div class="ms-3">{{ __('layout.direct_referral_tree') }}</div>
                    </li>
                </a>
-               <a class="nav-link text-inverse fs-5 pb-0 border-bottom border-gray border-opacity-25" href="{{ route('profile.dashboard') }}">
-                   <li class="nav-item d-flex justify-content-between align-items-center py-3">
+               <a class="nav-link text-inverse fs-5 p-0 border-bottom border-gray border-opacity-25" href="{{ route('profile.dashboard') }}">
+                   <li class="nav-item d-flex align-items-center py-4 px-3">
                        <div class="ms-3">{{ __('user.dashboard') }}</div>
                    </li>
                </a>
-               <a class="nav-link text-inverse fs-5 pb-0 border-bottom border-gray border-opacity-25" href="{{ route('about') }}">
-                   <li class="nav-item d-flex justify-content-between align-items-center py-3">
+               <a class="nav-link text-inverse fs-5 p-0 border-bottom border-gray border-opacity-25" href="{{ route('about') }}">
+                   <li class="nav-item d-flex align-items-center py-4 px-3">
                        <div class="ms-3">{{ __('layout.company_about') }}</div>
                    </li>
                </a>
                --}}
-                <a class="nav-link text-inverse fs-5 pb-0 border-bottom border-gray border-opacity-25 px-3" href="{{ route('board.list', ['code' =>'product'])}}">
-                    <li class="nav-item d-flex justify-content-between align-items-center py-3">
-                        <div class="ms-3"><img src="{{ asset('/images/icon/list_icon_product.svg') }}" class="list-icon me-2"><span>{{ __('layout.product_intro') }}</span></div>
+                <a class="nav-link text-inverse fs-5 p-0 border-bottom border-gray border-opacity-25 px-3" href="{{ route('board.list', ['code' =>'product'])}}">
+                    <li class="nav-item d-flex align-items-center py-4 px-3">
+                        <img src="{{ asset('/images/icon/list_icon_product.svg') }}" class="list-icon me-2"><span>{{ __('layout.product_intro') }}</span>
                     </li>
                 </a>
-                <a class="nav-link text-inverse fs-5 pb-0 border-bottom border-gray border-opacity-25 px-3" href="{{ route('board.list', ['code' =>'guide'])}}">
-                    <li class="nav-item d-flex justify-content-between align-items-center py-3">
-                        <div class="ms-3"><img src="{{ asset('/images/icon/list_icon_guidebook.svg') }}" class="list-icon me-2"><span>{{ __('layout.guidebook') }}</span></div>
+                <a class="nav-link text-inverse fs-5 p-0 border-bottom border-gray border-opacity-25 px-3" href="{{ route('board.list', ['code' =>'guide'])}}">
+                    <li class="nav-item d-flex align-items-center py-4 px-3">
+                        <img src="{{ asset('/images/icon/list_icon_guidebook.svg') }}" class="list-icon me-2"><span>{{ __('layout.guidebook') }}</span>
                     </li>
                 </a>
-                <a class="nav-link text-inverse fs-5 pb-0 border-bottom border-gray border-opacity-25 px-3" href="{{ route('board.list', ['code' =>'terms'])}}">
-                    <li class="nav-item d-flex justify-content-between align-items-center py-3">
-                        <div class="ms-3"><img src="{{ asset('/images/icon/list_icon_terms.svg') }}" class="list-icon me-2"><span>{{ __('layout.terms') }}</span></div>
+                <a class="nav-link text-inverse fs-5 p-0 border-bottom border-gray border-opacity-25 px-3" href="{{ route('board.list', ['code' =>'terms'])}}">
+                    <li class="nav-item d-flex align-items-center py-4 px-3">
+                        <img src="{{ asset('/images/icon/list_icon_terms.svg') }}" class="list-icon me-2"><span>{{ __('layout.terms') }}</span>
                     </li>
                 </a>
                 <li class="px-3">

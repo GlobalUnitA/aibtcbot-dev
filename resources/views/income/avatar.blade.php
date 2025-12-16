@@ -2,33 +2,30 @@
 
 @section('content')
 <main class="container-fluid py-5 mb-5">
-    <h2 class="mb-3 text-center">{{ __('asset.profit_detail') }}</h2>
-    <hr>
-    <div class="g-3 py-5">
-        <div class="px-4 py-5 rounded bg-light text-body">
-            <div class="mb-4">
-                <div>
-                    <p class="text-body fs-4 m-0">{{ __('asset.total_referral_bonus_matching') }}</p>
-                    <h3 class="text-primary fs-6 mb-1">{{ $data['total_bonus'] }}</h3>
-                </div>
+    <div class="mb-4">
+        <h3 class="mb-3 text-center">{{ __('asset.profit_detail') }}</h3>
+    </div>
+    <div class="g-3 mb-5 content-d mt-0">
+        <div class="p-4 mb-4 tabbox_bg text-body box_b_line">
+            <div class="d-flex justify-content-between align-items-center box_b_line">
+                <p class="text-body fs-4 m-0">{{ __('asset.total_referral_bonus_matching') }}</p>
+                <h3 class="key_color fs-6 mb-1">{{ $data['total_bonus'] }}</h3>
             </div>
-            <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center box_b_line">
                 <div class="d-flex justify-content-between align-items-start">
                     <p class="text-body fs-4 m-0">{{ __('asset.total_external_withdrawal') }}</p>
                     {{--<a href="{{ route('avatar.swap') }}" class="btn btn-primary fs-4 py-1 px-3">swap</a> 아바타 스왑 기능 해제--}}
                 </div>
-                <h3 class="text-primary fs-6 mb-1">0</h3>
+                <h3 class="key_color fs-6 mb-1">0</h3>
             </div>
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <p class="text-body fs-4 m-0">{{ __('asset.current_balance') }}</p>
-                    <h3 class="text-primary fs-6 mb-1">{{ $data['total_balance'] }}</h3>
-                </div>
+            <div class="d-flex justify-content-between align-items-center box_b_line mb-0">
+                <p class="text-body fs-4 m-0">{{ __('asset.current_balance') }}</p>
+                <h3 class="key_color fs-6 mb-1">{{ $data['total_balance'] }}</h3>
             </div>
         </div>
     </div>
-    <div class="table-responsive pb-5">
-        <table class="table table-striped table-bordered">
+    <div class="table-responsive pb-5 table-nstyle">
+        <table class="table">
             <thead class="mb-2">
                 <tr>
                     <th>{{ __('system.date') }}</th>

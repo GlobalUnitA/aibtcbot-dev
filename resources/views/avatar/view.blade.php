@@ -1,37 +1,31 @@
 @extends('layouts.master')
 
 @section('content')
-    <main class="container-fluid py-5 mb-5">
-        <div class="pb-3 mb-2">
+    <main class="container-fluid py-5 mb-5 px-4 content-d">
+        <div class="mb-3 tabbox_bg">
             <div class="justify-content-start align-items-center">
-                <p class="mb-4 ps-3 position-relative fs-4">
+                <p class="mb-3 position-relative fs-4">
                     UID<span class="fw-semibold d-inline-block ps-2">{{ $view->member->member_id }}</span>
                 </p>
-                <p class="mb-4 ps-3 position-relative fs-4">
+                <p class="mb-0 position-relative fs-4">
                     가입상품<span class="fw-semibold d-inline-block ps-2">50 USDT</span>
                 </p>
             </div>
         </div>
         <div class="g-3">
-            <div class="px-4 py-3 rounded bg-light text-body">
-                <h2 class="mb-2 fs-4">{{ __('asset.team_info') }}</h2>
-                <div class="mb-4">
-                    <div class="d-flex justify-content-between align-items-start">
-                        <p class="text-body fs-4 m-0">{{ __('asset.referral_count') }}</p>
-                    </div>
-                    <h3 class="text-primary fs-6 mb-1">{{ $view->member->referral_count  }}</h3>
+            <div class="px-4 py-3 text-body tabbox">
+                <h2 class="mb-3 fs-5">{{ __('asset.team_info') }}</h2>
+                <div class="mb-2 d-flex gap-4">
+                    <p class="text-body fs-4 m-0">{{ __('asset.referral_count') }}</p>
+                    <h3 class="fs-5 mb-0"  >{{ $view->member->referral_count  }}</h3>
                 </div>
-                <div class="mb-4">
-                    <div>
-                        <p class="text-body fs-4 m-0">{{ __('asset.child_count') }}</p>
-                        <h3 class="text-primary fs-6 mb-1">{{ collect($view->member->getChildrenTree())->map->count()->sum() }}</h3>
-                    </div>
+                <div class="mb-2 d-flex gap-4">
+                    <p class="text-body fs-4 m-0">{{ __('asset.child_count') }}</p>
+                    <h3 class="fs-5 mb-0" style="color:#ff7e00;">{{ collect($view->member->getChildrenTree())->map->count()->sum() }}</h3>
                 </div>
-                <div class="mb-4">
-                    <div>
-                        <p class="text-body fs-4 m-0">{{ __('asset.total_group_sales') }}</p>
-                        <h3 class="text-primary fs-6 mb-1">{{ $view->member->getGroupSales() }}</h3>
-                    </div>
+                <div class="mb-0 d-flex gap-4">
+                    <p class="text-body fs-4 m-0">{{ __('asset.total_group_sales') }}</p>
+                    <h3 class="fs-5 mb-0" style="color:#ff7e00;">{{ $view->member->getGroupSales() }}</h3>
                 </div>
             </div>
         </div>

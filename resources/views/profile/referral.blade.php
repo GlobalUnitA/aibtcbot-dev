@@ -8,11 +8,11 @@
         <div class="table-responsive overflow-x-auto">
             <div class="pt-2 avatar_list">
                 @foreach ($referrals as $referral)
-                    <div class="text-body mb-2 tabbox">
+                    <div class="text-body mb-2 referral_box referral_{{ $level }}">
                         <a href="{{ route('profile.referral', ['id' => $referral->id]) }}">
                             <div class="d-flex align-items-center mb-2">
                                 <p class="text-body fs-5 m-0 me-2">{{ __('Level') }}</p>
-                                <p class="text-body fs-5 m-0 referral_{{ $level }}">{{ $level }}</p>
+                                <p class="text-body fs-5 m-0">{{ $level }}</p>
                             </div>
                             <div class="mb-2">
                                 <div class="d-flex">
