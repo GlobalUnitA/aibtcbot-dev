@@ -49,9 +49,10 @@ return array (
   'close' => 'Close',
   'modify_notice' => 'Successfully Updated.',
   'maturity_at' => 'Repayment Date',
-  'instant' => 'Right now',
+  'instant' => 'Right Now',
   'split' => 'Installment',
   'active' => 'Activate',
   'inactive' => 'Inactivate',
   'notice_label' => 'Notices',
+  'joined_at' => 'Date of Registration',
 );

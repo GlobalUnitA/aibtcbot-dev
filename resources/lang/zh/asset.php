@@ -95,4 +95,5 @@ return array (
   'withdrawable_amount' => '实际可提金额',
   'max_withdrawable_amount_guide' => '已超出最大可提金额。',
   'total_avatar_cost' => '虚拟账户生成金额合计',
+  'referrer_info' => '推荐信息',
 );

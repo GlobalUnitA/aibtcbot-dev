@@ -54,4 +54,5 @@ return array (
   'active' => '活性',
   'inactive' => '非活性',
   'notice_label' => 'お知らせ',
+  'joined_at' => '登録日',
 );

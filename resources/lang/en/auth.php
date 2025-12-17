@@ -16,7 +16,7 @@ return array (
   'verify' => 'Verify',
   'verify_code_sent_notice' => 'The verification code has been sent.',
   'email_verification_notice' => 'Verification successful.',
-  'user_not_found' => 'Cannot find matching information.',
+  'user_not_found' => 'Cannot find matching user information.',
   'join' => 'Sign Up',
   'logout' => 'Log Out',
   'id_already_taken_notice' => 'This username is already taken.',

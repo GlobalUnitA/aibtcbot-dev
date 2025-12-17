@@ -95,4 +95,5 @@ return array (
   'withdrawable_amount' => '실출금가능액',
   'max_withdrawable_amount_guide' => '최대 출금 가능 금액을 초과하였습니다.',
   'total_avatar_cost' => '아바타 생성 금액 합계',
+  'referrer_info' => '추천정보',
 );

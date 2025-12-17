@@ -95,4 +95,5 @@ return array (
   'withdrawable_amount' => 'Actual Withdrawable Amount',
   'max_withdrawable_amount_guide' => 'You have exceeded the maximum withdrawal amount.',
   'total_avatar_cost' => 'Total Amount for Virtual Account Creation',
+  'referrer_info' => 'Referral Information',
 );

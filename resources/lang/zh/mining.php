@@ -26,4 +26,5 @@ return array (
   'reward_count' => '收益产生次数',
   'participation_amount' => '参与商品金额',
   'avatar_cost' => '虚拟账号扣减',
+  'entry_amount' => '参与数量',
 );

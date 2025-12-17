@@ -16,7 +16,7 @@ return array (
   'verify' => 'Xác minh',
   'verify_code_sent_notice' => 'Mã xác minh đã được gửi.',
   'email_verification_notice' => 'Xác minh thành công.',
-  'user_not_found' => 'Không tìm thấy thông tin.',
+  'user_not_found' => 'Không tìm thấy thông tin người dùng.',
   'join' => 'Đăng ký',
   'logout' => 'Đăng xuất',
   'id_already_taken_notice' => 'Tên đăng nhập đã được sử dụng',

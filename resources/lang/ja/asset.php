@@ -95,4 +95,5 @@ return array (
   'withdrawable_amount' => '実際の出金可能額',
   'max_withdrawable_amount_guide' => '最大出金可能額を超えました。',
   'total_avatar_cost' => 'バーチャルアカウント生成金額の合計',
+  'referrer_info' => '紹介情報',
 );

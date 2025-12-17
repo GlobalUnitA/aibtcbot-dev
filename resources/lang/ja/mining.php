@@ -26,4 +26,5 @@ return array (
   'reward_count' => '収益発生回数',
   'participation_amount' => '商品参加金額',
   'avatar_cost' => 'アバターの差し引き',
+  'entry_amount' => '参加数量',
 );

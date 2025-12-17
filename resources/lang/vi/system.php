@@ -49,9 +49,10 @@ return array (
   'close' => 'Đóng',
   'modify_notice' => 'Chỉnh sửa thành công.',
   'maturity_at' => 'Ngày thanh toán',
-  'instant' => 'Trả',
-  'split' => 'Trả',
+  'instant' => 'Thanh toán ngay',
+  'split' => 'Trả góp',
   'active' => 'Kích hoạt',
   'inactive' => 'Vô hiệu hóa',
   'notice_label' => 'Thông báo',
+  'joined_at' => 'Ngày đăng ký',
 );

@@ -26,4 +26,5 @@ return array (
   'reward_count' => 'Số lần phát sinh lợi nhuận',
   'participation_amount' => 'Số tiền tham gia sản phẩm',
   'avatar_cost' => 'Khấu trừ avatar',
+  'entry_amount' => 'Số lượng tham gia',
 );

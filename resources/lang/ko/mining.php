@@ -26,4 +26,5 @@ return array (
   'reward_count' => '수익 발생 횟수',
   'participation_amount' => '상품 참여금액',
   'avatar_cost' => '아바타 차감',
+  'entry_amount' => '참여수량',
 );

@@ -26,4 +26,5 @@ return array (
   'reward_count' => 'Number of Profit Occurrences',
   'participation_amount' => 'Participation Amount',
   'avatar_cost' => 'Avatar deduction',
+  'entry_amount' => 'Participation',
 );

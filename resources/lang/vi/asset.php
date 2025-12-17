@@ -95,4 +95,5 @@ return array (
   'withdrawable_amount' => 'Số tiền có thể thực rút',
   'max_withdrawable_amount_guide' => 'Bạn đã vượt quá số tiền rút tối đa.',
   'total_avatar_cost' => 'Tổng số tiền tạo tài khoản ảo',
+  'referrer_info' => 'Thông tin giới thiệu',
 );

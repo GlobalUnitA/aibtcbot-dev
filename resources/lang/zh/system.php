@@ -55,4 +55,5 @@ return array (
   'active' => '激活',
   'inactive' => '未激活',
   'notice_label' => '提示信息',
+  'joined_at' => '推荐人信息',
 );

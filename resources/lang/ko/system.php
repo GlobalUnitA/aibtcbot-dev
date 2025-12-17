@@ -54,4 +54,5 @@ return array (
   'active' => '활성',
   'inactive' => '비활성',
   'notice_label' => '안내사항',
+  'joined_at' => '가입일',
 );
