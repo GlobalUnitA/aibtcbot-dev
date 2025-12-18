@@ -37,9 +37,6 @@ class TestController extends Controller
         $this->kakaoApi = new KakaoApi();;
     }
 
-
-
-    //테스트 주석 2
    public function index()
     {
 
