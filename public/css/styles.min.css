@@ -17554,6 +17554,27 @@ input.style-no:-webkit-autofill:active {
     -webkit-text-fill-color: #000 !important;
 }
 
+input.style-no-bon {
+    caret-color: #000 !important; /* 커서 색상 흰색 */
+    color: #000 !important; /* 혹시 모를 기본 텍스트 색상 */
+    -webkit-text-fill-color: #000 !important;
+}
+
+input.style-no-bon:-webkit-autofill,
+input.style-no-bon:-webkit-autofill:hover,
+input.style-no-bon:-webkit-autofill:focus,
+input.style-no-bon:-webkit-autofill:active {
+    /* 핵심: 배경색 변경을 5000초 동안 천천히 하도록 설정 -> 사실상 변경 안 됨 */
+    transition: background-color 5000s ease-in-out 0s;
+    /* 텍스트 색상을 흰색으로 강제 고정 */
+    -webkit-text-fill-color: #000 !important;
+}
+
+
+
+
+
+
 .box-outline:focus-within{
   border-color: #ff7e00;
 }
@@ -17753,11 +17774,14 @@ footer.footerContainer{
   left:12px;
 }
 /*sign up page style 변경*/
-.register_n .form_line{
+.form_line{
   position: relative;
   gap: 0 5px;
 }
-.register_n .form_line .form-label{
+.form_line.keycolor .form-control{
+  border-color: #ff7e00;
+}
+.form_line .form-label{
   position: absolute;
   left: 15px;
   top: -15px;
@@ -17766,6 +17790,46 @@ footer.footerContainer{
   padding: 5px 10px;
 }
 
+.form_line .upbox_line{
+  border-radius: 20px;
+  width: 100%;
+  padding: 15px;
+  line-height: 1.5;
+    color: var(--bs-inverse);
+    background-color: transparent;
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid #ff7e00;
+}
+
+.upbox_line .preview-box{
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border-radius: 10px;
+  padding: 0px !important;
+  overflow: hidden;
+  background-color: #eee;
+}
+.form_line.keycolor textarea{
+  resize: none;
+}
+.upbox_line .preview-box .icon-plus {
+  width: 100%;
+  height: 100%;
+  fill: #999;
+  cursor: pointer;
+  padding:30px;
+}
+
+.upbox_line .preview-box .img-preview{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #fff;
+}
 .register_n .form-label.required::after{
   content: "*";
   color: #dc3545;
@@ -17773,7 +17837,43 @@ footer.footerContainer{
   font-weight: bold;
 }
 
-.register_n .form-control {
+/* 아이콘 들어갈 padding 확보 */
+.register_n .form_line .form-control.required {
+  padding-right: calc(1.5em + 0.75rem);
+}
+
+/* 기본: valid면 체크 표시 (버튼 없는 줄) */
+.register_n .form_line:has(> .form-control.required:valid)::after {
+  content: "";
+  position: absolute;
+  right: calc(0.375em + 0.1875rem);
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(0.75em + 0.375rem);
+  height: calc(0.75em + 0.375rem);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+}
+
+/* account 줄(버튼 있음): 아이콘을 버튼 왼쪽으로 당기기 */
+.register_n .form_line.line_btn:has(> .form-control.required:valid)::after {
+  right: calc(175px + 12px); /* 버튼 max-width + 여백 (필요하면 조절) */
+}
+
+/* invalid-feedback 표시 로직은 기존 그대로 */
+.register_n .form-control.required:invalid:not(:placeholder-shown) ~ .invalid-feedback {
+  display: block;
+}
+
+.register_n .form_line .form-control.required:valid{
+  background-image: none;
+}
+
+
+.form_line .form-control {
   border-radius: 20px;
   width: 100%;
   padding: 15px;
@@ -17786,36 +17886,13 @@ footer.footerContainer{
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 
-.register_n .form-control.required:invalid:not(:placeholder-shown) {
-  border-color: #f25a5a;
-  padding-right: calc(1.5em + 0.75rem);
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right calc(0.375em + 0.1875rem) center;
-  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
-}
-
-/* 빈 상태이면서 :placeholder-shown이 아닐 때 포커스 스타일 */
-.register_n .form-control.required:invalid:not(:placeholder-shown):focus {
-  border-color: #dc3545;
-  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
-}
-
 /* 유효한 입력 상태 스타일 */
 .register_n .form-control.required:valid {
   border-color: #198754;
-  padding-right: calc(1.5em + 0.75rem);
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right calc(0.375em + 0.1875rem) center;
-  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 
-/* 빈 상태이면서 :placeholder-shown이 아닐 때만 에러 메시지 표시 */
-.register_n .form-control.required:invalid:not(:placeholder-shown) ~ .invalid-feedback {
-  display: block;
-}
-.key_color{color:#ff7e00;}
+
+.key_color{color:#ff7e00 !important;}
 .tab-button{
   justify-content: center;
   gap:0 5px;
@@ -17892,10 +17969,10 @@ footer.footerContainer{
 .table-nstyle table tbody tr{
   border-bottom: 1px solid #ededed;
 }
-/* .table-nstyle table tbody tr:nth-child(odd){
+.table-nstyle table tbody.box-gray tr:nth-child(odd){
   background-color:#f9f9fa;
-} */
-.table-nstyle table thead tr th, .table-nstyle table tbody tr td {
+}
+.table-nstyle table tr th, .table-nstyle table tr td{
   border: 0 !important;
   background-color: transparent;
 }
@@ -17931,6 +18008,7 @@ footer.footerContainer{
 }
 .avatar_list .referral_1{
   background-color: #fff5e7;
+  border: 1px solid #fff5e7;
 }
 .avatar_list [class*="referral_"]:not(.referral_1) {
   border: 1px solid #ff7e00;
@@ -18026,9 +18104,9 @@ footer.footerContainer{
 [data-bs-theme=dark] .content-d .tabbox p.idtext{
   color: #a0b4f8 !important;
 }
-/* [data-bs-theme=dark] .table-nstyle table tbody tr:nth-child(odd){
+[data-bs-theme=dark] .table-nstyle table tbody.box-gray tr:nth-child(odd){
   background-color:#000;
-} */
+}
 [data-bs-theme=dark] .table-nstyle table thead tr{
   border-bottom:1px solid #aaa;
   background-color:#1d1d1d;
@@ -18038,6 +18116,23 @@ footer.footerContainer{
 }
 [data-bs-theme=dark] .box_b_line > div.box_b_line{
   border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+}
+
+[data-bs-theme=dark] .avatar_list .referral_1{
+  background-color: #000;
+  border: 1px solid #000;
+}
+[data-bs-theme=dark] .avatar_list [class*="referral_"]:not(.referral_1) {
+  border: 1px solid #fff;
+}
+
+[data-bs-theme=dark] .referral_box [class*="referral_"]:not(.referral_1) .level_t{
+  border-bottom: 1px solid #fff;
+}
+[data-bs-theme=dark] .input_like{
+  border-color: #505050;
+  background-color: #333;
+  color: #666;
 }
 
 @media (max-width: 479px) {

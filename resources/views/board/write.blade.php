@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<main class="container-fluid py-5 mb-5">
+<main class="container-fluid py-5 mb-5 px-4">
     @if($mode == 'write')
     <form method="POST" action="{{ route('board.write') }}" id="boardForm">
     @else
@@ -13,63 +13,51 @@
         <input type="hidden" name="post_id" value="{{ $view->id }}">
         @endif
         <div class="mb-4">
-            <h5 class="card-title">
+            <h3 class="text-center">
                 @if($mode == 'write')
                 {{ $board->locale_name }}
                 @else
                 {{ $board->locale_name }}
                 @endif
-            </h5>
+            </h3>
         </div>
-        <div class="mb-4">
-            <label for="subject" class="form-label fw-bold">{{ __('system.title') }}</label>
+        <div class="mb-4 form_line keycolor">
+            <label for="subject" class="form-label fw-bold style-no">{{ __('system.title') }}</label>
             <input type="text" class="form-control" id="subject" name="subject" value="{{ $view->subject ?? '' }}" >
         </div>
-        <div class="mb-4">
+        <div class="mb-4 form_line keycolor">
             <label for="content" class="form-label fw-bold">{{ __('system.contents') }}</label>
             <textarea name="content" id="content" class="form-control" rows="12"></textarea>
         </div>
-        <div class="mb-4">
+        <div class="mb-4 form_line keycolor">
             <label for="content" class="form-label fw-bold">{{ __('etc.image_upload') }}</label>
-            <div class="d-flex">
-                <div class="preview-box" style="width: 60px; height: 60px; position: relative;">
+            <div class="d-flex upbox_line gap-2">
+                <div class="preview-box">
                     <label style="display: block; width: 100%; height: 100%; position: relative;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#adb5bd"
-                             class="cursor-pointer svg-icon p-2"
-                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; cursor: pointer; border-radius: 4px;"
-                             viewBox="0 0 16 16">
-                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon-plus">
+                            <path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
                         </svg>
-                        <img src="" class="img-preview d-none cursor-pointer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border: 3px solid #adb5bd; border-radius: 4px;">
+                        <img src="" class="img-preview d-none cursor-pointer">
                         <input type="file" name="image_urls[0]" class="file-input d-none" accept="image/jpeg, image/png">
                         <input type="hidden" name="file_key[]">
                     </label>
                 </div>
-                <div class="preview-box" style="width: 60px; height: 60px; position: relative;">
+                <div class="preview-box">
                     <label style="display: block; width: 100%; height: 100%; position: relative;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#adb5bd"
-                             class="cursor-pointer svg-icon p-2"
-                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; cursor: pointer; border-radius: 4px;"
-                             viewBox="0 0 16 16">
-                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon-plus">
+                            <path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
                         </svg>
-                        <img src="" class="img-preview d-none cursor-pointer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border: 3px solid #adb5bd; border-radius: 4px;" />
+                        <img src="" class="img-preview d-none cursor-pointer">
                         <input type="file" name="image_urls[1]" class="file-input d-none" accept="image/jpeg, image/png">
                         <input type="hidden" name="file_key[]">
                     </label>
                 </div>
-                <div class="preview-box" style="width: 60px; height: 60px; position: relative;">
+                <div class="preview-box">
                     <label style="display: block; width: 100%; height: 100%; position: relative;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" fill="#adb5bd"
-                             class="cursor-pointer svg-icon p-2"
-                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; cursor: pointer; border-radius: 4px;"
-                             viewBox="0 0 16 16">
-                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon-plus">
+                            <path d="M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
                         </svg>
-                        <img src="" class="img-preview d-none cursor-pointer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; border: 3px solid #adb5bd; border-radius: 4px;" />
+                        <img src="" class="img-preview d-none cursor-pointer">
                         <input type="file" name="image_urls[2]" class="file-input d-none" accept="image/jpeg, image/png">
                         <input type="hidden" name="file_key[]">
                     </label>
@@ -77,15 +65,13 @@
             </div>
         </div>
         <div class="mb-4">
-            <div class="d-flex justify-content-end align-items-center">
-                <div class="d-flex w-100 justify-content-between align-items-center">
-                    <a href="{{ route('board.list', ['code' => $board->board_code ])}}" class="btn btn-secondary">{{ __('system.list') }}</a>
-                    @if($mode == 'write')
-                    <button type="submit" class="btn btn-inverse">{{ __('layout.submit_request') }}</button>
-                    @else
-                    <button type="submit" class="btn btn-info">{{ __('system.modify') }}</button>
-                    @endif
-                </div>
+            <div class="d-flex justify-content-start flex-column w-100 align-items-start gap-4">
+                @if($mode == 'write')
+                <button type="submit" class="btn btn-primary w-100 py-9 fs-4 mt-2 rounded-3">{{ __('layout.submit_request') }}</button>
+                @else
+                <button type="submit" class="btn btn-primary w-100 py-9 fs-4 mt-5 rounded-3">{{ __('system.modify') }}</button>
+                @endif
+                <a href="{{ route('board.list', ['code' => $board->board_code ])}}" class="btn btn-inverse">{{ __('system.list') }}</a>
             </div>
         </div>
     </form>

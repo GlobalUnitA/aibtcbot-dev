@@ -263,3 +263,14 @@ $(document).ready(function() {
 });
 
 
+//regisiter number check
+document.addEventListener('DOMContentLoaded', () => {
+  const phoneInput = document.getElementById('inputPhone');
+
+  // inputPhone no play
+  if (!phoneInput) return;
+
+  phoneInput.addEventListener('input', () => {
+    phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '');
+  });
+});

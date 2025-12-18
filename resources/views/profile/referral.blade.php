@@ -3,7 +3,7 @@
 @section('content')
     <main class="container-fluid py-5 mb-5">
         <div class="mb-4">
-            <h3 class="text-center">{{ __('asset.referrer_info') }}</h3>
+            <h3>{{ __('asset.referrer_info') }}</h3>
         </div>
         <div class="table-responsive overflow-x-auto">
             <div class="pt-2 avatar_list">

@@ -4,7 +4,7 @@
 
 <main class="container-fluid py-5 mb-5 px-4">
     <div class="mb-4">
-        <h3 class="text-center">{{ __('user.dashboard') }}</h3>
+        <h3>{{ __('user.dashboard') }}</h3>
     </div>
     <div class="mb-5">
         <ul class="nav nav-underline tab-button mb-3 fs-6" id="dashboard-tab" role="tablist">

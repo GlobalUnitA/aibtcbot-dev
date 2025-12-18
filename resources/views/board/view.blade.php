@@ -10,7 +10,7 @@
     </div>
     <div class="post-info mb-2">
         <span class="me-3"><i class="bi bi-clock"></i> {{ __('system.created_at') }}:{{ $view->created_at->format('Y-m-d') }}</span>
-    </div>
+    </div>fgdrsedffdswadfsfgsdf  gdfgftdfgesddfdgrrdhfsdfhfghdfrgd
 
     <div class="post-content py-4 px-2 mb-3 fs-4">
     @if ($board->is_popup == 'y')
@@ -65,7 +65,7 @@
     <hr>
     <div class="d-flex justify-content-start align-items-center mb-5">
         <div>
-            <a href="{{ route('board.list', ['code' => $board->board_code ])}}" class="btn btn-primary">{{ __('system.list') }}</a>
+            <a href="{{ route('board.list', ['code' => $board->board_code ])}}" class="btn btn-inverse">{{ __('system.list') }}</a>
         </div>
     </div>
 </main>

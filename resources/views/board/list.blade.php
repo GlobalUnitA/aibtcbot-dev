@@ -2,32 +2,34 @@
 
 @section('content')
 
-<main class="container-fluid py-5">
-    <div class="mb-3 d-flex justify-content-between">
-        <h3>{{ $board->locale_name }}</h3>
+<main class="container-fluid py-5 mb-5 px-4">
+    <div class="mb-3 text-end">
+        <h3 class="text-center">{{ $board->locale_name }}</h3>
         @if($board->board_code == 'qna')
         <a class="btn btn-primary" href="{{ route('board.view', ['code' => $board->board_code, 'mode' => 'write']) }}">{{ __('layout.submit_request') }}</a>
         @endif
     </div>
-    <div class="table-responsive">
-        <table class="table text-nowrap align-middle mb-0 table-striped table-hover bg-body">
-            <thead>
+    <div class="table-responsive table-nstyle">
+        <table class="table text-nowrap align-middle mb-0 table-hover bg-body">
+            {{-- <thead>
                 <tr class="border-2 border-bottom border-primary border-0"> 
                     <th scope="col" class="ps-0 text-center text-body">{{ __('system.number') }}</th>
                     <th scope="col" class="text-center text-body">{{ __('system.title') }}</th>
                     <th scope="col" class="text-center text-body">{{ __('system.date') }}</th>
                 </tr>
-            </thead>
-            <tbody class="table-group-divider">
+            </thead> --}}
+            <tbody class="box-gray">
+                <tr style="cursor:pointer;">
                 @if($list->isNotEmpty())
                 @foreach ($list as $key => $value)
                 <tr style="cursor:pointer;" onclick="window.location='{{ route('board.view', ['code' => $board->board_code, 'mode' => 'view', 'id' => $value->id]) }}';">
-                    <th scope="row" class="ps-0 fw-medium text-center">{{ $list->firstItem() + $key }}</th>
-                    <td class="text-center">
-                        {{ $value->subject }}
-                        
+                @if(!in_array($board->board_code, ['notice', 'terms', 'guide']))
+                    <th scope="row" class="fw-medium key_color" width="10%">{{ $list->firstItem() + $key }}</th>
+                @endif
+                    <td width="70%">
+                        {{ $value->subject }}                
                     </td>
-                    <td class="text-center">{{ $value->created_at->format('Y-m-d') }}</td>
+                    <td width="20%">{{ $value->created_at->format('Y-m-d') }}</td>
                 </tr>
                 @endforeach
                 @else

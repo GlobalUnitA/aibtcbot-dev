@@ -3,7 +3,7 @@
 @section('content')
 <main class="container-fluid py-5 mb-5">
     <div class="mb-4">
-        <h3 class="mb-3 text-center">{{ __('asset.profit_detail') }}</h3>
+        <h3 class="mb-3">{{ __('asset.profit_detail') }}</h3>
     </div>
     <div class="g-3 mb-5 content-d mt-0">
         <div class="p-4 mb-4 tabbox_bg text-body box_b_line">

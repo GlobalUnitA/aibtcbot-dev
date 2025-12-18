@@ -5,7 +5,7 @@
     <div class="position-relative overflow-hidden min-vh-100 d-flex justify-content-center">
         <div class="d-flex justify-content-center w-100">
             <div class="row justify-content-center w-100">
-                <div class="py-3 col-sm-11 px-0">
+                <div class="py-3 px-0">
                     <div class="card mb-0">
                         <div class="px-4 py-2 text-end">
                             <a href="{{ url()->previous() }}">
@@ -13,24 +13,28 @@
                             </a>
                         </div>
                         <div class="card-body py-0 px-4 register_n">
-                            <div class="mb-4">
-                                <h3 class="text-center">{{ __('auth.sign_up') }}</h3>
+                            <div class="mb-7">
+                                <h3>{{ __('auth.sign_up') }}</h3>
                             </div>
                             <form method="POST" action="{{ route('register') }}" id="ajaxForm">
                                 @csrf
-                                <div class="mb-4 form_line d-flex">
+                                <div class="mb-4 form_line line_btn d-flex">
                                     <label for="inputAccount" class="form-label required">{{ __('auth.login_id') }}</label>
-                                    <input type="text" name="account" id="inputAccount" class="form-control required" required>
+                                    <input type="text" name="account" id="inputAccount" class="form-control required style-no-bon" required>
                                     <button type="button"  id="accountCheck" class="btn btn-primary rounded-5" style="width: auto;max-width: 175px;flex-shrink: 0;">{{ __('auth.duplicate_check') }}</button>
                                 </div>
-                                <div class="mb-4 form_line">
-                                    <label for="inputPassword1" class="form-label required">{{ __('auth.password') }}</label>
-                                    <input type="password" name="password"  id="inputPassword1" class="form-control required" required>
+                                <div class="mb-4">
+                                    <div class="form_line">
+                                        <label for="inputPassword1" class="form-label required">{{ __('auth.password') }}</label>
+                                        <input type="password" name="password"  id="inputPassword1" class="form-control required style-no-bon" required>
+                                    </div>
                                     <div id="msg_password_guide" class="form-text">{{ __('auth.password_guide') }}</div>
                                 </div>
-                                <div class="mb-4 form_line">
-                                    <label for="inputPassword2" class="form-label required">{{ __('auth.confirm_password') }}</label>
-                                    <input type="password" name="password_confirmation" id="inputPassword2" class="form-control required" required>
+                                <div class="mb-4">
+                                    <div class="form_line">
+                                        <label for="inputPassword2" class="form-label required">{{ __('auth.confirm_password') }}</label>
+                                        <input type="password" name="password_confirmation" id="inputPassword2" class="form-control required style-no-bon" required>
+                                    </div>
                                     <div class="form-text">{{ __('auth.password_guide') }}</div>
                                 </div>
                                 <div class="mb-4 form_line">
@@ -43,7 +47,7 @@
                                 </div>
                                 <div class="mb-4 form_line">
                                     <label for="inputEmail" class="form-label required">{{ __('user.email') }}</label>
-                                    <input type="email" name="email" id="inputEmail" class="form-control required" required>
+                                    <input type="email" name="email" id="inputEmail" class="form-control required style-no-bon" required>
                                     {{-- <button type="button" id="verifyCode" class="btn btn-primary rounded-end-3">{{ __('system.send') }}</button> 이메일 인증 무효 --}}
                                 </div>
                                 {{-- 이메일 인증 무효
@@ -54,7 +58,7 @@
                                 --}}
                                 <div class="mb-4 form_line">
                                     <label for="inputReferrerId" class="form-label required">{{ __('user.recommender_uid') }}</label>
-                                    <input type="text" name="referrerId" id="inputReferrerId" @if($mid)value="{{ $mid }}"@endif class="form-control required" required>
+                                    <input type="text" name="referrerId" id="inputReferrerId" @if($mid)value="{{ $mid }}"@endif class="form-control required style-no-bon" required>
                                 </div>
                                 <div class="mb-4 form_line">
                                     <label for="inputMetaUid" class="form-label">{{ __('user.meta_id') }}</label>
