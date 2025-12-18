@@ -1,11 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container py-5">
-    <h2 class="mb-3 text-center">{{ __('asset.profit_detail') }}</h2>
-    <hr>
-    <div class="table-responsive overflow-x-auto mb-5">
-        <table class="table table-striped table-bordered break-keep-all m-0 mb-5">
+<div class="container py-5 mb-5 px-4">
+    <div class="mb-4">
+        <h3>{{ __('asset.profit_detail') }}</h3>
+    </div>
+    <div class="table-responsive overflow-x-auto mb-5 table-nstyle">
+        <table class="table">
             <thead class="mb-2">
                 <tr>
                     <th>{{ __('system.date') }}</th>

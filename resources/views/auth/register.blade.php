@@ -18,10 +18,12 @@
                             </div>
                             <form method="POST" action="{{ route('register') }}" id="ajaxForm">
                                 @csrf
-                                <div class="mb-4 form_line line_btn d-flex">
-                                    <label for="inputAccount" class="form-label required">{{ __('auth.login_id') }}</label>
-                                    <input type="text" name="account" id="inputAccount" class="form-control required style-no-bon" required>
-                                    <button type="button"  id="accountCheck" class="btn btn-primary rounded-5" style="width: auto;max-width: 175px;flex-shrink: 0;">{{ __('auth.duplicate_check') }}</button>
+                                <div class="mb-4 d-flex gap-2">
+                                    <div class="d-flex form_line line_btn w-100">
+                                        <label for="inputAccount" class="form-label required">{{ __('auth.login_id') }}</label>
+                                        <input type="text" name="account" id="inputAccount" class="form-control required style-no-bon" required>
+                                    </div>
+                                        <button type="button"  id="accountCheck" class="btn btn-primary rounded-5" style="width: auto;max-width: 175px;flex-shrink: 0;">{{ __('auth.duplicate_check') }}</button>
                                 </div>
                                 <div class="mb-4">
                                     <div class="form_line">

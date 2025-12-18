@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<main class="container-fluid py-5 mb-5">
+<main class="container-fluid py-5 mb-5 px-4">
     <div class="mb-4">
         <h3 class="mb-3">{{ __('asset.profit_detail') }}</h3>
     </div>

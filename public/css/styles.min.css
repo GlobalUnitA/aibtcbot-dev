@@ -17842,6 +17842,8 @@ footer.footerContainer{
   padding-right: calc(1.5em + 0.75rem);
 }
 
+.form_line + button.btn{min-width: 100px;}
+
 /* 기본: valid면 체크 표시 (버튼 없는 줄) */
 .register_n .form_line:has(> .form-control.required:valid)::after {
   content: "";
@@ -17859,9 +17861,9 @@ footer.footerContainer{
 }
 
 /* account 줄(버튼 있음): 아이콘을 버튼 왼쪽으로 당기기 */
-.register_n .form_line.line_btn:has(> .form-control.required:valid)::after {
-  right: calc(175px + 12px); /* 버튼 max-width + 여백 (필요하면 조절) */
-}
+/* .register_n .form_line.line_btn:has(> .form-control.required:valid)::after {
+  right: calc(175px + 12px);
+} */
 
 /* invalid-feedback 표시 로직은 기존 그대로 */
 .register_n .form-control.required:invalid:not(:placeholder-shown) ~ .invalid-feedback {
@@ -18068,7 +18070,7 @@ footer.footerContainer{
   background-color: #000;
 }
 
-[data-bs-theme=dark] .register_n .form_line .form-label{
+[data-bs-theme=dark] .form_line .form-label{
   background-color: rgb(47, 47, 48);
 }
 
@@ -18134,6 +18136,21 @@ footer.footerContainer{
   background-color: #333;
   color: #666;
 }
+
+[data-bs-theme=dark] input.style-no-bon {
+    caret-color: #fff !important; /* 커서 색상 흰색 */
+    color: #fff !important; /* 혹시 모를 기본 텍스트 색상 */
+    -webkit-text-fill-color: #fff !important;
+}
+
+[data-bs-theme=dark] input.style-no-bon:-webkit-autofill,
+[data-bs-theme=dark] input.style-no-bon:-webkit-autofill:hover,
+[data-bs-theme=dark] input.style-no-bon:-webkit-autofill:focus,
+[data-bs-theme=dark] input.style-no-bon:-webkit-autofill:active {
+    /* 텍스트 색상을 흰색으로 강제 고정 */
+    -webkit-text-fill-color: #fff !important;
+}
+
 
 @media (max-width: 479px) {
   .container-fluid{
