@@ -8,7 +8,6 @@ use App\Models\Mining;
 use App\Models\MiningReward;
 use App\Models\MiningPolicy;
 use App\Models\User;
-use App\Models\KakaoApi;
 use App\Models\UserOtp;
 use App\Models\Admin;
 use App\Models\AdminOtp;
@@ -32,10 +31,6 @@ class TestController extends Controller
 {
     protected $kakaoApi;
 
-    public function __construct()
-    {
-        $this->kakaoApi = new KakaoApi();;
-    }
 
    public function index()
     {
