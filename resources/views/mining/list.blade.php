@@ -1,12 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container py-5">
-    <h2 class="mb-3 text-center">{{ __('mining.mining_list') }}</h2>
-    <hr>
+<div class="container py-5 mb-5 px-4">
+    <div class="mb-4">
+        <h3>{{ __('mining.mining_list') }}</h3>
+    </div>
     @foreach($minings as $mining)
-    <div class="table-responsive overflow-x-auto pt-3">
-        <table class="table table-striped table-bordered break-keep-all">
+    <div class="table-responsive overflow-x-auto pb-5 table-nstyle">
+        <table class="table break-keep-all">
             <thead class="mb-2">
                 <tr>
                     <th class="text-center" colspan="3">{{ $mining->product->mining_locale_name }}</th>

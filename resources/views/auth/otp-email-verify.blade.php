@@ -7,7 +7,7 @@
             <div class="row justify-content-center w-100">
                 <div class="py-3 px-0">
                     <div class="card mb-0">
-                        <div class="card-body px-4 py-5">
+                        <div class="card-body px-4 py-2">
                             <div class="mb-7">
                                 <h3>{{ __('system.security') }}</h3>
                             </div>

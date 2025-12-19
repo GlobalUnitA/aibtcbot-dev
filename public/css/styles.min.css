@@ -9225,6 +9225,10 @@ textarea.form-control-lg {
   height: 50px !important;
 }
 
+.h-75px {
+  height: 75px !important;
+}
+
 .h-100px {
   height: 100px !important;
 }
@@ -18025,6 +18029,22 @@ footer.footerContainer{
   border-bottom: 1px solid #ff7e00;
 }
 
+.bd-top-b{border-top:1px solid #333;}
+.bd-top-k{border-top:1px solid #ff7e00;}
+.bd-top-g{border-top:1px solid #ddd;}
+.bd-bottom-b{border-bottom:1px solid #333;}
+.bd-bottom-k{border-bottom:1px solid #ff7e00;}
+.bd-bottom-g{border-bottom:1px solid #ddd;}
+
+.list-group-item.list-item-line{
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  padding:0 0 10px 0;
+  margin: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+}
+.list-group-item.list-item-line:last-child{border-bottom: 0;}
+
 /*dark theme 작업*/
 [data-bs-theme=dark] .mid-icon a div img{
   filter:  brightness(0) invert(1);
@@ -18150,8 +18170,13 @@ footer.footerContainer{
     /* 텍스트 색상을 흰색으로 강제 고정 */
     -webkit-text-fill-color: #fff !important;
 }
-
-
+[data-bs-theme=dark] .placeholder-w::placeholder{color:#333;}
+[data-bs-theme=dark] .upbox_line .preview-box{
+  background-color: #555;
+}
+[data-bs-theme=dark] .upbox_line .preview-box .icon-plus{
+  fill: #777;
+}
 @media (max-width: 479px) {
   .container-fluid{
     padding-left: 1rem;

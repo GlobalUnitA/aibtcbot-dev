@@ -1,19 +1,17 @@
 @extends('layouts.master')
 
 @section('content')
-<header class="p-4 w-100 border-top-title" style="background: url('../images/tit_bg_01.png') center right no-repeat, #1e1e1f;" >
-    <h2 class="text-white mb-1 px-1">{{ __('AI BTC BOT') }}</h2>
-    <h6 class="text-white mb-4 px-1">{{ __('AI BTC BOT') }}</h6>
-    <div class="m-0 px-1">
+
+<main class="container-fluid py-5 mb-5 px-4">
+    <div class="mb-4 d-flex gap-2 justify-content-between align-items-center">
+        <h3 class="mb-0">{{ __('AI BTC BOT') }}</h3>
         <a href="{{ route('mining.list') }}">
             <h5 class="btn btn-header text-white border-0 m-0">{{ __('mining.mining_list') }}</h5>
         </a>
     </div>
-</header>
-<main class="container-fluid py-5 mb-5">
-    <div class="px-3 mb-5">
-        <fieldset class="mb-4">
-            <legend class="fs-4 text-body mb-3">{{ __('mining.select_mining_asset_guide') }}</legend>
+    <div class="mb-5 table-nstyle">
+        <fieldset>
+            <legend class="fs-4 text-body mb-3 mt-4">{{ __('mining.select_mining_asset_guide') }}</legend>
             <div class="d-grid d-grid-col-2 mb-3">
                 @foreach($assets as $asset)
                 <div>

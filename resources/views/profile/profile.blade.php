@@ -3,7 +3,7 @@
 @section('content')
 <main class="container-fluid py-5 mb-5 px-4">
     <div class="mb-4">
-        <h3 class="text-center">{{ __('user.user_info') }}</h3>    
+        <h3>{{ __('user.user_info') }}</h3>    
     </div>
     <form method="POST" action="{{ route('profile.update') }}" id="ajaxForm" class="mb-5">
         @csrf

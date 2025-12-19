@@ -4,7 +4,7 @@
 
 <main class="container-fluid py-5 mb-5 px-4">
     <div class="mb-3 text-end">
-        <h3 class="text-center">{{ $board->locale_name }}</h3>
+        <h3 class="text-start">{{ $board->locale_name }}</h3>
         @if($board->board_code == 'qna')
         <a class="btn btn-primary" href="{{ route('board.view', ['code' => $board->board_code, 'mode' => 'write']) }}">{{ __('layout.submit_request') }}</a>
         @endif
