@@ -45,23 +45,23 @@
 @endsection
 @push('script')
 <template id="miningDataTemplate">
-<div class="mb-4 miningData">
-<div class="bg-light w-100 p-4 rounded fs-5">
-    <div class="row g-3 text-start">
-        <div class="col-12 p-0">
-            <span class="fs-5 text-primary fw-semibold mining-name"></span>
+<div class="mb-4 miningData content-d">
+    <div class="bg-light w-100 p-4 rounded fs-5 text-end tabbox_bg">
+        <div class="g-3 text-start">
+            <div class="p-0 w-100">
+                <span class="fs-5 text-primary fw-semibold mining-name"></span>
+            </div>
+            <div class="d-flex align-items-center gap-5">
+                <p class="fs-4 fw-light m-0">{{ __('mining.max_node_amount') }}</p>
+                <p class="fs-6 m-0 fw-semibold text-body mining-limit"></p>
+            </div>
+            <div class="d-flex align-items-center gap-5">
+                <p class="fs-4 fw-light m-0">{{ __('mining.mining_period') }}</p>
+                <p class="fs-6 m-0 fw-semibold text-body mining-period"></p>
+            </div>
         </div>
-        <div class="col-6">
-            <p class="fs-4 fw-light m-0">{{ __('mining.max_node_amount') }}</p>
-            <p class="fs-6 m-0 fw-semibold text-body mining-limit"></p>
-        </div>
-        <div class="col-6">
-            <p class="fs-4 fw-light m-0">{{ __('mining.mining_period') }}</p>
-            <p class="fs-6 m-0 fw-semibold text-body mining-period"></p>
-        </div>
+        <button type="button" class="btn btn-primary py-2 mt-2 fs-4 mining-btn">{{ __('mining.participate') }}</button>
     </div>
-    <button type="button" class="btn btn-primary w-100 py-2 mt-4 fs-4 mining-btn">{{ __('mining.participate') }}</button>
-</div>
 </div>
 </template>
 <script src="{{ asset('js/mining/mining.js') }}"></script>
