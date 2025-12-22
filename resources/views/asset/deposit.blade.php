@@ -2,7 +2,7 @@
 
 @section('content')
 <main class="container-fluid py-5 mb-5 px-4 position-relative">
-    <div class="mb-4 d-flex gap-2 justify-content-between align-items-center">
+    <div class="mb-4 d-flex gap-2 justify-content-between">
         <h3 class="mb-0">{{ __('asset.deposit') }}</h3>
         <a href="{{ route('asset.deposit.list') }}">
             <h5 class="btn btn-header text-white border-0 m-0">{{ __('asset.deposit_list') }}</h5>

@@ -73,7 +73,7 @@
     </div>
     <div class="table-responsive pb-5 table-nstyle">
         <table class="table">
-            <thead class="mb-2">
+            <thead>
                 <tr>
                     <th>{{ __('system.date') }}</th>
                     <th>{{ __('system.amount') }}</th>

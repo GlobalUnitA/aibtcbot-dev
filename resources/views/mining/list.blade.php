@@ -8,7 +8,7 @@
     @foreach($minings as $mining)
     <div class="table-responsive overflow-x-auto pb-5 table-nstyle">
         <table class="table break-keep-all">
-            <thead class="mb-2">
+            <thead>
                 <tr>
                     <th class="text-center" colspan="3">{{ $mining->product->mining_locale_name }}</th>
                 </tr>

@@ -1,12 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container py-5">
-    <h2 class="mb-3 text-center">{{ __('asset.deposit_list') }}</h2>
-    <hr>
-    <div class="table-responsive overflow-x-auto">
-        <table class="table table-striped table-bordered break-keep-all m-0">
-            <thead class="mb-2">
+<div class="container py-5 mb-5 px-4">
+    <div class="mb-4">
+        <h3>{{ __('asset.deposit_list') }}</h3>
+    </div>
+        <div class="table-responsive overflow-x-auto table-nstyle">
+        <table class="table break-keep-all m-0">
+            <thead>
                 <tr>
                     <th>{{ __('system.request_date') }}</th>
                     <th>{{ __('system.waiting_period') }}</th>

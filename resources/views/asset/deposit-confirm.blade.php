@@ -1,17 +1,17 @@
 @extends('layouts.master')
 
 @section('content')
-<main class="container-fluid py-5 mb-5">
-    <div>
-        <div class="card border-0 shadow-sm mb-3">
+<main class="container-fluid py-5 mb-5 px-4">
+    <div class="content-d">
+        <div class="card mb-3 tabbox_bg">
             <div class="card-body text-center py-4">
-                <p class="text-muted fs-4 d-block mb-1">{{ __('asset.total_deposit_amount') }}</p>
+                <p class="fs-4 d-block mb-1 key_color">{{ __('asset.total_deposit_amount') }}</p>
                 <h3 class="fw-bold mb-0">{{ number_format($amount) }} {{ $asset->coin->name }}</h3>
             </div>
         </div>
 
-        <div class="card border-0 shadow-sm">
-            <div class="card-body p-3">
+        <div class="card content-d">
+            <div class="card-body p-3 tabbox">
                 <form method="POST" id="confirmForm" action = "{{ route('asset.deposit.store') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="asset" value="{{ $asset->encrypted_id }}">
@@ -33,10 +33,12 @@
                         <img id="imagePreview" class="d-none w-100 rounded" style="object-fit: contain; max-height: 200px;">
                     </div>
                     <div class="mb-5">
-                        <label class="form-label fs-4 text-body">{{ __('asset.usdt_deposit_address') }}</label>
-                        <div class="input-group">
-                            <input type="text" id="textToCopy" class="form-control" value="{{ $asset->coin->address }}" readonly>
-                            <button type="button" class="btn btn-dark rounded-end-3 copyBtn" data-copy="{{ $asset->coin->address }}">{{ __('system.copy') }}</button>
+                        <div class="d-flex gap-2">
+                            <div class="d-flex form_line line_btn w-100">
+                                <label class="form-label fs-4 text-body">{{ __('asset.usdt_deposit_address') }}</label>
+                                <input type="text" id="textToCopy" class="form-control style-no-bon" value="{{ $asset->coin->address }}" readonly>
+                            </div>
+                            <button type="button" class="btn btn-dark rounded-5 copyBtn" data-copy="{{ $asset->coin->address }}" style="width: auto;max-width: 175px;flex-shrink: 0;">{{ __('system.copy') }}</button>
                         </div>
                         <h6 class="mt-4 text-danger">{{ __('asset.usdt_deposit_notice') }}</h6>
                         <div class="alert alert-danger mb-2" role="alert">
@@ -46,12 +48,12 @@
                             {{ __('user.meta_id_guide_2') }}
                         </p>
                     </div>
-                    <div class="mb-4">
+                    <div class="mb-4 form_line">
                         <label class="form-label fs-4 text-body">TXID</label>
                         <input type="text" name="txid" class="form-control" placeholder="">
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100 py-3 mb-4">{{ __('system.apply') }}</button>
+                    <button type="submit" class="btn btn-primary w-100 py-9 fs-4 mt-4 rounded-3">{{ __('system.apply') }}</button>
                 </form>
             </div>
         </div>
