@@ -18045,6 +18045,11 @@ footer.footerContainer{
 }
 .list-group-item.list-item-line:last-child{border-bottom: 0;}
 
+.btn-posi-end{
+  position: absolute;
+  right: 0;
+  bottom: 0 ;
+}
 /*dark theme 작업*/
 [data-bs-theme=dark] .mid-icon a div img{
   filter:  brightness(0) invert(1);

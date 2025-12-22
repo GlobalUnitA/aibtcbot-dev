@@ -14,7 +14,7 @@
                 </div>
                 <div class="d-flex gap-3">
                     <p class="text-body fs-4 m-0">{{ __('mining.reward_count') }}</p>
-                    <h3 class="text-primary fs-5 mb-0">{{ $product->reward_limit }}</h3>
+                    <h3 class="key_color fs-5 mb-0">{{ $product->reward_limit }}</h3>
                 </div>
             </div>
         </div>
