@@ -46,10 +46,10 @@
 @push('script')
 <template id="miningDataTemplate">
 <div class="mb-4 miningData content-d">
-    <div class="bg-light w-100 p-4 rounded fs-5 text-end tabbox_bg">
+    <div class="w-100 p-4 rounded fs-5 text-end tabbox_bg">
         <div class="g-3 text-start">
-            <div class="p-0 w-100">
-                <span class="fs-5 text-primary fw-semibold mining-name"></span>
+            <div class="p-0 w-100 mb-2">
+                <span class="fs-5 key_color fw-semibold mining-name"></span>
             </div>
             <div class="d-flex align-items-center gap-5">
                 <p class="fs-4 fw-light m-0">{{ __('mining.max_node_amount') }}</p>
