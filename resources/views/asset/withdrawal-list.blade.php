@@ -1,9 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container py-5">
-    <h2 class="mb-3 text-center">{{ __('asset.withdrawal_list') }}</h2>
-    <hr>
+<div class="container py-5 px-4">
+    <div class="mb-4">
+        <h3>{{ __('asset.withdrawal_list') }}</h3>
+    </div>
     <div class="table-responsive overflow-x-auto">
         <table class="table table-striped table-bordered break-keep-all">
             <thead class="mb-2">

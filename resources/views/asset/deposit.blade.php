@@ -25,7 +25,7 @@
                 @endforeach
                 </div>  
             </fieldset>            
-            <div class="my-4">
+            <div class="my-4 form_line">
                 <label class="form-label text-body fs-4">{{ __('asset.deposit_amount_guide') }}</label>
                 <input type="text" name="amount" id="amount" placeholder="0" class="form-control mb-3 text-body">
             </div>
