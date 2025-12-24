@@ -5,13 +5,13 @@
     <div class="position-relative overflow-hidden d-flex justify-content-center">
         <div class="d-flex justify-content-center w-100">
             <div class="row justify-content-center w-100">
-                <div class="py-3 px-0">
+                <div class="py-0 px-0">
                     <div class="card mb-0">
-                        <div class="card-body px-4 py-2">
-                            <div class="mb-7">
+                        <div class="card-body px-4 py-5">
+                            <div class="mb-3">
                                 <h3>{{ __('system.security') }}</h3>
                             </div>
-                            <div class="pb-3  register_n">
+                            <div class="pb-3 pt-4 register_n">
                                 <h5 class="mb-4"> {{ __('auth.identity_verification') }} ({{ __('auth.email_verification') }})</h5>
                                 <form method="POST" action="{{ route('verify.code.send') }}" id="ajaxForm">
                                     @csrf
@@ -21,7 +21,7 @@
                                             <label for="inputAccount" class="form-label">{{ __('auth.email') }}</label>
                                             <input type="email" name="email" class="form-control required style-no-bon" required>
                                         </div>
-                                        <button type="submit" class="btn btn-primary rounded-5">{{ __('system.send') }}</button>
+                                        <button type="submit" class="btn btn-primary rounded-5" style="width: auto;max-width: 175px;flex-shrink: 0;">{{ __('system.send') }}</button>
                                     </div>
                                 </form>
                                 <form method="POST" action="  {{ route('verify.code.check') }}" id="verifyForm">
