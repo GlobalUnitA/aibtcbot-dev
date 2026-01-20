@@ -17788,10 +17788,12 @@ footer.footerContainer{
 .form_line .form-label{
   position: absolute;
   left: 15px;
-  top: -15px;
+  top: -10px;
   font-weight: 600;
   background-color: #fff;
-  padding: 5px 10px;
+  padding: 0 10px;
+  border-radius: 15px;
+  z-index: 2;
 }
 
 .form_line .upbox_line{
@@ -17884,6 +17886,8 @@ footer.footerContainer{
   width: 100%;
   padding: 15px;
   flex: 1;
+  position:relative;
+  z-index: 1;
 }
 
 /* 포커스 시 스타일 */
@@ -17996,7 +18000,7 @@ footer.footerContainer{
   padding: 8px 16px;
   font-size: 0.875rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 2.5;
   width: 100%;
 }
 

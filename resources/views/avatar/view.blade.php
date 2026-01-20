@@ -17,7 +17,7 @@
                 <h2 class="mb-3 fs-5">{{ __('asset.team_info') }}</h2>
                 <div class="mb-2 d-flex gap-4">
                     <p class="text-body fs-4 m-0">{{ __('asset.referral_count') }}</p>
-                    <h3 class="fs-5 mb-0"  >{{ $view->member->referral_count  }}</h3>
+                    <h3 class="fs-5 mb-0" style="color:#ff7e00;">{{ $view->member->referral_count  }}</h3>
                 </div>
                 <div class="mb-2 d-flex gap-4">
                     <p class="text-body fs-4 m-0">{{ __('asset.child_count') }}</p>

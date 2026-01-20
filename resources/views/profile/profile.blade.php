@@ -63,7 +63,7 @@
                     <tr style="border-bottom:0;">
                         <th class="text-body ps-0">{{ __('user.meta_id') }}</th>
                         <td class="align-m text-body px-0">
-                            <input type="text" name="meta_uid" value="{{ $view->meta_uid }}" class="form-control">
+                            <input type="text" name="meta_uid" value="{{ $view->meta_uid }}" class="form-control"  {{ $view->meta_uid ? 'readonly' : '' }}>
                         </td>
                     </tr>
                     <tr>

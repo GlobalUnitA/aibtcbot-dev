@@ -1,14 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
-<main class="container-fluid py-5">
-    <div class="d-flex justify-content-between align-items-center">
+<main class="container-fluid py-5 px-4">
+    <div class="mb-7">
         <h3>{{ __('user.kyc_verification') }}</h3>
     </div>
-    <hr>
-    <div class="mt-4 mb-5">
-        <label for="state" class="text-body fs-4 form-label">Nationality</label>
-        <select class="form-select text-body" id="nationality">
+    <div class="mb-5 box-outline">
+        <label for="state" class="form-label">Nationality</label>
+        <select class="form-select text-dark border-0" id="nationality">
             @foreach($countries as $code => $name)
             <option>{{ $name }}</option>
             @endforeach

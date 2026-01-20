@@ -1,48 +1,33 @@
 @extends('layouts.master')
 
 @section('content')
-<main class="container-fluid py-5">
-    <div class="d-flex justify-content-between align-items-center">
+<main class="container-fluid py-5 px-4">
+    <div class="mb-7">
         <h3>{{ __('auth.reset_password') }}</h3>    
-        <div></div>
     </div>
     <form method="POST" action="{{ route('profile.password.update') }}" id="ajaxForm" class="mb-5">
         @csrf
         <input type="hidden" name="id" value="{{ $view->user_id }}">
-        <hr>
-        <div class="table-responsive">
-            <table class="table table-bordered mt-5 pb-5">
-                <tbody>
-                    <tr>
-                        <th class="text-center align-middle text-nowrap">{{ __('auth.login_id') }}</th>
-                        <td class="align-middle">{{ $view->account }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-center align-middle text-nowrap">{{ __('auth.current_password') }}</th>
-                        <td class="align-middle">
-                            <input type="password" name="current_password" class="form-control required" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-center align-middle text-nowrap">{{ __('auth.new_password') }}</th>
-                        <td class="align-middle">
-                            <input type="password" name="password"  id="inputPassword1" class="form-control required" required>
-                            <div class="form-text">{{ __('auth.password_guide') }}</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-center align-middle text-nowrap">{{ __('auth.confirm_password') }}</th>
-                        <td class="align-middle">
-                            <input type="password" name="password_confirmation" id="inputPassword2" class="form-control required" required>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="pt-4">
+            <div class="d-flex form_line w-100 mb-4">
+                <div class="form-label">{{ __('auth.login_id') }}</div>
+                <div class="form-control input_like">{{ $view->account }}</div>
+            </div>
+            <div class="d-flex form_line w-100 mb-4">
+                <div class="form-label">{{ __('auth.current_password') }}</div>
+                <input type="password" name="current_password" class="form-control required" required>
+            </div>
+            <div class="d-flex form_line w-100 mb-1">
+                <div class="form-label">{{ __('auth.new_password') }}</div>
+                <input type="password" name="password"  id="inputPassword1" class="form-control required" required>
+            </div>
+            <div class="form-text mb-3">{{ __('auth.password_guide') }}</div>
+            <div class="d-flex form_line w-100 mb-1">
+                <div class="form-label">{{ __('auth.confirm_password') }}</div>
+                <input type="password" name="password_confirmation" id="inputPassword2" class="form-control required" required>
+            </div>
         </div>
-        <hr>
-        <div class="d-flex justify-content-end pb-5">
-            <button type="submit" class="btn btn-danger mb-3">{{ __('auth.reset_password') }}</button>
-        </div>
+        <button type="submit" class="btn btn-primary w-100 py-9 fs-4 mt-4 rounded-3">{{ __('auth.reset_password') }}</button>
     </form>
 </main>
 <form method="POST" id="confirmForm" >
